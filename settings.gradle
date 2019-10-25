@@ -1,0 +1,6 @@
+rootProject.name='BattleShips Android'
+includeFlat 'client'
+includeFlat 'server'
+includeFlat 'ai'
+includeFlat 'logic'
+includeFlat 'network'
