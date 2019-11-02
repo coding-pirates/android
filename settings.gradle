@@ -1,4 +1,4 @@
-rootProject.name='BattleShips Android'
+rootProject.name='android'
 includeFlat 'client'
 includeFlat 'server'
 includeFlat 'ai'
