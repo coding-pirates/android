@@ -1,6 +1,7 @@
+include ':app'
+includeFlat('client')
+includeFlat('network')
+includeFlat('logic')
+includeFlat('server')
+includeFlat('ai')
 rootProject.name='android'
-includeFlat 'client'
-includeFlat 'server'
-includeFlat 'ai'
-includeFlat 'logic'
-includeFlat 'network'
