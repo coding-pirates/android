@@ -4,7 +4,7 @@
                                                    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button8"
         android:text="@string/DefaultBtn"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginLeft="8dp"
