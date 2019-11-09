@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">android</string>
     <string name="DefaultBtn">This is a Button</string>
+
+    <!-- Page Title Strings -->
+    <string name="gameStr">Game Activity</string>
+    <string name="gameEndStr">Game End Activity</string>
+    <string name="lobbyStr">Lobby Activity</string>
+    <string name="loginStr">Login Activity</string>
+    <string name="mainStr">Main Activity</string>
+    <string name="placeShipStr">Placeship Activity</string>
+    <string name="settingsStr">Settings Activity</string>
+    <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
 </resources>
