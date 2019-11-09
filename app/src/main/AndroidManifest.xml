@@ -16,6 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="login.LoginActivity">
+        </activity>
+
+        <activity android:name="endscreen.EndScreenActivity">
+        </activity>
+
+        <activity android:name="game.GameActivity">
+        </activity>
+
+        <activity android:name=".lobby.LobbyActivity">
+        </activity>
+
+        <activity android:name=".settings.SettingsActivity">
+        </activity>
+
+        <activity android:name=".spectatorWaitingscreen.SpectatorWaitingActivity">
+        </activity>
+
+
     </application>
 
 </manifest>
