@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/gameActivity">
+
+    <activity android:id="@+id/gameActivity" android:name="de.upb.codingpirates.battleships.android.game.GameActivity"
+              android:label="game_activity" tools:layout="@layout/game_activity"/>
+    <activity android:id="@+id/lobbyActivity"
+              android:name="de.upb.codingpirates.battleships.android.lobby.LobbyActivity" android:label="lobby_activity"
+              tools:layout="@layout/lobby_activity"/>
+    <activity android:id="@+id/mainActivity" android:name="de.upb.codingpirates.battleships.android.MainActivity"
+              android:label="main_activity" tools:layout="@layout/main_activity"/>
+    <activity android:id="@+id/loginActivity"
+              android:name="de.upb.codingpirates.battleships.android.login.LoginActivity" android:label="login_activity"
+              tools:layout="@layout/login_activity"/>
+    <activity android:id="@+id/endScreenActivity"
+              android:name="de.upb.codingpirates.battleships.android.endscreen.EndScreenActivity"
+              android:label="gameend_activity" tools:layout="@layout/gameend_activity"/>
+    <activity android:id="@+id/spectatorWaitingActivity"
+              android:name="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWaitingActivity"
+              android:label="spectatorwaiting_activity" tools:layout="@layout/spectatorwaiting_activity"/>
+</navigation>
