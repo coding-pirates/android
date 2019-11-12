@@ -17,22 +17,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="login.LoginActivity">
+        <activity android:name=".login.LoginFragment">
         </activity>
 
-        <activity android:name="endscreen.EndScreenActivity">
+        <activity android:name=".endscreen.EndScreenFragment">
         </activity>
 
-        <activity android:name="game.GameActivity">
+        <activity android:name=".game.GameFragment">
         </activity>
 
         <activity android:name=".lobby.LobbyActivity">
         </activity>
 
-        <activity android:name=".settings.SettingsActivity">
+        <activity android:name=".settings.SettingsFragment">
         </activity>
 
-        <activity android:name=".spectatorWaitingscreen.SpectatorWaitingActivity">
+        <activity android:name=".spectatorWaitingscreen.SpectatorWaitingFragment">
         </activity>
 
 

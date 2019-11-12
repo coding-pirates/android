@@ -2,22 +2,46 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/gameActivity">
+            app:startDestination="@id/startScreenFragment">
 
-    <activity android:id="@+id/gameActivity" android:name="de.upb.codingpirates.battleships.android.game.GameActivity"
-              android:label="game_activity" tools:layout="@layout/game_activity"/>
-    <activity android:id="@+id/lobbyActivity"
-              android:name="de.upb.codingpirates.battleships.android.lobby.LobbyActivity" android:label="lobby_activity"
-              tools:layout="@layout/lobby_activity"/>
-    <activity android:id="@+id/mainActivity" android:name="de.upb.codingpirates.battleships.android.MainActivity"
-              android:label="main_activity" tools:layout="@layout/main_activity"/>
-    <activity android:id="@+id/loginActivity"
-              android:name="de.upb.codingpirates.battleships.android.login.LoginActivity" android:label="login_activity"
-              tools:layout="@layout/login_activity"/>
-    <activity android:id="@+id/endScreenActivity"
-              android:name="de.upb.codingpirates.battleships.android.endscreen.EndScreenActivity"
-              android:label="gameend_activity" tools:layout="@layout/gameend_activity"/>
-    <activity android:id="@+id/spectatorWaitingActivity"
-              android:name="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWaitingActivity"
-              android:label="spectatorwaiting_activity" tools:layout="@layout/spectatorwaiting_activity"/>
+    <fragment android:id="@+id/loginFragment"
+              android:name="de.upb.codingpirates.battleships.android.login.LoginFragment" android:label="login_fragment"
+              tools:layout="@layout/login_fragment">
+        <action android:id="@+id/action_loginFragment_to_lobbyFragment" app:destination="@id/lobbyFragment"/>
+        <action android:id="@+id/action_loginFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/lobbyFragment"
+              android:name="de.upb.codingpirates.battleships.android.lobby.LobbyFragment" android:label="lobby_fragment"
+              tools:layout="@layout/lobby_fragment">
+        <action android:id="@+id/action_lobbyFragment_to_spectatorWaitingFragment"
+                app:destination="@id/spectatorWaitingFragment"/>
+        <action android:id="@+id/action_lobbyFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/startScreenFragment"
+              android:name="de.upb.codingpirates.battleships.android.startscreen.StartScreenFragment"
+              android:label="startscreen_fragment" tools:layout="@layout/startscreen_fragment">
+        <action android:id="@+id/action_startScreenFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+        <action android:id="@+id/action_startScreenFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/gameFragment" android:name="de.upb.codingpirates.battleships.android.game.GameFragment"
+              android:label="game_fragment" tools:layout="@layout/game_fragment">
+        <action android:id="@+id/action_gameFragment_to_endScreenFragment" app:destination="@id/endScreenFragment"/>
+        <action android:id="@+id/action_gameFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/endScreenFragment"
+              android:name="de.upb.codingpirates.battleships.android.endscreen.EndScreenFragment"
+              android:label="gameend_fragment" tools:layout="@layout/gameend_fragment">
+        <action android:id="@+id/action_endScreenFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/settingsFragment"
+              android:name="de.upb.codingpirates.battleships.android.settings.SettingsFragment"
+              android:label="settings_fragment" tools:layout="@layout/settings_fragment"/>
+    <fragment android:id="@+id/spectatorWaitingFragment"
+              android:name="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWaitingFragment"
+              android:label="spectatorwaiting_fragment" tools:layout="@layout/spectatorwaiting_fragment">
+        <action android:id="@+id/action_spectatorWaitingFragment_to_gameFragment" app:destination="@id/gameFragment"/>
+        <action android:id="@+id/action_spectatorWaitingFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"/>
+    </fragment>
 </navigation>
