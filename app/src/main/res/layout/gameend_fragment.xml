@@ -10,7 +10,8 @@
                                                    android:layout_height="match_parent">
     <Button
         android:id="@+id/button3"
-        android:text="@string/DefaultBtn"
+        android:text="@string/NextBtn"
+        android:onClick="@{viewmodel::nextButtonClicked}"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_marginTop="456dp"
         android:layout_marginBottom="227dp"

@@ -3,8 +3,11 @@ package de.upb.codingpirates.battleships.android.startscreen;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.navigation.Navigation;
 
 import android.view.View;
+
+import de.upb.codingpirates.battleships.android.R;
 
 
 public class StartScreenViewModel extends BaseObservable {
@@ -22,8 +25,8 @@ public class StartScreenViewModel extends BaseObservable {
             notifyPropertyChanged(BR.title);
     }
 
-    public void onButtonClicked(View view){
+    public void nextButtonClicked(View view){
         //do something
-        setTitle("Title changed");
+        Navigation.findNavController(view).navigate(R.id.action_startScreenFragment_to_loginFragment);
     }
 }
