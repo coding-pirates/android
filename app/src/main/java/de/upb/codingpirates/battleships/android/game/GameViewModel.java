@@ -1,4 +1,6 @@
 package de.upb.codingpirates.battleships.android.game;
 
-public class GameViewModel {
+import androidx.databinding.BaseObservable;
+
+public class GameViewModel extends BaseObservable {
 }

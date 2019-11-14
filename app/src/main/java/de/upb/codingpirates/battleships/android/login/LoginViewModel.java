@@ -1,4 +1,6 @@
 package de.upb.codingpirates.battleships.android.login;
 
-public class LoginViewModel {
+import androidx.databinding.BaseObservable;
+
+public class LoginViewModel extends BaseObservable {
 }

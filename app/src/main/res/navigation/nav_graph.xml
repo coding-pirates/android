@@ -30,7 +30,7 @@
         <action android:id="@+id/action_gameFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
     </fragment>
     <fragment android:id="@+id/endScreenFragment"
-              android:name="de.upb.codingpirates.battleships.android.endscreen.EndScreenFragment"
+              android:name="de.upb.codingpirates.battleships.android.gameEnd.GameEndFragment"
               android:label="gameend_fragment" tools:layout="@layout/gameend_fragment">
         <action android:id="@+id/action_endScreenFragment_to_settingsFragment" app:destination="@id/settingsFragment"/>
     </fragment>

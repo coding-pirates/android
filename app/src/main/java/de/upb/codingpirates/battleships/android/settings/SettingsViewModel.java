@@ -1,4 +1,6 @@
 package de.upb.codingpirates.battleships.android.settings;
 
-public class SettingsViewModel {
+import androidx.databinding.BaseObservable;
+
+public class SettingsViewModel extends BaseObservable {
 }

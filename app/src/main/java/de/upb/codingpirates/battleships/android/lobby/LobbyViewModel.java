@@ -1,4 +1,7 @@
 package de.upb.codingpirates.battleships.android.lobby;
 
-public class LobbyViewModel {
+import androidx.databinding.BaseObservable;
+
+public class LobbyViewModel extends BaseObservable {
+
 }
