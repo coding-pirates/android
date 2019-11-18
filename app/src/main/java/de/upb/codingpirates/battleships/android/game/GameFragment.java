@@ -13,13 +13,16 @@ import de.upb.codingpirates.battleships.android.startscreen.StartScreenViewModel
 
 public class GameFragment extends Fragment {
 
+    GameFragmentBinding databinding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        GameFragmentBinding databinding= DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
+        databinding= DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(new GameViewModel());
         // Inflate the layout for this fragment
         return databinding.getRoot();
     }
+
 
 }
