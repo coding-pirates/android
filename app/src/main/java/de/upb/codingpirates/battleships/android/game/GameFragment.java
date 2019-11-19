@@ -20,6 +20,7 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         databinding= DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(new GameViewModel());
+
         // Inflate the layout for this fragment
         return databinding.getRoot();
     }
