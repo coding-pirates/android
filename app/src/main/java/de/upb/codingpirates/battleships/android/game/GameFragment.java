@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import de.upb.codingpirates.battleships.android.R;
@@ -15,11 +16,14 @@ public class GameFragment extends Fragment {
 
     GameFragmentBinding databinding;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         databinding= DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(new GameViewModel());
+
+        databinding.getViewmodel().nextButtonClicked(databinding.getRoot());
         // Inflate the layout for this fragment
         return databinding.getRoot();
     }
