@@ -5,41 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewmodel"
-            type="de.upb.codingpirates.battleships.android.startscreen.StartScreenViewModel"/>
+            type="de.upb.codingpirates.battleships.android.startscreen.StartScreenViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/nextButtonStartScreen"
-        android:text="@string/NextBtn"
-        android:onClick="@{viewmodel::nextButtonClicked}"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <Button
+            android:id="@+id/nextButtonStartScreen"
+            android:text="@string/NextBtn"
+            android:onClick="@{viewmodel::nextButtonClicked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/startScreenFragmentTitle"
-        android:text="@={viewmodel.title}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/nextButtonStartScreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:id="@+id/startScreenFragmentTitle"
+            android:text="@={viewmodel.title}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/nextButtonStartScreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

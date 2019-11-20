@@ -25,7 +25,8 @@ public class GameViewModel extends BaseObservable implements AdapterView.OnItemS
 
     public void nextButtonClicked(View view){
         //do something
-        GridLayout gameField = view.getRootView().findViewWithTag("gameField");
+        GridLayout gameField = view.findViewById(R.id.gridLayout);
+
        // gameField.setColumnCount(fieldWidth);
         //gameField.setRowCount(fieldHeight);
         //i = counter,  c = current colum, r = current row
