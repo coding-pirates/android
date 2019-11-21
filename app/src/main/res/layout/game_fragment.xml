@@ -11,21 +11,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout  android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="102dp"
-        android:layout_height="57dp"
-        android:onClick="@{viewmodel::nextButtonClicked}"
-        android:text="@string/NextBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
+        android:id="@+id/gameField"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="fill_vertical"
+        android:layout_gravity="fill"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -33,25 +24,24 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="24dp"
         android:tag="gameField"
+        app:columnCount="@{viewmodel.fieldWidth}"
+        app:rowCount="@{viewmodel.fieldHeight}"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton"
         app:layout_constraintVertical_bias="0.0">
-
-
     </androidx.gridlayout.widget.GridLayout>
-
 
     <Spinner
         android:id="@+id/spinner"
-        android:tag="playerSpinner"
-        android:spinnerMode="dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dialog"
+        android:tag="playerSpinner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

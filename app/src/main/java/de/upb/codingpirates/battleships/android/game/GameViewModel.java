@@ -1,96 +1,131 @@
 package de.upb.codingpirates.battleships.android.game;
 
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 
-import androidx.databinding.BaseObservable;
-import androidx.fragment.app.Fragment;
-import androidx.gridlayout.widget.GridLayout;
-import androidx.navigation.Navigation;
+import androidx.lifecycle.ViewModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
 
-import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.android.Model;
+import de.upb.codingpirates.battleships.logic.util.*;
 
-public class GameViewModel extends BaseObservable implements AdapterView.OnItemSelectedListener {
+/**
+ * This class holds all the data for the GameFragment.
+ *
+ * @author Lukas Kröger
+ */
+public class GameViewModel extends ViewModel {
 
-    public int fieldWidth = 5;
-    public int fieldHeight = 5;
+    /**
+     * Is the Model which manages the GameLogic and Server communication
+     */
+    private Model model = new Model();
 
-    public void nextButtonClicked(View view){
-        //do something
-        GridLayout gameField = view.findViewById(R.id.gridLayout);
+    /**
+     * The game field width specified in the configuration
+     */
+    private int fieldWidth = model.getFieldWidth();
 
-       // gameField.setColumnCount(fieldWidth);
-        //gameField.setRowCount(fieldHeight);
-        //i = counter,  c = current colum, r = current row
-        for(int i=0, c=0, r =0; i<fieldHeight*fieldWidth; i++) {
-            //if one row is filled
-            if (c == fieldWidth) {
-                c = 0;
-                r++;
+    /**
+     * The game field heigth specified in the configuration
+     */
+    private int fieldHeight = model.getFieldHeigth();
+
+    /**
+     * Contains all players of the current game
+     */
+    private Collection<Client> players = model.getPlayers();
+
+    /**
+     * Contains all points of currently displayed ships
+     */
+    private ArrayList<Point2D> pointsOfShips; //already converted for the GridLayout of the GameView
+
+    /**
+     * Represents the currently selected player
+     */
+    private Client currentPlayer;
+
+    public ArrayList<Point2D> getPointsOfShips() {
+        return pointsOfShips;
+    }
+
+
+    public Client getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Client currentPlayer) {
+        this.currentPlayer = currentPlayer;
+        refreshShipPoints();
+    }
+
+
+    public Collection<Client> getPlayers() {
+        return players;
+    }
+
+
+    public int getFieldWidth() {
+        return fieldWidth;
+    }
+
+    public int getFieldHeight() {
+        return fieldHeight;
+    }
+
+    /**
+     * Calculates/Converts the points of the ships for the game field
+     */
+    private void refreshShipPoints() {
+        Map<Integer, PlacementInfo> placementOfPlayer = model.getShipPlacementOfPlayer(currentPlayer.getId());
+        Map<Integer, ShipType> shipTypes = model.getShipTypes();
+
+        ArrayList<Point2D> newPointsOfShips = new ArrayList<>();
+
+        for (int shipID : placementOfPlayer.keySet()) {
+
+            ShipType currentShip = shipTypes.get(shipID);
+            for (Point2D point : currentShip.getPosition()) {
+                Point2D editedPoint = new Point2D(point.getX(), point.getY());
+                //rotate ship
+                editedPoint = rotatePoint(editedPoint, placementOfPlayer.get(shipID).getRotation().ordinal());
+                //position ship
+                editedPoint = new Point2D(editedPoint.getX() + placementOfPlayer.get(shipID).getPosition().getX(), editedPoint.getY() + placementOfPlayer.get(shipID).getPosition().getY());
+                //bring point in sector 4 of the coordinatesystem
+                editedPoint = new Point2D(editedPoint.getX(), (editedPoint.getY() - (fieldHeight - 1)) * (-1));
+                newPointsOfShips.add(editedPoint);
             }
-            Button btn = new Button(view.getContext());
-            btn.setLayoutParams(new GridLayout.LayoutParams());
-            //btn.setBackgroundColor(Color.BLUE);
-            btn.setBackground(btn.getContext().getResources().getDrawable(R.drawable.border));
-            GridLayout.LayoutParams param = new GridLayout.LayoutParams();
-            param.height = (gameField.getHeight()-24) /fieldHeight; //TODO get margins (24 and 20) dynamically
-            param.width = (gameField.getWidth()-20)/ fieldWidth;
-            param.setGravity(Gravity.CENTER);
-            param.columnSpec = GridLayout.spec(c);
-            param.rowSpec = GridLayout.spec(r);
-            gameField.addView(btn, param);
-            c++;
         }
-
-        Spinner playerSpinner = (Spinner) view.getRootView().findViewWithTag("playerSpinner");
-        List<String> players = new ArrayList<>();
-        players.add("Raphael");
-        players.add("Fynn");
-        players.add("Paul");
-        players.add("Carolin");
-        players.add("Roman");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                players
-        );
-
-        playerSpinner.setAdapter(adapter);
-
-                //Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_endScreenFragment);
+        this.pointsOfShips = newPointsOfShips;
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-        this.initShips();
+    /**
+     * rotates a point by the given rotation Enum
+     *
+     * @param point        contains the point that should be rotated
+     * @param rotationEnum Contains the rotation Enum
+     * @return The rotated point
+     */
+    public Point2D rotatePoint(Point2D point, int rotationEnum) {
+        //rotation Matix
+        double rotation = (4 - rotationEnum) * Math.PI / 2;
+        int x = (int) Math.round(point.getX() * Math.cos(rotation) - point.getY() * Math.sin(rotation));
+        int y = (int) Math.round(point.getX() * Math.sin(rotation) + point.getY() * Math.cos(rotation));
+        return new Point2D(x, y);
     }
 
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
 
-    //initialize Gamefield
-    public void init(View view){
-        //TODO init gamefield
-    }
-
-    //initialize Ships
-    public void initShips(){
-        //TODO init Ships for selected Player
-    }
-    public void exitGameButtonClicked(View view){
-        //TODO exit Game and go Back to lobby
+    /**
+     * Exits the game and goes back to the lobby view
+     *
+     * @param view contains the button which calls this function
+     */
+    public void exitGameButtonClicked(View view) {
+        //TODO exit Game and go back to lobby
     }
 
 }
