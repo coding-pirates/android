@@ -12,14 +12,25 @@ import java.util.Set;
 import de.upb.codingpirates.battleships.logic.util.*;
 
 public class Model {
+
+    private int fieldWidth;
+    private int fieldHeigth;
+
     private Collection<Client> players;
     private Collection<Shot> shots;
     private Map<Integer, Map<Integer,PlacementInfo>> shipPlacement;
     private GameState state;
 
-    Map<Integer, ShipType> shipsInitial;
+
+
+    private Map<Integer, ShipType> shipsInitial;
 
     public Model(){
+
+        //set Field size
+        fieldHeigth= 6;
+        fieldWidth = 6;
+
         players = new ArrayList<Client>();
         players.add(new Client(0,"Roman"));
         players.add(new Client(1,"Raphael"));
@@ -40,20 +51,21 @@ public class Model {
         shipPlacement.put(0,shipsOfPlayer);
 
         //add Ships of Player 1(Raphael)
-        shipsOfPlayer.clear();
+        shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
         shipsOfPlayer.put(0,new PlacementInfo(new Point2D(2,3),Rotation.NONE));
         shipsOfPlayer.put(1,new PlacementInfo(new Point2D(3,1),Rotation.NONE));
         shipsOfPlayer.put(2,new PlacementInfo(new Point2D(0,0),Rotation.COUNTERCLOCKWISE_90));
         shipPlacement.put(1,shipsOfPlayer);
 
         //add Ships of Player 2(Fynn)
-        shipsOfPlayer.clear();
+        shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
         shipsOfPlayer.put(0,new PlacementInfo(new Point2D(0,5),Rotation.CLOCKWISE_90));
-        shipsOfPlayer.put(1,new PlacementInfo(new Point2D(3,1),Rotation.NONE));
+        shipsOfPlayer.put(1,new PlacementInfo(new Point2D(2,3),Rotation.NONE));
         shipsOfPlayer.put(2,new PlacementInfo(new Point2D(1,1),Rotation.NONE));
         shipPlacement.put(2,shipsOfPlayer);
 
         //create initial Positions of Ships
+        shipsInitial = new HashMap<Integer, ShipType>();
         //Ship 0
         Collection<Point2D> shipPoints = new ArrayList<Point2D>();
         shipPoints.add(new Point2D(0,0));
@@ -62,13 +74,13 @@ public class Model {
         shipsInitial.put(0,new ShipType(shipPoints));
 
         //Ship 1
-        shipPoints.clear();
+        shipPoints = new ArrayList<Point2D>();
         shipPoints.add(new Point2D(0,0));
         shipPoints.add(new Point2D(1,0));
         shipsInitial.put(1,new ShipType(shipPoints));
 
         //Ship 2
-        shipPoints.clear();
+        shipPoints = new ArrayList<Point2D>();
         shipPoints.add(new Point2D(0,0));
         shipPoints.add(new Point2D(1,0));
         shipPoints.add(new Point2D(2,0));
@@ -79,8 +91,8 @@ public class Model {
     }
 
     //all points of the players ships
-    public Collection<Point2D> getPlayerShips(Client player){
-        Map<Integer, PlacementInfo> shipsOfPlayer = shipPlacement.get(player.getId());
+    public Collection<Point2D> getPlayerShips(int playerID){
+        Map<Integer, PlacementInfo> shipsOfPlayer = shipPlacement.get(playerID);
         Collection<Point2D> pointsOfShips = new ArrayList<Point2D>();
         Point2D rootPosition;
         for(int i: shipsOfPlayer.keySet()){
@@ -100,5 +112,30 @@ public class Model {
         }
 
         return pointsOfShips;
+    }
+
+    //get all Ship placements of one Player
+    public Map<Integer, PlacementInfo> getShipPlacementOfPlayer(int id){
+        return shipPlacement.get(id);
+    }
+    //get ships from Config
+    public Map<Integer, ShipType> getShipTypes() {
+        return shipsInitial;
+    }
+    //set Ships from Config
+    public void setShipsInitial(Map<Integer, ShipType> shipsInitial) {
+        this.shipsInitial = shipsInitial;
+    }
+
+    public Collection<Client> getPlayers(){
+        return players;
+    }
+
+    public int getFieldWidth(){
+        return fieldWidth;
+    }
+
+    public int getFieldHeigth(){
+        return fieldHeigth;
     }
 }
