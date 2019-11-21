@@ -11,6 +11,10 @@ import java.util.Set;
 
 import de.upb.codingpirates.battleships.logic.util.*;
 
+/**
+ * Is the class does the communication and the business logic
+ * @author Lukas Kröger
+ */
 public class Model {
 
     private int fieldWidth;
@@ -26,6 +30,8 @@ public class Model {
     private Map<Integer, ShipType> shipsInitial;
 
     public Model(){
+
+        //currently sets a hard coded state of a game for testing
 
         //set Field size
         fieldHeigth= 6;
@@ -90,39 +96,16 @@ public class Model {
 
     }
 
-    //all points of the players ships
-    public Collection<Point2D> getPlayerShips(int playerID){
-        Map<Integer, PlacementInfo> shipsOfPlayer = shipPlacement.get(playerID);
-        Collection<Point2D> pointsOfShips = new ArrayList<Point2D>();
-        Point2D rootPosition;
-        for(int i: shipsOfPlayer.keySet()){
-            rootPosition = shipsOfPlayer.get(i).getPosition();
-            switch(shipsOfPlayer.get(i).getRotation()){
-                case NONE:
-                    for(Point2D point: shipsInitial.get(i).getPosition())
-                    {
-                        pointsOfShips.add(new Point2D(rootPosition.getX()+point.getX(),rootPosition.getY()+point.getY()));
-                    }
-                    pointsOfShips.add(shipsOfPlayer.get(i).getPosition());
-
-                case CLOCKWISE_90:
 
 
-            }
-        }
-
-        return pointsOfShips;
-    }
-
-    //get all Ship placements of one Player
     public Map<Integer, PlacementInfo> getShipPlacementOfPlayer(int id){
         return shipPlacement.get(id);
     }
-    //get ships from Config
+
     public Map<Integer, ShipType> getShipTypes() {
         return shipsInitial;
     }
-    //set Ships from Config
+
     public void setShipsInitial(Map<Integer, ShipType> shipsInitial) {
         this.shipsInitial = shipsInitial;
     }
