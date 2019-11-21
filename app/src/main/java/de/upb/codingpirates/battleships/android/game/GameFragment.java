@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
@@ -51,7 +53,18 @@ public class GameFragment extends Fragment {
         view = inflater.inflate(R.layout.game_fragment, container, false);
         this.initSpinner(viewModel.getPlayers());
         this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
-        this.initShips();
+
+        // Create the observer which updates the UI.
+        final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Point2D> newShipPoints) {
+                // Update the UI, in this case, a TextView.
+                initShips(newShipPoints);
+            }
+        };
+
+        viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
+
         return view;
     }
 
@@ -63,7 +76,7 @@ public class GameFragment extends Fragment {
      */
     private void initGameFild(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
-        //gameField.setRowCount(fieldHeight);
+
         //i = counter,  c = current colum, r = current row
         for (int i = 0, c = 0, r = 0; i < fieldHeight * fieldWidth; i++) {
             //if one row is filled
@@ -103,13 +116,12 @@ public class GameFragment extends Fragment {
                 new ArrayList<Client>(players)
         );
         playersSpinner.setAdapter(adapter);
-        viewModel.setCurrentPlayer((Client) playersSpinner.getSelectedItem());
+        //viewModel.setCurrentPlayer((Client) playersSpinner.getSelectedItem());
 
         playersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 viewModel.setCurrentPlayer((Client) parent.getItemAtPosition(position));
-                initShips();
             }
 
             @Override
@@ -123,8 +135,7 @@ public class GameFragment extends Fragment {
     /**
      * Initialises the ships for the selected Player
      */
-    private void initShips() {
-        Collection<Point2D> shipPoints = viewModel.getPointsOfShips();
+    private void initShips(Collection<Point2D> shipPoints) {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
             gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.borderfield));

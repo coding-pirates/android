@@ -2,6 +2,7 @@ package de.upb.codingpirates.battleships.android.game;
 
 import android.view.View;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Array;
@@ -42,14 +43,17 @@ public class GameViewModel extends ViewModel {
     /**
      * Contains all points of currently displayed ships
      */
-    private ArrayList<Point2D> pointsOfShips; //already converted for the GridLayout of the GameView
+    private MutableLiveData<ArrayList<Point2D>> pointsOfShips; //already converted for the GridLayout of the GameView
 
     /**
      * Represents the currently selected player
      */
     private Client currentPlayer;
 
-    public ArrayList<Point2D> getPointsOfShips() {
+    public MutableLiveData<ArrayList<Point2D>> getPointsOfShips() {
+        if(pointsOfShips==null){
+            pointsOfShips = new MutableLiveData<ArrayList<Point2D>>();
+        }
         return pointsOfShips;
     }
 
@@ -100,7 +104,7 @@ public class GameViewModel extends ViewModel {
                 newPointsOfShips.add(editedPoint);
             }
         }
-        this.pointsOfShips = newPointsOfShips;
+        this.pointsOfShips.setValue(newPointsOfShips);
     }
 
     /**
