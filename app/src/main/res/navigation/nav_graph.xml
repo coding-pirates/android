@@ -47,7 +47,7 @@
         android:label="game_fragment"
         tools:layout="@layout/game_fragment">
         <action
-            android:id="@+id/action_gameFragment_to_endScreenFragment"
+            android:id="@+id/action_gameFragment_to_gameEndFragment"
             app:destination="@id/gameEndFragment" />
         <action
             android:id="@+id/action_gameFragment_to_settingsFragment"

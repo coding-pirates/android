@@ -4,13 +4,14 @@ import android.view.View;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.Navigation;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
 import de.upb.codingpirates.battleships.android.Model;
+import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.logic.util.*;
 
 /**
@@ -132,4 +133,8 @@ public class GameViewModel extends ViewModel {
         //TODO exit Game and go back to lobby
     }
 
+    public void nextButtonClicked(View view) {
+        System.out.println("Hello");
+        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
+    }
 }
