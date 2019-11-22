@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.Observer;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
 import de.upb.codingpirates.battleships.logic.util.Client;
 import de.upb.codingpirates.battleships.logic.util.Point2D;
 
@@ -36,6 +38,7 @@ public class GameFragment extends Fragment {
 
     private GameViewModel viewModel;
     private View view;
+    private GameFragmentBinding databinding;
 
     /**
      * Creates the GamesView if it should be displayed on the screen
@@ -50,11 +53,14 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
-        view = inflater.inflate(R.layout.game_fragment, container, false);
+        databinding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
+        databinding.setViewmodel(viewModel);
+        view = databinding.getRoot();
+        //view = inflater.inflate(R.layout.game_fragment, container, false);
         this.initSpinner(viewModel.getPlayers());
         this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
 
-        // Create the observer which updates the UI.
+        // Create the observer which updates the Ships.
         final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Point2D> newShipPoints) {

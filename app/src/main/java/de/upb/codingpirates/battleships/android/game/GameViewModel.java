@@ -2,6 +2,7 @@ package de.upb.codingpirates.battleships.android.game;
 
 import android.view.View;
 
+import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
@@ -130,11 +131,10 @@ public class GameViewModel extends ViewModel {
      * @param view contains the button which calls this function
      */
     public void exitGameButtonClicked(View view) {
-        //TODO exit Game and go back to lobby
+        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
     }
 
     public void nextButtonClicked(View view) {
-        System.out.println("Hello");
         Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
     }
 }
