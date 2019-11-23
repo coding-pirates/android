@@ -124,17 +124,15 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
-
-    /**
-     * Exits the game and goes back to the lobby view
-     *
-     * @param view contains the button which calls this function
-     */
-    public void exitGameButtonClicked(View view) {
+    public void nextButtonClicked(View view) {
         Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
     }
 
-    public void nextButtonClicked(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
+    /**
+     * Navigates to the game exit dialog, in which the user can select, if he really wants to exit.
+     * @param view
+     */
+    public void exitGameButtonClicked(View view){
+        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_exitGameFragment);
     }
 }

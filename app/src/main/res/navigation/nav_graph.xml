@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_gameFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_gameFragment_to_exitGameFragment"
+            app:destination="@id/exitGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameEndFragment"
@@ -82,4 +85,15 @@
             android:id="@+id/action_spectatorWaitingFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/exitGameFragment"
+        android:name="de.upb.codingpirates.battleships.android.game.ExitGameFragment"
+        android:label="ExitGameFragment" >
+        <action
+            android:id="@+id/action_exitGameFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_exitGameFragment_to_lobbyFragment"
+            app:destination="@id/lobbyFragment" />
+    </dialog>
 </navigation>
