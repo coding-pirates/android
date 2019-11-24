@@ -18,6 +18,6 @@ public class GameEndViewModel extends BaseObservable {
      * @param view
      */
     public void exitGameButtonClicked(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_gameEndFragment_to_lobbyFragment);
+        Navigation.findNavController(view).navigate(R.id.action_gameEndFragment_to_exitGameFragment);
     }
 }

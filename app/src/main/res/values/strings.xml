@@ -13,7 +13,7 @@
     <string name="settingsStr">Settings Activity</string>
     <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
 
-    <string name="exitGameString">Wollen sie das Spiel wirklich verlassen?</string>
+    <string name="exitGameString">Wollen Sie das Spiel wirklich verlassen?</string>
     <string name="exitButton">Jo ich bin raus.</string>
-    <string name="cancelButton">Neiin, ich will hier nicht raus!!!</string>
+    <string name="cancelButton">Nein, ich möchte hier bleiben.</string>
 </resources>

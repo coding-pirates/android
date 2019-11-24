@@ -11,8 +11,8 @@ import androidx.navigation.Navigation;
 import de.upb.codingpirates.battleships.android.R;
 
 /**
- * The class for showing the game exit dialog
- * @author: Lukas Kröger
+ * The class for showing the game exit dialog. If User exists, he returns to the lobby. If not, he stays in the current screen
+ * @author: Lukas Kröger, Fynn Ruppel
  */
 public class ExitGameFragment extends DialogFragment {
     @Override
