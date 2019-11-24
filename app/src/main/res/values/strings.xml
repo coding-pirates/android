@@ -5,7 +5,7 @@
     <!-- Page Title Strings -->
     <string name="startScreenStr">Start Screen Fragment</string>
     <string name="gameStr">Game Activity</string>
-    <string name="gameEndStr">Game End Activity</string>
+    <string name="gameEndStr">Ai Ai Captain, das Spiel ist vorbei!</string>
     <string name="lobbyStr">Lobby Fragment</string>
     <string name="loginStr">Login Fragment</string>
     <string name="mainStr">Main Activity</string>

@@ -12,4 +12,12 @@ public class GameEndViewModel extends BaseObservable {
         //do something
         Navigation.findNavController(view).navigate(R.id.action_gameEndFragment_to_lobbyFragment);
     }
+
+    /**
+     * exits the game and returns to the LobbyView, when the button is clicked
+     * @param view
+     */
+    public void exitGameButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_gameEndFragment_to_lobbyFragment);
+    }
 }
