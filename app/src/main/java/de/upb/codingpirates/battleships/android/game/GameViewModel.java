@@ -2,6 +2,7 @@ package de.upb.codingpirates.battleships.android.game;
 
 import android.view.View;
 
+import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
@@ -123,18 +124,15 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
-
-    /**
-     * Exits the game and goes back to the lobby view
-     *
-     * @param view contains the button which calls this function
-     */
-    public void exitGameButtonClicked(View view) {
-        //TODO exit Game and go back to lobby
+    public void nextButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
     }
 
-    public void nextButtonClicked(View view) {
-        System.out.println("Hello");
-        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
+    /**
+     * Navigates to the game exit dialog, in which the user can select, if he really wants to exit.
+     * @param view
+     */
+    public void exitGameButtonClicked(View view){
+        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_exitGameFragment);
     }
 }
