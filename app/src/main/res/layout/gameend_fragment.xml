@@ -15,7 +15,7 @@
 
         <ImageButton
             android:id="@+id/exitGameButton"
-            android:onClick="@{viewmodel::exitGameButtonClicked}"
+            android:onClick="@{viewmodel::exitGameEndButtonClicked}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
