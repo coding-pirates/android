@@ -23,8 +23,8 @@ import java.util.Collection;
 
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
-import de.upb.codingpirates.battleships.logic.util.Client;
-import de.upb.codingpirates.battleships.logic.util.Point2D;
+import de.upb.codingpirates.battleships.logic.Client;
+import de.upb.codingpirates.battleships.logic.Point2D;
 
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
@@ -122,7 +122,7 @@ public class GameFragment extends Fragment {
                 new ArrayList<Client>(players)
         );
         playersSpinner.setAdapter(adapter);
-        //viewModel.setCurrentPlayer((Client) playersSpinner.getSelectedItem());
+        //viewModel.setCurrentPlayer((ClientApplication) playersSpinner.getSelectedItem());
 
         playersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

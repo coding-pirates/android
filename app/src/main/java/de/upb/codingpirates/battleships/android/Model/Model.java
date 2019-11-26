@@ -1,15 +1,16 @@
-package de.upb.codingpirates.battleships.android;
+package de.upb.codingpirates.battleships.android.Model;
 
-import android.graphics.Point;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-import de.upb.codingpirates.battleships.logic.util.*;
+import de.upb.codingpirates.battleships.client.network.ClientApplication;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
+import de.upb.codingpirates.battleships.logic.*;
+import de.upb.codingpirates.battleships.network.Properties;
+import de.upb.codingpirates.battleships.network.message.request.GameJoinPlayerRequest;
+import de.upb.codingpirates.battleships.network.message.request.ServerJoinRequest;
 
 /**
  * Is the class does the communication and the business logic
@@ -20,7 +21,7 @@ public class Model {
     private int fieldWidth;
     private int fieldHeigth;
 
-    private Collection<Client> players;
+    private Collection<de.upb.codingpirates.battleships.logic.Client> players;
     private Collection<Shot> shots;
     private Map<Integer, Map<Integer,PlacementInfo>> shipPlacement;
     private GameState state;
@@ -28,6 +29,8 @@ public class Model {
 
 
     private Map<Integer, ShipType> shipsInitial;
+
+
 
     public Model(){
 
@@ -37,10 +40,10 @@ public class Model {
         fieldHeigth= 6;
         fieldWidth = 6;
 
-        players = new ArrayList<Client>();
-        players.add(new Client(0,"Roman"));
-        players.add(new Client(1,"Raphael"));
-        players.add(new Client(2,"Fynn"));
+        players = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
+        players.add(new de.upb.codingpirates.battleships.logic.Client(0,"Roman"));
+        players.add(new de.upb.codingpirates.battleships.logic.Client(1,"Raphael"));
+        players.add(new de.upb.codingpirates.battleships.logic.Client(2,"Fynn"));
 
 
         shots = new ArrayList<Shot>();
@@ -94,9 +97,26 @@ public class Model {
 
         state = GameState.IN_PROGRESS;
 
+
+
     }
+    public void test(){
 
-
+        Thread thread = new Thread(new Runnable(){
+            public void run(){
+                try {
+                    ClientConnector connector = ClientApplication.create();
+                    connector.connect("192.168.178.45", Properties.PORT);
+                    connector.sendMessageToServer(new ServerJoinRequest("peter", ClientType.SPECTATOR));
+                    connector.sendMessageToServer(new GameJoinPlayerRequest(0));
+                }
+                catch(Exception e){
+                    System.out.println("here is the exception " +e);
+                }
+            }
+        });
+        thread.start();
+    }
 
     public Map<Integer, PlacementInfo> getShipPlacementOfPlayer(int id){
         return shipPlacement.get(id);
@@ -110,7 +130,7 @@ public class Model {
         this.shipsInitial = shipsInitial;
     }
 
-    public Collection<Client> getPlayers(){
+    public Collection<de.upb.codingpirates.battleships.logic.Client> getPlayers(){
         return players;
     }
 
@@ -121,4 +141,11 @@ public class Model {
     public int getFieldHeigth(){
         return fieldHeigth;
     }
+
+
+
+
+
+
+
 }
