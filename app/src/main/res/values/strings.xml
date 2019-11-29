@@ -10,9 +10,11 @@
     <string name="loginStr">Login Fragment</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
-    <string name="settingsStr">Settings Activity</string>
+    <string name="settingsStr">Einstellungen</string>
     <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
-
+    <string name="rulesStr">Regeln</string>
+    <string name="imprintStr">Impressum</string>
+    
     <string name="exitGameString">Wollen sie das Spiel wirklich verlassen?</string>
     <string name="exitButton">Jo ich bin raus.</string>
     <string name="cancelButton">Neiin, ich will hier nicht raus!!!</string>
