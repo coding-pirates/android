@@ -17,7 +17,7 @@
         android:background="@mipmap/sot2_background">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,25 +28,15 @@
             app:layout_constraintVertical_bias="0.786">
 
             <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="77dp"
-                android:layout_height="85dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icons8_einstellungen"
-                tools:ignore="VectorDrawableCompat"
-                android:layout_weight="1"
-                android:onClick="@{viewmodel::settingsButtonClicked}"/>
-
-            <ImageButton
                 android:id="@+id/imageButton2"
-                android:layout_width="326dp"
+                android:layout_width="fill_parent"
                 android:layout_height="85dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_weight="2"
                 android:background="@android:color/transparent"
                 android:onClick="@{viewmodel::playButtonClicked}"
-                app:srcCompat="@mipmap/spielen_schriftzug"
-                android:layout_weight="2"/>
+                app:srcCompat="@mipmap/spielen_schriftzug" />
         </LinearLayout>
 
         <ImageView
@@ -59,6 +49,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/coding_pirates_logo" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="77dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="@{viewmodel::settingsButtonClicked}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icons8_einstellungen"
+            tools:ignore="VectorDrawableCompat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
