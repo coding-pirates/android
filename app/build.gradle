@@ -38,6 +38,10 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:2.1.0"
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-rc02"
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.29'
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
+    implementation group: 'org.roboguice', name: 'roboguice', version: '4.0.0'
+
     implementation "com.google.android.material:material:1.2.0-alpha02"
     implementation project(":network")
     implementation project(":logic")

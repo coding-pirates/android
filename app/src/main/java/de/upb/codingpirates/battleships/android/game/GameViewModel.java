@@ -24,7 +24,7 @@ public class GameViewModel extends ViewModel {
     /**
      * Is the Model which manages the GameLogic and Server communication
      */
-    private Model model = new Model();
+    private Model model = Model.getInstance();
 
     /**
      * The game field width specified in the configuration

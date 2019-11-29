@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +52,6 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
         databinding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(viewModel);
