@@ -1,6 +1,8 @@
 package de.upb.codingpirates.battleships.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
