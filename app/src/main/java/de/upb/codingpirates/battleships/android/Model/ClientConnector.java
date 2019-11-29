@@ -16,7 +16,9 @@ public class ClientConnector implements ConnectionHandler {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.create(host, port);
+                    synchronized (clientConnector) {
+                        clientConnector.create(host, port);
+                    }
                 }
                 catch(IOException e){}
             }});
@@ -27,7 +29,9 @@ public class ClientConnector implements ConnectionHandler {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.send(message);
+                    synchronized (clientConnector) {
+                        clientConnector.send(message);
+                    }
                 }
                 catch(IOException e){}
             }});
@@ -38,7 +42,9 @@ public class ClientConnector implements ConnectionHandler {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.disconnect();
+                    synchronized (clientConnector) {
+                        clientConnector.disconnect();
+                    }
                 }
                 catch(IOException e){}
             }});
