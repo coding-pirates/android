@@ -33,7 +33,8 @@
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/icons8_einstellungen"
                 tools:ignore="VectorDrawableCompat"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:onClick="@{viewmodel::settingsButtonClicked}"/>
 
             <ImageButton
                 android:id="@+id/imageButton2"

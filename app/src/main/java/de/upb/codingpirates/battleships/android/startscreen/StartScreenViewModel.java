@@ -29,4 +29,8 @@ public class StartScreenViewModel extends BaseObservable {
         //do something
         Navigation.findNavController(view).navigate(R.id.action_startScreenFragment_to_loginFragment);
     }
+
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_startScreenFragment_to_settingsFragment);
+    }
 }
