@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         player = MediaPlayer.create(this, R.raw.sot_soundtrack);
-        player.start();
+        player.start(); //TODO Musik muss beim verlassen der App stoppen und danach an gleicher Stelle fortgesetzt werden
     }
 
     @Override
