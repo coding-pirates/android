@@ -39,6 +39,12 @@ public class LoginViewModel extends ViewModel {
         usernameField = view.getRootView().findViewById(R.id.usernameInputView);
         serverIpField = view.getRootView().findViewById(R.id.serverIpInputView);
         serverPortField = view.getRootView().findViewById(R.id.serverPortInputView);
+
+        //TODO remove dummy placeholder
+        usernameField.setText("Peter Pan");
+        serverIpField.setText("123.123.123.123");
+        serverPortField.setText("123");
+        
         String username = usernameField.getText().toString();
         String serverIP = serverIpField.getText().toString();
         String serverPort = serverPortField.getText().toString();
@@ -47,6 +53,7 @@ public class LoginViewModel extends ViewModel {
         usernameLayout = view.getRootView().findViewById(R.id.usernameInputLayout);
         serverIpLayout = view.getRootView().findViewById(R.id.serverIpInputLayout);
         serverPortLayout = view.getRootView().findViewById(R.id.serverPortInputLayout);
+
 
         //reset all possible errorStates of the TextEditInputViews
         usernameLayout.setErrorEnabled(false);
