@@ -32,17 +32,17 @@ android {
 dependencies {
     implementation project(':client')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.navigation:navigation-fragment:2.1.0"
     implementation "androidx.navigation:navigation-ui:2.1.0"
-    implementation "com.android.support:support-core-utils:29.0.0"
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-rc02"
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.29'
     implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     implementation group: 'org.roboguice', name: 'roboguice', version: '4.0.0'
 
+    implementation "com.google.android.material:material:1.2.0-alpha02"
     implementation project(":network")
     implementation project(":logic")
 

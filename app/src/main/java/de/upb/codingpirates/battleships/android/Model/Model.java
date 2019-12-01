@@ -3,6 +3,7 @@ package de.upb.codingpirates.battleships.android.Model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,7 +65,22 @@ public class Model {
     }
 
     //data for LobbyView
-    Collection<Game> gamesOnServer;
+   private MutableLiveData<Collection<Game>> gamesOnServer;
+    public MutableLiveData<Collection<Game>> getGamesOnServer(){
+        if(gamesOnServer == null){
+            gamesOnServer = new MutableLiveData<>();
+            gamesOnServer.setValue(new ArrayList<Game>());
+        }
+        return gamesOnServer;
+    }
+
+    private MutableLiveData<Boolean> goToSpectatorWaiting;
+    public MutableLiveData<Boolean> getGoToSpectatorWaiting(){
+        if(goToSpectatorWaiting == null){
+            goToSpectatorWaiting = new MutableLiveData<>();
+        }
+        return goToSpectatorWaiting;
+    }
 
     //data for GameView
     private Game joinedGame; //When changed go to next page
@@ -93,7 +109,11 @@ public class Model {
         thread.start();
 
         //currently sets a hard coded state of a game for testing
-
+        //set gamesOnServer:
+        gamesOnServer = new MutableLiveData<>();
+        ArrayList<Game> testList= new ArrayList<>();
+        testList.add(new Game("testGame", 3, GameState.IN_PROGRESS, Configuration.DEFAULT,false));
+        gamesOnServer.setValue(testList);
         //set Field size
         fieldHeigth = 6;
         fieldWidth = 6;
@@ -154,6 +174,7 @@ public class Model {
         shipsInitial.put(2, new ShipType(shipPoints));
 
         state = GameState.IN_PROGRESS;
+
     }
 
     public static Model getInstance(){
@@ -207,11 +228,11 @@ public class Model {
     }
 
 
-    public void connectToServer(String ipAddress, String name, ClientType clientType)  {
+    public void connectToServer(String ipAddress, String name, ClientType clientType,int port )  {
         this.clientType =clientType;
         this.clientName = name;
         try {
-            connector.connect(ipAddress, Properties.PORT);
+            connector.connect(ipAddress, port);
             //connector.sendMessageToServer(new ServerJoinRequest(name, clientType));
         }
         catch(IOException e){
@@ -227,7 +248,7 @@ public class Model {
     }
 
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
-        this.gamesOnServer = gamesOnServer;
+        this.gamesOnServer.postValue(gamesOnServer);
     }
 
     public void sendSpectatorGameStateRequest(){
@@ -291,13 +312,14 @@ public class Model {
 
     public void handlegameJoinSpectatorResponse(int gameId){
         //TODO init all game related variables
-        for(Game game: gamesOnServer){
+        for(Game game: gamesOnServer.getValue()){
             if(game.getId() == gameId){
                 joinedGame = game;
                 break;
             }
         }
        this.state = joinedGame.getState();
+        this.goToSpectatorWaiting.setValue(true);
     }
     public void disconnectFromServer(){
         //        //connector.disconnect();
@@ -319,6 +341,7 @@ public class Model {
         catch(IOException e){
             LOGGER.log(Level.SEVERE,"Could not send GameJoinSpectatorRequest to Server",e);
         }
+
     }
 
 
