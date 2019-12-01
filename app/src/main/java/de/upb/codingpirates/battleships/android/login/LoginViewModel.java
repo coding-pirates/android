@@ -14,10 +14,19 @@ import de.upb.codingpirates.battleships.android.R;
 public class LoginViewModel extends ViewModel {
 
     private TextInputEditText usernameField;
+    private TextInputEditText serverIpField;
+    private TextInputEditText serverPortField;
 
     public void loginButtonClicked(View view){
+        //get the current values of the input fields
         usernameField = view.getRootView().findViewById(R.id.usernameInputView);
-        String currUserName = usernameField.getText().toString();
+        serverIpField = view.getRootView().findViewById(R.id.serverIpInputView);
+        serverPortField = view.getRootView().findViewById(R.id.serverPortInputView);
+
+        String currUsername = usernameField.getText().toString();
+        String serverIP = serverIpField.getText().toString();
+        String serverPort = serverPortField.getText().toString();
+        
         //TODO pass the username to the model and validate the username
         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_lobbyFragment);
     }
