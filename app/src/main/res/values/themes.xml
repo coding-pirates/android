@@ -62,6 +62,10 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
 
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">

@@ -7,7 +7,7 @@
     <string name="gameStr">Game Activity</string>
     <string name="gameEndStr">Ai Ai Captain, das Spiel ist vorbei!</string>
     <string name="lobbyStr">Lobby Fragment</string>
-    <string name="loginStr">Login Fragment</string>
+    <string name="loginStr">Login</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
     <string name="settingsStr">Settings Activity</string>
