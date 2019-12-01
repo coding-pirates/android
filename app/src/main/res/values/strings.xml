@@ -7,11 +7,13 @@
     <string name="gameStr">Game Activity</string>
     <string name="gameEndStr">Game End Activity</string>
     <string name="lobbyStr">Lobby Fragment</string>
-    <string name="loginStr">Login</string>
+    <string name="loginStr">Login Fragment</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
     <string name="settingsStr">Settings Activity</string>
     <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
+    <string name="rulesStr">Regeln</string>
+    <string name="imprintStr">Impressum</string>
 
     <string name="serverIPStr">Server-IP</string>
     <string name="serverPortStr">Server-Port</string>
