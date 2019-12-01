@@ -1,6 +1,7 @@
 package de.upb.codingpirates.battleships.android.login;
 
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BaseObservable;
@@ -12,6 +13,8 @@ import androidx.navigation.Navigation;
 import java.io.IOException;
 
 import de.upb.codingpirates.battleships.android.Model.Model;
+import com.google.android.material.textfield.TextInputEditText;
+
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.logic.ClientType;
 
@@ -20,6 +23,23 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<Boolean> serverJoin;
     private Model model = Model.getInstance();
 
+public class LoginViewModel extends ViewModel {
+
+    private TextInputEditText usernameField;
+    private TextInputEditText serverIpField;
+    private TextInputEditText serverPortField;
+
+    public void loginButtonClicked(View view){
+        //get the current values of the input fields
+        usernameField = view.getRootView().findViewById(R.id.usernameInputView);
+        serverIpField = view.getRootView().findViewById(R.id.serverIpInputView);
+        serverPortField = view.getRootView().findViewById(R.id.serverPortInputView);
+
+        String currUsername = usernameField.getText().toString();
+        String serverIP = serverIpField.getText().toString();
+        String serverPort = serverPortField.getText().toString();
+
+        //TODO pass the username to the model and validate the username
     public LoginViewModel(){
         /*final Observer<Boolean> connected = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newConnected) {
