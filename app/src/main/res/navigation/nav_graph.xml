@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_gameEndFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
+        <action
+            android:id="@+id/action_gameEndFragment_to_exitGameFragment"
+            app:destination="@id/exitGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

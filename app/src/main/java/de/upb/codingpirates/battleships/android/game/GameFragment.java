@@ -1,6 +1,5 @@
 package de.upb.codingpirates.battleships.android.game;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -58,7 +57,7 @@ public class GameFragment extends Fragment {
         view = databinding.getRoot();
         //view = inflater.inflate(R.layout.game_fragment, container, false);
         this.initSpinner(viewModel.getPlayers());
-        this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
+        this.initGameField(viewModel.getFieldHeight(), viewModel.getFieldWidth());
 
         // Create the observer which updates the Ships.
         final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
@@ -80,7 +79,7 @@ public class GameFragment extends Fragment {
      * @param fieldHeight The game field height specified in the Configruation
      * @param fieldWidth  The game field width specified in the Configruation
      */
-    private void initGameFild(int fieldHeight, int fieldWidth) {
+    private void initGameField(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
 
         //i = counter,  c = current colum, r = current row
