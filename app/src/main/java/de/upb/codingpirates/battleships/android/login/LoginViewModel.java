@@ -26,7 +26,7 @@ public class LoginViewModel extends ViewModel {
         String currUsername = usernameField.getText().toString();
         String serverIP = serverIpField.getText().toString();
         String serverPort = serverPortField.getText().toString();
-        
+
         //TODO pass the username to the model and validate the username
         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_lobbyFragment);
     }
