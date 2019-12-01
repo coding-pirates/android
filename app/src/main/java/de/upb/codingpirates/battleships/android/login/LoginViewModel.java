@@ -1,19 +1,14 @@
 package de.upb.codingpirates.battleships.android.login;
 
 import android.view.View;
-import android.widget.EditText;
 
-import androidx.databinding.BaseObservable;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
-import java.io.IOException;
-
-import de.upb.codingpirates.battleships.android.Model.Model;
 import com.google.android.material.textfield.TextInputEditText;
 
 import de.upb.codingpirates.battleships.android.R;
-import de.upb.codingpirates.battleships.logic.ClientType;
+import de.upb.codingpirates.battleships.android.Model.Model;
 
 public class LoginViewModel extends ViewModel {
     private Model model = Model.getInstance();
