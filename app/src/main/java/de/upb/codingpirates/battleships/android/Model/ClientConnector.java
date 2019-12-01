@@ -1,5 +1,7 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import android.os.AsyncTask;
+
 import com.google.inject.Inject;
 import de.upb.codingpirates.battleships.network.ConnectionHandler;
 import de.upb.codingpirates.battleships.network.connectionmanager.ClientConnectionManager;
@@ -11,12 +13,21 @@ import java.io.IOException;
 public class ClientConnector implements ConnectionHandler {
     @Inject
     private ClientConnectionManager clientConnector;
+    private Boolean connected = false;
+
+    public boolean isConnected(){
+        return !clientConnector.getConnection().isClosed();
+    }
 
     public void connect(String host, int port) throws IOException {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.create(host, port);
+                    synchronized (clientConnector) {
+                        clientConnector.create(host, port);
+                    }
+                    Model.getInstance().setConnected(true);
+
                 }
                 catch(IOException e){}
             }});
@@ -27,7 +38,9 @@ public class ClientConnector implements ConnectionHandler {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.send(message);
+                    synchronized (clientConnector) {
+                        clientConnector.send(message);
+                    }
                 }
                 catch(IOException e){}
             }});
@@ -38,7 +51,10 @@ public class ClientConnector implements ConnectionHandler {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    clientConnector.disconnect();
+                    synchronized (clientConnector) {
+                        clientConnector.disconnect();
+                    }
+                    Model.getInstance().setConnected(false);
                 }
                 catch(IOException e){}
             }});
@@ -46,6 +62,12 @@ public class ClientConnector implements ConnectionHandler {
     }
     @Override
     public void handleBattleshipException(BattleshipException e) {
+
+    }
+    protected boolean doInBackground(String ip){
+        return true;
+    }
+    protected void onPostExecute(boolean result){
 
     }
 }

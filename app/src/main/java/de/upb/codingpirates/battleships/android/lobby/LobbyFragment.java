@@ -36,7 +36,7 @@ public class LobbyFragment extends Fragment {
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] myDataset = new String[5];
+        String[] myDataset = new String[5]; //TODO make LiveData to gamesOnServer from ViewModel
         myDataset[0] = "1. Item";
         myDataset[1] = "2. Item";
         myDataset[2] = "3. Item";

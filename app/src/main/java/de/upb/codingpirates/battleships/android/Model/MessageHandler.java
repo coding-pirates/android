@@ -6,20 +6,24 @@ import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedR
 import de.upb.codingpirates.battleships.network.message.response.*;
 
 public class MessageHandler implements Handler {
+
+
     @Override
     public void handleGameInitNotification(GameInitNotification message) {
         Model.getInstance().setPlayers(message.getClientList());
         Model.getInstance().setGameConfig(message.getConfiguration());
+        Model.getInstance().sendSpectatorGameStateRequest();
     }
 
     @Override
     public void handleContinueNotification(ContinueNotification message) {
-        //TODO continue game
+        Model.getInstance().setContinued();
     }
 
     @Override
     public void handleConnectionClosedReport(ConnectionClosedReport message) {
         //TODO show Connection Lost error
+        //TODO set Connection hanler to unconnected
     }
 
     @Override
@@ -30,7 +34,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleFinishNotification(FinishNotification message) {
         Model.getInstance().setPointsOfPlayers(message.getPoints());
-        //Model.getInstance().setWinner(message.getWinner());
+        //Model.getInstance().setWinner(message.getWinner()); //TODO
     }
 
     @Override
@@ -40,17 +44,17 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleGameJoinSpectator(GameJoinSpectatorResponse message) {
-        //TODO Game joined. Goto next page
+        Model.getInstance().handlegameJoinSpectatorResponse(message.getGameId());
     }
 
     @Override
     public void handleGameStartNotification(GameStartNotification message) {
-
+        Model.getInstance().setGameStart();
     }
 
     @Override
     public void handleLeaveNotification(LeaveNotification message) {
-        //TODO delete Player from player list
+       Model.getInstance().removePlayer(message.getPlayerId());
     }
 
     @Override
@@ -60,7 +64,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handlePauseNotification(PauseNotification message) {
-        //TODO pause game
+        Model.getInstance().setPaused();
     }
 
     @Override
@@ -75,8 +79,11 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleSpectatorUpdateNotification(SpectatorUpdateNotification message) {
-        //TODO update Points
-        //TODO update shots
+        Model model  = Model.getInstance();
+        model.addHits(message.getHits());
+        model.updatePoints(message.getPoints());
+        model.addMissed(message.getMissed());
+        //TODO sunk points update
     }
 
     @Override
@@ -97,6 +104,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleServerJoinResponse(ServerJoinResponse message) {
         Model.getInstance().setClientId(message.getClientId());
+        Model.getInstance().setServerJoinRequestSuccess(true);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
 import java.io.IOException;
@@ -7,20 +8,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.logic.*;
 import de.upb.codingpirates.battleships.network.Properties;
 import de.upb.codingpirates.battleships.network.message.request.GameJoinPlayerRequest;
+import de.upb.codingpirates.battleships.network.message.request.GameJoinSpectatorRequest;
+import de.upb.codingpirates.battleships.network.message.request.LobbyRequest;
 import de.upb.codingpirates.battleships.network.message.request.ServerJoinRequest;
+import de.upb.codingpirates.battleships.network.message.request.SpectatorGameStateRequest;
 
 /**
  * This class holds and gets the data form the Server
  * @author Lukas Kröger
  */
 public class Model {
-
+    private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
     private static final Model globalModel = new Model();
+
+    private String clientName;
+    private String serverIP;
+    private ClientType clientType;
 
     private int fieldWidth; //TODO delete because its conained in config
     private int fieldHeigth;
@@ -29,13 +40,38 @@ public class Model {
 
     //for Server communication
     private ClientConnector connector;
+    private MutableLiveData<Boolean> serverJoinRequestSuccess;
+
+    public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
+        if(serverJoinRequestSuccess == null){
+            serverJoinRequestSuccess = new MutableLiveData<Boolean>();
+        }
+        return serverJoinRequestSuccess;
+    }
+    public void setServerJoinRequestSuccess(Boolean serverJoinSuccess) {
+        this.serverJoinRequestSuccess.postValue(serverJoinSuccess);
+    }
+
+
+    public void setConnected(Boolean connected){
+        try {
+            connector.sendMessageToServer(new ServerJoinRequest(clientName, clientType));
+        }
+        catch(IOException e){
+            LOGGER.log(Level.SEVERE,"Could not send ServerJoinRequest to Server",e);
+        }
+
+    }
 
     //data for LobbyView
     Collection<Game> gamesOnServer;
 
     //data for GameView
+    private Game joinedGame; //When changed go to next page
     private Collection<de.upb.codingpirates.battleships.logic.Client> players;
     private Collection<Shot> shots;
+    private Collection<Shot> hits;
+    private Collection<Shot> missed;
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
     private GameState state;
     private Configuration gameConfig;
@@ -52,7 +88,7 @@ public class Model {
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                connector = (ClientConnector) ClientApplication.create(ClientModule.class);
+                    connector = (ClientConnector) ClientApplication.create(ClientModule.class);
             }});
         thread.start();
 
@@ -171,11 +207,18 @@ public class Model {
     }
 
 
-    public void connectToServer(String ipAddress, String name, ClientType clientType) throws IOException {
-        //connector.sendMessageToServer(new ServerJoinRequest(name, clientType));
-        connector.connect(ipAddress, Properties.PORT);
-        connector.sendMessageToServer(new ServerJoinRequest(name, clientType));
+    public void connectToServer(String ipAddress, String name, ClientType clientType)  {
+        this.clientType =clientType;
+        this.clientName = name;
+        try {
+            connector.connect(ipAddress, Properties.PORT);
+            //connector.sendMessageToServer(new ServerJoinRequest(name, clientType));
+        }
+        catch(IOException e){
+            LOGGER.log(Level.SEVERE,"Could not connect to Server",e);
+        }
     }
+
 
 
 
@@ -183,16 +226,17 @@ public class Model {
         this.clientId = clientId;
     }
 
-    public void sendLobbyRequest() {
-        //connector.sendMessageToServer(new LobbyRequest());
-    }
-
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
         this.gamesOnServer = gamesOnServer;
     }
 
     public void sendSpectatorGameStateRequest(){
-        //connector.sendMessageToServer(new SpectatorGameStateRequest());
+        try {
+            connector.sendMessageToServer(new SpectatorGameStateRequest());
+        }
+        catch(IOException e){
+            LOGGER.log(Level.SEVERE,"Could not send SpectatorGameStateRequest to Server",e);
+        }
     }
 
     public void setPlayers(Collection<Client> players){
@@ -216,13 +260,77 @@ public class Model {
     public void setPointsOfPlayers(Map<Integer, Integer> pointsOfPlayers) {
         this.pointsOfPlayers = pointsOfPlayers;
     }
+
+    public void removePlayer(int playerId){
+       this.pointsOfPlayers.remove(playerId);
+       for(Client player: players){
+           if(player.getId() == playerId){
+               players.remove(player);
+               break;
+           }
+       }
+    }
+
     public void setWinner(int winner) {
         this.winner = winner;
     }
 
-    public void disconnectFromServer(){
-        //connector.disconnect();
+    public void addHits(Collection<Shot> hits){
+        this.hits.addAll(hits);
     }
 
+    public void addMissed(Collection<Shot> missed){
+        this.missed.addAll(missed);
+    }
+
+    public void updatePoints(Map<Integer, Integer> newPoints){
+        for(Integer key: newPoints.keySet()){
+            this.pointsOfPlayers.put(key,newPoints.get(key));
+        }
+    }
+
+    public void handlegameJoinSpectatorResponse(int gameId){
+        //TODO init all game related variables
+        for(Game game: gamesOnServer){
+            if(game.getId() == gameId){
+                joinedGame = game;
+                break;
+            }
+        }
+       this.state = joinedGame.getState();
+    }
+    public void disconnectFromServer(){
+        //        //connector.disconnect();
+    }
+
+    public void sendLobbyRequest() {
+        try {
+            connector.sendMessageToServer(new LobbyRequest());
+        }
+        catch(IOException e){
+            LOGGER.log(Level.SEVERE,"Could not send LobbyRequest to Server",e);
+        }
+    }
+
+    public void sendGameJoinSpectatorRequest(int gameId){
+        try {
+            connector.sendMessageToServer(new GameJoinSpectatorRequest(gameId));
+        }
+        catch(IOException e){
+            LOGGER.log(Level.SEVERE,"Could not send GameJoinSpectatorRequest to Server",e);
+        }
+    }
+
+
+    public void setGameStart(){
+        //TODO change view when game starts
+    }
+
+    public void setPaused(){
+        this.state = GameState.PAUSED;
+    }
+    public void setContinued(){
+        this.state = GameState.IN_PROGRESS;
+    }
 
 }
