@@ -11,7 +11,7 @@ import de.upb.codingpirates.battleships.android.R;
 
 
 public class StartScreenViewModel extends BaseObservable {
-    private String title = "Test";
+    private String title = "StartScreen";
 
     @Bindable
     public String getTitle() {
@@ -25,8 +25,12 @@ public class StartScreenViewModel extends BaseObservable {
             notifyPropertyChanged(BR.title);
     }
 
-    public void nextButtonClicked(View view){
+    public void playButtonClicked(View view){
         //do something
         Navigation.findNavController(view).navigate(R.id.action_startScreenFragment_to_loginFragment);
+    }
+
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_startScreenFragment_to_settingsFragment);
     }
 }
