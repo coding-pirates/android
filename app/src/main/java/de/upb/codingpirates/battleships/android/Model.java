@@ -25,7 +25,8 @@ public class Model {
     private Map<Integer, Map<Integer,PlacementInfo>> shipPlacement;
     private GameState state;
 
-
+    //name of the current User, which the user entered in the loginFragment
+    private String userName;
 
     private Map<Integer, ShipType> shipsInitial;
 

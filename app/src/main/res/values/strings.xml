@@ -7,11 +7,14 @@
     <string name="gameStr">Game Activity</string>
     <string name="gameEndStr">Game End Activity</string>
     <string name="lobbyStr">Lobby Fragment</string>
-    <string name="loginStr">Login Fragment</string>
+    <string name="loginStr">Login</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
     <string name="settingsStr">Settings Activity</string>
     <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
+
+    <string name="serverIPStr">Server-IP</string>
+    <string name="serverPortStr">Server-Port</string>
 
     <string name="exitGameString">Wollen sie das Spiel wirklich verlassen?</string>
     <string name="exitButton">Jo ich bin raus.</string>
