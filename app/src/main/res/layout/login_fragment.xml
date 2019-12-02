@@ -68,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
+                    android:text="Goofie"
                     android:hint="Username" />
                 <!-- TODO MaterialDesign outlines box-->
             </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
+                    android:text ="192.168.178.42"
                     android:hint="@string/serverIPStr" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,6 +93,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverPortInputView"
                     android:inputType="number"
+                    android:text = "47345"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"

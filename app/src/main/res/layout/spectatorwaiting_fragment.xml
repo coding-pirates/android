@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWatingViewModel" />
+            type="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWaitingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

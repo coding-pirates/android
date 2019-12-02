@@ -21,7 +21,7 @@
     <style name="MyTheme.DayNight" parent="Base.MyTheme"/>
 
     <!--Base custom theme which will be shared between both light and dark theme variants-->
-    <style name="Base.MyTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Base.MyTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--Material color attributes -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryVariant">@color/color_primary_variant</item>

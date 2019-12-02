@@ -26,6 +26,7 @@ import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Client;
 import de.upb.codingpirates.battleships.logic.Point2D;
+import de.upb.codingpirates.battleships.logic.Shot;
 
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
@@ -60,7 +61,9 @@ public class GameFragment extends Fragment {
         this.initSpinner(viewModel.getPlayers());
         this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
 
-        // Create the observer which updates the Ships.
+        /**
+         * Observer for updating Ships
+         */
         final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Point2D> newShipPoints) {
@@ -69,7 +72,18 @@ public class GameFragment extends Fragment {
             }
         };
 
+        /**
+         * Observer for updating Shots
+         */
+        final Observer<ArrayList<Shot>> shotsObserver = new Observer<ArrayList<Shot>>() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Shot> newShots) {
+                initShots(newShots);
+            }
+        };
+
         viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
+        viewModel.getShots().observe(this.getViewLifecycleOwner(), shotsObserver);
 
         return view;
     }
@@ -151,6 +165,10 @@ public class GameFragment extends Fragment {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
             cell.setBackground(getResources().getDrawable(R.drawable.bordership));
         }
+    }
+
+    private void initShots(Collection<Shot> shots){
+
     }
 
 

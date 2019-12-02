@@ -34,9 +34,6 @@ public class Model {
     private String serverIP;
     private ClientType clientType;
 
-    private int fieldWidth; //TODO delete because its conained in config
-    private int fieldHeigth;
-
     private int clientId;
 
     //for Server communication
@@ -84,20 +81,47 @@ public class Model {
 
     //data for GameView
     private Game joinedGame; //When changed go to next page
-    private Collection<de.upb.codingpirates.battleships.logic.Client> players;
-    private Collection<Shot> shots;
-    private Collection<Shot> hits;
-    private Collection<Shot> missed;
+
+    /**
+     * LivaData for Players in Game
+     */
+    private MutableLiveData<Collection<Client>> players;
+    public MutableLiveData<Collection<Client>> getPlayers(){
+        if(players == null){
+            players = new MutableLiveData<>();
+        }
+        return players;
+    }
+
+    /**
+     * LiveData for all shots
+     */
+    private MutableLiveData<Collection<Shot>> shots;
+    public MutableLiveData<Collection<Shot>> getShots(){
+        if(shots == null){
+            shots = new MutableLiveData<>();
+        }
+        return shots;
+    }
+
+
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
-    private GameState state;
+    private GameState state; //TODO make LiveData
+    private MutableLiveData<Boolean> goToGameView;
+    public MutableLiveData<Boolean> getGoToGameView(){
+        if(goToGameView == null){
+            goToGameView = new MutableLiveData<>();
+        }
+        return goToGameView;
+    }
     private Configuration gameConfig;
-    private Map<Integer, Integer> pointsOfPlayers;
+    private Map<Integer, Integer> pointsOfPlayers; //is no Live Data because the ViewModel only needs the points of one player
+
+
     //TODO remaining Time ??
 
     //data for GameEndView
     private int winner;
-
-    private Map<Integer, ShipType> shipsInitial; //TODO delete because shipsInitial is contained in config
 
 
     public Model() {
@@ -108,27 +132,30 @@ public class Model {
             }});
         thread.start();
 
+        gameConfig = Configuration.DEFAULT;
+
         //currently sets a hard coded state of a game for testing
         //set gamesOnServer:
-        gamesOnServer = new MutableLiveData<>();
+       /* gamesOnServer = new MutableLiveData<>();
         ArrayList<Game> testList= new ArrayList<>();
         testList.add(new Game("testGame", 3, GameState.IN_PROGRESS, Configuration.DEFAULT,false));
         gamesOnServer.setValue(testList);
         //set Field size
-        fieldHeigth = 6;
-        fieldWidth = 6;
-
-        players = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
-        players.add(new de.upb.codingpirates.battleships.logic.Client(0, "Roman"));
-        players.add(new de.upb.codingpirates.battleships.logic.Client(1, "Raphael"));
-        players.add(new de.upb.codingpirates.battleships.logic.Client(2, "Fynn"));
 
 
-        shots = new ArrayList<Shot>();
-        shots.add(new Shot(0, new Point2D(2, 1)));
-        shots.add(new Shot(1, new Point2D(1, 3)));
-        shots.add(new Shot(2, new Point2D(2, 3)));
+        players = new MutableLiveData<>();
+        ArrayList <Client> playersList = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
+        playersList.add(new de.upb.codingpirates.battleships.logic.Client(0, "Roman"));
+        playersList.add(new de.upb.codingpirates.battleships.logic.Client(1, "Raphael"));
+        playersList.add(new de.upb.codingpirates.battleships.logic.Client(2, "Fynn"));
+        players.setValue(playersList);
 
+        shots = new MutableLiveData<>();
+        ArrayList<Shot> shotsList = new ArrayList<Shot>();
+        shotsList.add(new Shot(0, new Point2D(2, 1)));
+        shotsList.add(new Shot(1, new Point2D(1, 3)));
+        shotsList.add(new Shot(2, new Point2D(2, 3)));
+        shots.setValue(shotsList);
         //add Ships of Player 0 (Roman)
         ships = new HashMap<Integer, Map<Integer, PlacementInfo>>();
         Map<Integer, PlacementInfo> shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
@@ -151,7 +178,7 @@ public class Model {
         shipsOfPlayer.put(2, new PlacementInfo(new Point2D(1, 1), Rotation.NONE));
         ships.put(2, shipsOfPlayer);
 
-        //create initial Positions of Ships
+     /*   //create initial Positions of Ships
         shipsInitial = new HashMap<Integer, ShipType>();
         //Ship 0
         Collection<Point2D> shipPoints = new ArrayList<Point2D>();
@@ -173,7 +200,7 @@ public class Model {
         shipPoints.add(new Point2D(2, 0));
         shipsInitial.put(2, new ShipType(shipPoints));
 
-        state = GameState.IN_PROGRESS;
+        state = GameState.IN_PROGRESS; */
 
     }
 
@@ -208,32 +235,24 @@ public class Model {
     }
 
     public Map<Integer, ShipType> getShipTypes() {
-        return shipsInitial;
-    }
-
-    public void setShipsInitial(Map<Integer, ShipType> shipsInitial) {
-        this.shipsInitial = shipsInitial;
-    }
-
-    public Collection<de.upb.codingpirates.battleships.logic.Client> getPlayers() {
-        return players;
+        return gameConfig.getShipTypes();
     }
 
     public int getFieldWidth() {
-        return fieldWidth;
+        return gameConfig.getWidth();
     }
 
-    public int getFieldHeigth() {
-        return fieldHeigth;
+    public int getFieldHeight() {
+        return gameConfig.getHeight();
     }
 
 
     public void connectToServer(String ipAddress, String name, ClientType clientType,int port )  {
         this.clientType =clientType;
         this.clientName = name;
+        this.serverIP = ipAddress;
         try {
             connector.connect(ipAddress, port);
-            //connector.sendMessageToServer(new ServerJoinRequest(name, clientType));
         }
         catch(IOException e){
             LOGGER.log(Level.SEVERE,"Could not connect to Server",e);
@@ -261,12 +280,10 @@ public class Model {
     }
 
     public void setPlayers(Collection<Client> players){
-        this.players = players;
+        this.players.postValue(players);
     }
 
-    public void setShots(Collection<Shot> shots){
-        this.shots = shots;
-    }
+
     public void setShips(Map<Integer, Map<Integer, PlacementInfo>> ships) {
         this.ships = ships;
     }
@@ -284,24 +301,28 @@ public class Model {
 
     public void removePlayer(int playerId){
        this.pointsOfPlayers.remove(playerId);
-       for(Client player: players){
+       Collection<Client> oldPlayers = players.getValue();
+       for(Client player: oldPlayers){
            if(player.getId() == playerId){
-               players.remove(player);
+               oldPlayers.remove(player);
                break;
            }
        }
+       players.postValue(oldPlayers);
     }
 
     public void setWinner(int winner) {
         this.winner = winner;
     }
 
-    public void addHits(Collection<Shot> hits){
-        this.hits.addAll(hits);
+    public void addShots(Collection<Shot> newShots){
+        Collection<Shot> oldShots = this.shots.getValue();
+        oldShots.addAll(newShots);
+       this.shots.setValue(oldShots);
     }
 
-    public void addMissed(Collection<Shot> missed){
-        this.missed.addAll(missed);
+    public void setShots(Collection<Shot> newShots){
+        this.shots.setValue(newShots);
     }
 
     public void updatePoints(Map<Integer, Integer> newPoints){
@@ -319,7 +340,7 @@ public class Model {
             }
         }
        this.state = joinedGame.getState();
-        this.goToSpectatorWaiting.setValue(true);
+        this.goToSpectatorWaiting.postValue(true);
     }
     public void disconnectFromServer(){
         //        //connector.disconnect();
@@ -346,6 +367,7 @@ public class Model {
 
 
     public void setGameStart(){
+
         //TODO change view when game starts
     }
 
@@ -355,5 +377,7 @@ public class Model {
     public void setContinued(){
         this.state = GameState.IN_PROGRESS;
     }
+
+
 
 }

@@ -83,6 +83,6 @@ public class LoginViewModel extends ViewModel {
         catch(NumberFormatException e){
             Toast.makeText(view.getContext(),"Please insert a valid Port", Toast.LENGTH_SHORT).show();
         }
-        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_lobbyFragment);
+        //Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_lobbyFragment);
     }
 }

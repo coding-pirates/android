@@ -2,7 +2,9 @@ package de.upb.codingpirates.battleships.android.game;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
@@ -24,32 +26,27 @@ public class GameViewModel extends ViewModel {
     /**
      * Is the Model which manages the GameLogic and Server communication
      */
-    private Model model = Model.getInstance();
+    private Model model;
 
     /**
      * The game field width specified in the configuration
      */
-    private int fieldWidth = model.getFieldWidth();
+    private int fieldWidth;
 
     /**
      * The game field heigth specified in the configuration
      */
-    private int fieldHeight = model.getFieldHeigth();
+    private int fieldHeight;
 
     /**
      * Contains all players of the current game
      */
-    private Collection<Client> players = model.getPlayers();
+    private Collection<Client> players; //TODO Mutable live data so that it changes when Player leaves
 
     /**
      * Contains all points of currently displayed ships
      */
     private MutableLiveData<ArrayList<Point2D>> pointsOfShips; //already converted for the GridLayout of the GameView
-
-    /**
-     * Represents the currently selected player
-     */
-    private Client currentPlayer;
 
     public MutableLiveData<ArrayList<Point2D>> getPointsOfShips() {
         if(pointsOfShips==null){
@@ -58,6 +55,50 @@ public class GameViewModel extends ViewModel {
         return pointsOfShips;
     }
 
+    /**
+     * Represents the currently selected player
+     */
+    private Client currentPlayer;
+
+    private Collection<Shot> missed;
+    private MutableLiveData<ArrayList<Shot>> shots;
+    public MutableLiveData<ArrayList<Shot>> getShots(){
+        if(shots == null){
+            shots = new MutableLiveData<>();
+        }
+        return shots;
+    }
+
+   public GameViewModel(){
+       model = Model.getInstance();
+       fieldWidth = model.getFieldWidth();
+       fieldHeight = model.getFieldHeight();
+
+       /**
+        * Observer for shots
+        */
+       final Observer<Collection<Shot>> shotsObserver = new Observer<Collection<Shot>>(){
+           public void onChanged(@Nullable final Collection<Shot> newShots) {
+               if(shots == null){
+                   shots = new MutableLiveData<>();
+               }
+               shots.setValue((ArrayList<Shot>)newShots);
+           }
+       };
+        model.getShots().observeForever(shotsObserver);
+
+       /**
+        * Observer for Players in Game
+        */
+       final Observer<Collection<Client>> playersObserver = new Observer<Collection<Client>>(){
+           public void onChanged(@Nullable final Collection<Client> newPlayers) {
+               players = newPlayers;
+           }
+       };
+       model.getPlayers().observeForever(playersObserver);
+
+
+   }
 
     public Client getCurrentPlayer() {
         return currentPlayer;
@@ -88,25 +129,27 @@ public class GameViewModel extends ViewModel {
     private void refreshShipPoints() {
         Map<Integer, PlacementInfo> placementOfPlayer = model.getShipPlacementOfPlayer(currentPlayer.getId());
         Map<Integer, ShipType> shipTypes = model.getShipTypes();
+        if(!shipTypes.isEmpty()) {
+            ArrayList<Point2D> newPointsOfShips = new ArrayList<>();
 
-        ArrayList<Point2D> newPointsOfShips = new ArrayList<>();
+            for (int shipID : placementOfPlayer.keySet()) {
 
-        for (int shipID : placementOfPlayer.keySet()) {
-
-            ShipType currentShip = shipTypes.get(shipID);
-            for (Point2D point : currentShip.getPositions()) {
-                Point2D editedPoint = new Point2D(point.getX(), point.getY());
-                //rotate ship
-                editedPoint = rotatePoint(editedPoint, placementOfPlayer.get(shipID).getRotation().ordinal());
-                //position ship
-                editedPoint = new Point2D(editedPoint.getX() + placementOfPlayer.get(shipID).getPosition().getX(), editedPoint.getY() + placementOfPlayer.get(shipID).getPosition().getY());
-                //bring point in sector 4 of the coordinatesystem
-                editedPoint = new Point2D(editedPoint.getX(), (editedPoint.getY() - (fieldHeight - 1)) * (-1));
-                newPointsOfShips.add(editedPoint);
+                ShipType currentShip = shipTypes.get(shipID);
+                for (Point2D point : currentShip.getPositions()) {
+                    Point2D editedPoint = new Point2D(point.getX(), point.getY());
+                    //rotate ship
+                    editedPoint = rotatePoint(editedPoint, placementOfPlayer.get(shipID).getRotation().ordinal());
+                    //position ship
+                    editedPoint = new Point2D(editedPoint.getX() + placementOfPlayer.get(shipID).getPosition().getX(), editedPoint.getY() + placementOfPlayer.get(shipID).getPosition().getY());
+                    //bring point in sector 4 of the coordinatesystem
+                    editedPoint = new Point2D(editedPoint.getX(), (editedPoint.getY() - (fieldHeight - 1)) * (-1));
+                    newPointsOfShips.add(editedPoint);
+                }
             }
+            this.pointsOfShips.setValue(newPointsOfShips);
         }
-        this.pointsOfShips.setValue(newPointsOfShips);
     }
+
 
     /**
      * rotates a point by the given rotation Enum

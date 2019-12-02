@@ -12,7 +12,6 @@ public class MessageHandler implements Handler {
     public void handleGameInitNotification(GameInitNotification message) {
         Model.getInstance().setPlayers(message.getClientList());
         Model.getInstance().setGameConfig(message.getConfiguration());
-        Model.getInstance().sendSpectatorGameStateRequest();
     }
 
     @Override
@@ -23,7 +22,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleConnectionClosedReport(ConnectionClosedReport message) {
         //TODO show Connection Lost error
-        //TODO set Connection hanler to unconnected
+        //TODO set Connection handler to unconnected
     }
 
     @Override
@@ -50,6 +49,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleGameStartNotification(GameStartNotification message) {
         Model.getInstance().setGameStart();
+        Model.getInstance().sendSpectatorGameStateRequest();
     }
 
     @Override
@@ -60,6 +60,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleLobbyResponse(LobbyResponse message) {
         Model.getInstance().setGamesOnServer(message.getGames());
+        //TODO NAvigate to LobbyView
     }
 
     @Override
@@ -80,9 +81,9 @@ public class MessageHandler implements Handler {
     @Override
     public void handleSpectatorUpdateNotification(SpectatorUpdateNotification message) {
         Model model  = Model.getInstance();
-        model.addHits(message.getHits());
+        model.addShots(message.getHits());
         model.updatePoints(message.getPoints());
-        model.addMissed(message.getMissed());
+        model.addShots(message.getMissed());
         //TODO sunk points update
     }
 

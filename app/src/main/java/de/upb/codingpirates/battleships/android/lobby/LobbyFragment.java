@@ -28,6 +28,7 @@ public class LobbyFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private LobbyViewModel viewmodel;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,8 +36,8 @@ public class LobbyFragment extends Fragment {
         LobbyFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.lobby_fragment,container,false);
         viewmodel = new ViewModelProvider(this).get(LobbyViewModel.class);
         databinding.setViewmodel(viewmodel);
-
-        recyclerView = (RecyclerView) databinding.getRoot().findViewById(R.id.lobbyList);
+        view = databinding.getRoot();
+        recyclerView = (RecyclerView) view.findViewById(R.id.lobbyList);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -45,17 +46,16 @@ public class LobbyFragment extends Fragment {
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-
-
-
-        ArrayList<Game> gamesOnServer = viewmodel.getGamesOnServer();
-
-
-        // specify an adapter (see also next example)
-        mAdapter = new RecyclerAdapter(gamesOnServer);
+        mAdapter = new RecyclerAdapter(new ArrayList<Game>());
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
+        final Observer<ArrayList<Game> > gamesObserver = new Observer<ArrayList<Game> >() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Game>  newGames) {
+                initGamesOnServer(newGames);
+            }
+        };
+        viewmodel.getGamesOnServer().observe(this.getViewLifecycleOwner(),gamesObserver);
 
         final Observer<Boolean> goToSpectatorScreen = new Observer<Boolean >() {
             @Override
@@ -70,6 +70,13 @@ public class LobbyFragment extends Fragment {
         return databinding.getRoot();
     }
 
+    public void initGamesOnServer(ArrayList<Game> gamesOnServer){
+
+        // specify an adapter (see also next example)
+        mAdapter = new RecyclerAdapter(gamesOnServer);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+    }
 
 
 }
