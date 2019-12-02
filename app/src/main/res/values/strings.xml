@@ -5,13 +5,14 @@
     <!-- Page Title Strings -->
     <string name="startScreenStr">Start Screen Fragment</string>
     <string name="gameStr">Game Activity</string>
-    <string name="gameEndStr">Ai Ai Captain, das Spiel ist vorbei!</string>
+    <string name="gameEndStr">Beim Klabautermann! Die Seeschlacht ist vollendet</string>
     <string name="lobbyStr">Lobby Fragment</string>
     <string name="loginStr">Login</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
     <string name="settingsStr">Settings Activity</string>
-    <string name="spectatorWaitingStr">Spectator Waiting Activity</string>
+    <string name="spectatorWaitingStr">Die Piraten planen noch ihre Schlacht</string>
+    <string name="patienceStr">Geduld!</string>
     <string name="rulesStr">Regeln</string>
     <string name="imprintStr">Impressum</string>
     <string name="pointsStr">Punkte</string>
