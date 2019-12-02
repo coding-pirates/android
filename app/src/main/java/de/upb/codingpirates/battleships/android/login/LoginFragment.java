@@ -1,6 +1,7 @@
 package de.upb.codingpirates.battleships.android.login;
 
 import android.os.Bundle;
+import android.transition.TransitionManager;
 import android.view.*;
 
 import androidx.databinding.DataBindingUtil;
