@@ -1,11 +1,12 @@
 package de.upb.codingpirates.battleships.android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
-import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
+import de.upb.codingpirates.battleships.android.logger.Log4jConfiguration;
+
 
 public class MainActivity extends AppCompatActivity {
     MediaPlayer player;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        Log4jConfiguration.init();
 
         player = MediaPlayer.create(this, R.raw.sot_soundtrack);
         player.start(); 
