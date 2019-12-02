@@ -34,8 +34,8 @@ public class Model {
         //currently sets a hard coded state of a game for testing
 
         //set Field size
-        fieldHeigth= 6;
-        fieldWidth = 6;
+        fieldHeigth= 20;
+        fieldWidth = 20;
 
         players = new ArrayList<Client>();
         players.add(new Client(0,"Roman"));

@@ -14,25 +14,16 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gameField"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="fill"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="24dp"
         android:tag="gameField"
         app:columnCount="@{viewmodel.fieldWidth}"
-        app:rowCount="@{viewmodel.fieldHeight}"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton"
-        app:layout_constraintVertical_bias="0.0">
-    </androidx.gridlayout.widget.GridLayout>
+        app:rowCount="@{viewmodel.fieldHeight}"/>
 
     <Spinner
         android:id="@+id/spinner"
@@ -75,18 +66,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_delete" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="137dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="3dp"
-        android:onClick="@{viewmodel::nextButtonClicked}"
-        android:text="@string/NextBtn"
-        app:layout_constraintBottom_toTopOf="@+id/gameField"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

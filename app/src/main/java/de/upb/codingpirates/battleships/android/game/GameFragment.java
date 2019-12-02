@@ -97,8 +97,8 @@ public class GameFragment extends Fragment {
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
-            param.height = 150; //TODO variable size
-            param.width = 150;
+            param.height = 50; //TODO variable size
+            param.width = 50;
             param.columnSpec = GridLayout.spec(c);
             param.rowSpec = GridLayout.spec(r);
             gameField.addView(btn, param);
