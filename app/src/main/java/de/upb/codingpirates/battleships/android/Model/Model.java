@@ -62,12 +62,8 @@ public class Model {
     }
 
     //data for LobbyView
-   private MutableLiveData<Collection<Game>> gamesOnServer;
+    private MutableLiveData<Collection<Game>> gamesOnServer = new MutableLiveData<>();
     public MutableLiveData<Collection<Game>> getGamesOnServer(){
-        if(gamesOnServer == null){
-            gamesOnServer = new MutableLiveData<>();
-            gamesOnServer.setValue(new ArrayList<Game>());
-        }
         return gamesOnServer;
     }
 
