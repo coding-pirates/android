@@ -94,21 +94,23 @@
             app:layout_constraintVertical_bias="0.263" />
 
         <TableLayout
+            android:id="@+id/playerRankingHeaderLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/playerRankingTableLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
             <TableRow>
+
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Platz"
-                android:textStyle="bold" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Platz"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,6 +129,26 @@
                     android:textStyle="bold" />
             </TableRow>
 
+            <ScrollView
+                android:id="@+id/scrollViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="251dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/playerRankingHeaderLayout">
+
+                <TableLayout
+                    android:id="@+id/playerRankingTableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+                </TableLayout>
+
+            </ScrollView>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

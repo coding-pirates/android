@@ -59,6 +59,7 @@ public class GameEndFragment extends Fragment {
      * @param id id of the row
      */
     private void addRow(int p, String n, int s, int id) {
+        //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
         TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);

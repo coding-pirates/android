@@ -44,7 +44,7 @@ public class LoginViewModel extends ViewModel {
         usernameField.setText("Peter Pan");
         serverIpField.setText("123.123.123.123");
         serverPortField.setText("123");
-        
+
         String username = usernameField.getText().toString();
         String serverIP = serverIpField.getText().toString();
         String serverPort = serverPortField.getText().toString();
