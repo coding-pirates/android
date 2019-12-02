@@ -27,7 +27,8 @@ public class ExitGameFragment extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancelButton, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Navigation.findNavController(getParentFragment().getView()).navigate(R.id.action_exitGameFragment_to_gameFragment);
+                        dialog.cancel();
+                        //Navigation.findNavController(getParentFragment().getView()).navigate(R.id.action_exitGameFragment_to_gameFragment);
                     }
                 });
         // Create the AlertDialog object and return it

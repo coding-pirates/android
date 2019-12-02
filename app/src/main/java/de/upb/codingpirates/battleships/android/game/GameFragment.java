@@ -21,14 +21,15 @@ import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
-import de.upb.codingpirates.battleships.logic.util.Client;
-import de.upb.codingpirates.battleships.logic.util.Point2D;
+import de.upb.codingpirates.battleships.logic.Client;
+import de.upb.codingpirates.battleships.logic.Point2D;
 
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
@@ -55,7 +56,6 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
         databinding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(viewModel);
@@ -124,7 +124,7 @@ public class GameFragment extends Fragment {
                 new ArrayList<Client>(players)
         );
         playersSpinner.setAdapter(adapter);
-        //viewModel.setCurrentPlayer((Client) playersSpinner.getSelectedItem());
+        //viewModel.setCurrentPlayer((ClientApplication) playersSpinner.getSelectedItem());
 
         playersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

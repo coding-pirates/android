@@ -2,7 +2,6 @@ package de.upb.codingpirates.battleships.android.game;
 
 import android.view.View;
 
-import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
@@ -11,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import de.upb.codingpirates.battleships.android.Model;
+import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;
-import de.upb.codingpirates.battleships.logic.util.*;
+import de.upb.codingpirates.battleships.logic.*;
 
 /**
  * This class holds all the data for the GameFragment.
@@ -25,7 +24,7 @@ public class GameViewModel extends ViewModel {
     /**
      * Is the Model which manages the GameLogic and Server communication
      */
-    private Model model = new Model();
+    private Model model = Model.getInstance();
 
     /**
      * The game field width specified in the configuration
@@ -95,7 +94,7 @@ public class GameViewModel extends ViewModel {
         for (int shipID : placementOfPlayer.keySet()) {
 
             ShipType currentShip = shipTypes.get(shipID);
-            for (Point2D point : currentShip.getPosition()) {
+            for (Point2D point : currentShip.getPositions()) {
                 Point2D editedPoint = new Point2D(point.getX(), point.getY());
                 //rotate ship
                 editedPoint = rotatePoint(editedPoint, placementOfPlayer.get(shipID).getRotation().ordinal());
