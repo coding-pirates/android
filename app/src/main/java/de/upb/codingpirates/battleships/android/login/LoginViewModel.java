@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.databinding.BaseObservable;
 import androidx.navigation.Navigation;
 
-import java.io.IOException;
 
 import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;

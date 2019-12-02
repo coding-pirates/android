@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
+import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,9 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 public class GameFragment extends Fragment {
 
+    int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+    int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
@@ -87,7 +91,7 @@ public class GameFragment extends Fragment {
     private void initGameFild(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
 
-        //i = counter,  c = current colum, r = current row
+        //i = counter,  c = current column, r = current row
         for (int i = 0, c = 0, r = 0; i < fieldHeight * fieldWidth; i++) {
             //if one row is filled
             if (c == fieldWidth) {
@@ -99,8 +103,11 @@ public class GameFragment extends Fragment {
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
-            param.height = 100;
-            param.width = 100;
+
+            //TODO comment and make max. Height and Width so the buttons are square
+            param.height = height/fieldHeight < 100 ? 100 : height/fieldHeight;
+            param.width = width/fieldWidth < 100 ? 100 : width/fieldWidth;
+
             param.columnSpec = GridLayout.spec(c);
             param.rowSpec = GridLayout.spec(r);
             gameField.addView(btn, param);
