@@ -50,12 +50,11 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
         databinding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(viewModel);
         view = databinding.getRoot();
-        //view = inflater.inflate(R.layout.game_fragment, container, false);
+        view = inflater.inflate(R.layout.game_fragment, container, false);
         this.initSpinner(viewModel.getPlayers());
         this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
 
@@ -81,7 +80,7 @@ public class GameFragment extends Fragment {
      * @param fieldHeight The game field height specified in the Configruation
      * @param fieldWidth  The game field width specified in the Configruation
      */
-    private void initGameField(int fieldHeight, int fieldWidth) {
+    private void initGameFild(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
 
         //i = counter,  c = current colum, r = current row

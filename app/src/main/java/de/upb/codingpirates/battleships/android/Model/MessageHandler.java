@@ -48,6 +48,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleGameStartNotification(GameStartNotification message) {
+        System.out.println("GameStart received");
         Model.getInstance().setGameStart();
         Model.getInstance().sendSpectatorGameStateRequest();
     }
