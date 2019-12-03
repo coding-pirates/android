@@ -28,8 +28,8 @@ public class LoginViewModel extends ViewModel {
     private TextInputLayout serverPortLayout;
 
     /**
-     * TODO description
-     * @param view
+     * If the Login Button is clicked the 3 input fields will be checked for content. If the fields are not empty the connection to the server will start to build
+     * @param view the view from which the method is called. Here : @id/loginButton
      */
     public void loginButtonClicked(View view){
         // get the context of the view
