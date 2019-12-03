@@ -10,6 +10,7 @@ import de.upb.codingpirates.battleships.android.R;
 public class GameEndViewModel extends BaseObservable {
 
 
+
     /**
      * exits the game and returns to the LobbyView, when the button is clicked
      * @param view

@@ -33,7 +33,6 @@ public class MessageHandler implements Handler {
     @Override
     public void handleFinishNotification(FinishNotification message) {
         Model.getInstance().setPointsOfPlayers(message.getPoints());
-        //Model.getInstance().setWinner(message.getWinner()); //TODO
     }
 
     @Override
@@ -49,7 +48,6 @@ public class MessageHandler implements Handler {
     @Override
     public void handleGameStartNotification(GameStartNotification message) {
         System.out.println("GameStart received");
-        Model.getInstance().setGameStart();
         Model.getInstance().sendSpectatorGameStateRequest();
     }
 
@@ -120,6 +118,7 @@ public class MessageHandler implements Handler {
         Model.getInstance().setShots(message.getShots());
         Model.getInstance().setShips(message.getShips());
         Model.getInstance().setState(message.getState());
+        Model.getInstance().goToGameView();
     }
 
     @Override
