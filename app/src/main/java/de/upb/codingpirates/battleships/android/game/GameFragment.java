@@ -41,9 +41,9 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 public class GameFragment extends Fragment {
 
-    int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-
-    int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+    //get the width of the current device in pixel
+    private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+    //private int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
@@ -90,6 +90,8 @@ public class GameFragment extends Fragment {
      */
     private void initGameFild(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
+        int minWidth = 100;
+        //int minHeigth = 100;
 
         //i = counter,  c = current column, r = current row
         for (int i = 0, c = 0, r = 0; i < fieldHeight * fieldWidth; i++) {
@@ -104,9 +106,9 @@ public class GameFragment extends Fragment {
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
 
-            //TODO comment and make max. Height and Width so the buttons are square
-            param.height = height/fieldHeight < 100 ? 100 : height/fieldHeight;
-            param.width = width/fieldWidth < 100 ? 100 : width/fieldWidth;
+            //Scaling the buttons according to the screen size. If the ratio is smaller than the min width then the height and width will be the minimum.
+            param.height = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
+            param.width = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
 
             param.columnSpec = GridLayout.spec(c);
             param.rowSpec = GridLayout.spec(r);
