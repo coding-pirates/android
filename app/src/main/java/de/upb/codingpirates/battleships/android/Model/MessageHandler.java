@@ -1,11 +1,14 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import java.util.logging.Logger;
+
 import de.upb.codingpirates.battleships.client.Handler;
 import de.upb.codingpirates.battleships.network.message.notification.*;
 import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedReport;
 import de.upb.codingpirates.battleships.network.message.response.*;
 
 public class MessageHandler implements Handler {
+    private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
 
 
     @Override

@@ -58,7 +58,7 @@ public class GameViewModel extends ViewModel {
     private Client currentPlayer;
 
     private Collection<Shot> missed;
-    private MutableLiveData<ArrayList<Point2D>> pointsOfShots;
+    private MutableLiveData<ArrayList<Point2D>> pointsOfShots = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Point2D>> getPointsOfShots(){
         if(pointsOfShots == null){
             pointsOfShots = new MutableLiveData<>();

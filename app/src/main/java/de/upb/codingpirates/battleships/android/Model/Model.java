@@ -39,7 +39,7 @@ public class Model {
 
     //for Server communication
     private ClientConnector connector;
-    private MutableLiveData<Boolean> serverJoinRequestSuccess;
+    private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
         if(serverJoinRequestSuccess == null){
@@ -82,33 +82,24 @@ public class Model {
     /**
      * LivaData for Players in Game
      */
-    private MutableLiveData<Collection<Client>> players;
+    private MutableLiveData<Collection<Client>> players = new MutableLiveData<>();
     public MutableLiveData<Collection<Client>> getPlayers(){
-        if(players == null){
-            players = new MutableLiveData<>();
-        }
         return players;
     }
 
     /**
      * LiveData for all shots
      */
-    private MutableLiveData<Collection<Shot>> shots;
+    private MutableLiveData<Collection<Shot>> shots = new MutableLiveData<>();
     public MutableLiveData<Collection<Shot>> getShots(){
-        if(shots == null){
-            shots = new MutableLiveData<>();
-        }
         return shots;
     }
 
 
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
     private GameState state; //TODO make LiveData
-    private MutableLiveData<Boolean> goToGameView;
+    private MutableLiveData<Boolean> goToGameView = new MutableLiveData<>();
     public MutableLiveData<Boolean> getGoToGameView(){
-        if(goToGameView == null){
-            goToGameView = new MutableLiveData<>();
-        }
         return goToGameView;
     }
     private Configuration gameConfig;
