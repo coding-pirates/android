@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         player = MediaPlayer.create(this, R.raw.sot_soundtrack);
-        player.start(); 
+        player.start();
     }
 
     @Override

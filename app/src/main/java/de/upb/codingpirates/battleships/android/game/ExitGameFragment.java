@@ -11,8 +11,8 @@ import androidx.navigation.Navigation;
 import de.upb.codingpirates.battleships.android.R;
 
 /**
- * The class for showing the game exit dialog
- * @author: Lukas Kröger
+ * The class for showing the game exit dialog. If User exists, he returns to the lobby. If not, he stays in the current screen
+ * @author: Lukas Kröger, Fynn Ruppel
  */
 public class ExitGameFragment extends DialogFragment {
     @Override
@@ -28,7 +28,6 @@ public class ExitGameFragment extends DialogFragment {
                 .setNegativeButton(R.string.cancelButton, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        //Navigation.findNavController(getParentFragment().getView()).navigate(R.id.action_exitGameFragment_to_gameFragment);
                     }
                 });
         // Create the AlertDialog object and return it
