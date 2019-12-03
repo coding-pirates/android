@@ -27,6 +27,7 @@ public class SpectatorWaitingFragment extends Fragment {
         SpectatorwaitingFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.spectatorwaiting_fragment,container,false);
         viewModel = new ViewModelProvider(this).get(SpectatorWaitingViewModel.class);
         view = databinding.getRoot();
+        databinding.setViewmodel(viewModel);
 
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newGoToGameView) {

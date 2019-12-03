@@ -46,12 +46,9 @@ public class GameViewModel extends ViewModel {
     /**
      * Contains all points of currently displayed ships
      */
-    private MutableLiveData<ArrayList<Point2D>> pointsOfShips; //already converted for the GridLayout of the GameView
+    private ArrayList<Point2D> pointsOfShips; //already converted for the GridLayout of the GameView
 
-    public MutableLiveData<ArrayList<Point2D>> getPointsOfShips() {
-        if(pointsOfShips==null){
-            pointsOfShips = new MutableLiveData<ArrayList<Point2D>>();
-        }
+    public ArrayList<Point2D> getPointsOfShips() {
         return pointsOfShips;
     }
 
@@ -61,12 +58,12 @@ public class GameViewModel extends ViewModel {
     private Client currentPlayer;
 
     private Collection<Shot> missed;
-    private MutableLiveData<ArrayList<Shot>> shots;
-    public MutableLiveData<ArrayList<Shot>> getShots(){
-        if(shots == null){
-            shots = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Point2D>> pointsOfShots;
+    public MutableLiveData<ArrayList<Point2D>> getPointsOfShots(){
+        if(pointsOfShots == null){
+            pointsOfShots = new MutableLiveData<>();
         }
-        return shots;
+        return pointsOfShots;
     }
 
    public GameViewModel(){
@@ -79,10 +76,7 @@ public class GameViewModel extends ViewModel {
         */
        final Observer<Collection<Shot>> shotsObserver = new Observer<Collection<Shot>>(){
            public void onChanged(@Nullable final Collection<Shot> newShots) {
-               if(shots == null){
-                   shots = new MutableLiveData<>();
-               }
-               shots.setValue((ArrayList<Shot>)newShots);
+               pointsOfShots.setValue((ArrayList<Point2D>)createShotPointsForUI(model.getShotsOfPlayer(currentPlayer.getId())));
            }
        };
         model.getShots().observeForever(shotsObserver);
@@ -146,10 +140,18 @@ public class GameViewModel extends ViewModel {
                     newPointsOfShips.add(editedPoint);
                 }
             }
-            this.pointsOfShips.setValue(newPointsOfShips);
+            this.pointsOfShips= newPointsOfShips;
         }
     }
 
+    private Collection<Point2D> createShotPointsForUI(Collection<Shot> shotsOfPlayer){
+        Collection<Point2D> createdPoints = new ArrayList<>();
+        for(Shot shot: shotsOfPlayer){
+            Point2D newPointOfShot = new Point2D(shot.getTargetField().getX(), (shot.getTargetField().getY()-(fieldHeight-1))*(-1));
+            createdPoints.add(newPointOfShot);
+        }
+        return createdPoints;
+    }
 
     /**
      * rotates a point by the given rotation Enum

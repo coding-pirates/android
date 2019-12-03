@@ -230,6 +230,16 @@ public class Model {
         return ships.get(id);
     }
 
+    public Collection<Shot> getShotsOfPlayer(int playerId){
+        Collection<Shot> shotsOfPlayer = new ArrayList<Shot>();
+        for(Shot shot : shots.getValue()){
+            if(shot.getClientId() == playerId){
+                shotsOfPlayer.add(shot);
+            }
+        }
+        return shotsOfPlayer;
+    }
+
     public Map<Integer, ShipType> getShipTypes() {
         return gameConfig.getShipTypes();
     }
@@ -294,6 +304,7 @@ public class Model {
     public void setPointsOfPlayers(Map<Integer, Integer> pointsOfPlayers) {
         this.pointsOfPlayers = pointsOfPlayers;
     }
+
 
     public void removePlayer(int playerId){
        this.pointsOfPlayers.remove(playerId);
@@ -363,8 +374,7 @@ public class Model {
 
 
     public void setGameStart(){
-
-        //TODO change view when game starts
+        this.goToGameView.setValue(true);
     }
 
     public void setPaused(){

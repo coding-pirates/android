@@ -1,6 +1,5 @@
 package de.upb.codingpirates.battleships.android.game;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +24,6 @@ import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Client;
 import de.upb.codingpirates.battleships.logic.Point2D;
-import de.upb.codingpirates.battleships.logic.Shot;
 
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
@@ -58,32 +55,25 @@ public class GameFragment extends Fragment {
         databinding.setViewmodel(viewModel);
         view = databinding.getRoot();
         //view = inflater.inflate(R.layout.game_fragment, container, false);
-        this.initSpinner(viewModel.getPlayers());
+       // this.initSpinner(viewModel.getPlayers());
         this.initGameFild(viewModel.getFieldHeight(), viewModel.getFieldWidth());
-
-        /**
-         * Observer for updating Ships
-         */
-        final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
-            @Override
-            public void onChanged(@Nullable final ArrayList<Point2D> newShipPoints) {
-                // Update the UI, in this case, a TextView.
-                initShips(newShipPoints);
-            }
-        };
+        ArrayList<Point2D> testShots = new ArrayList<>();
+        testShots.add(new Point2D(3,4));
+        testShots.add(new Point2D(4,1));
+        this.initShots(testShots);
 
         /**
          * Observer for updating Shots
          */
-        final Observer<ArrayList<Shot>> shotsObserver = new Observer<ArrayList<Shot>>() {
+        final Observer<ArrayList<Point2D>> shotsObserver = new Observer<ArrayList<Point2D>>() {
             @Override
-            public void onChanged(@Nullable final ArrayList<Shot> newShots) {
+            public void onChanged(@Nullable final ArrayList<Point2D> newShots) {
                 initShots(newShots);
             }
         };
 
-        viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
-        viewModel.getShots().observe(this.getViewLifecycleOwner(), shotsObserver);
+       // viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
+        viewModel.getPointsOfShots().observe(this.getViewLifecycleOwner(), shotsObserver);
 
         return view;
     }
@@ -136,12 +126,14 @@ public class GameFragment extends Fragment {
                 new ArrayList<Client>(players)
         );
         playersSpinner.setAdapter(adapter);
-        //viewModel.setCurrentPlayer((ClientApplication) playersSpinner.getSelectedItem());
 
         playersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 viewModel.setCurrentPlayer((Client) parent.getItemAtPosition(position));
+                cleanGameField();
+                initShips(viewModel.getPointsOfShips());
+                initShots(viewModel.getPointsOfShots().getValue());
             }
 
             @Override
@@ -152,23 +144,37 @@ public class GameFragment extends Fragment {
 
     }
 
-    /**
-     * Initialises the ships for the selected Player
-     */
-    private void initShips(Collection<Point2D> shipPoints) {
+    private void cleanGameField(){
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
             gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.borderfield));
         }
-        for (Point2D point : shipPoints) {
+    }
 
+    /**
+     * Initialises the ships for the selected Player
+     */
+    private void initShips(Collection<Point2D> shipPoints) {
+        for (Point2D point : shipPoints) {
+            GridLayout gameField = view.findViewById(R.id.gameField);
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
             cell.setBackground(getResources().getDrawable(R.drawable.bordership));
+            cell.setTag("ship");
         }
     }
 
-    private void initShots(Collection<Shot> shots){
-
+    private void initShots(Collection<Point2D> shotPoints){
+        for (Point2D point : shotPoints) {
+            GridLayout gameField = view.findViewById(R.id.gameField);
+            Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
+            if(cell.getTag() == "ship" )
+            {
+                cell.setBackground(getResources().getDrawable(R.drawable.hit_ship));
+            }
+            else {
+                cell.setBackground(getResources().getDrawable(R.drawable.shot_field));
+            }
+        }
     }
 
 
