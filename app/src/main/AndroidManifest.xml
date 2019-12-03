@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/coding_pirates_app_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/MyTheme.DayNight"
+        android:theme="@style/Base.MyTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
