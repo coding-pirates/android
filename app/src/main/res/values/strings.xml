@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android</string>
+    <string name="app_name">Battleships</string>
     <string name="NextBtn">Next Page</string>
 
     <!-- Page Title Strings -->
