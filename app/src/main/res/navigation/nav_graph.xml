@@ -12,7 +12,9 @@
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_loginFragment_to_lobbyFragment"
-            app:destination="@id/lobbyFragment" />
+            app:destination="@id/lobbyFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_loginFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -24,7 +26,9 @@
         tools:layout="@layout/lobby_fragment">
         <action
             android:id="@+id/action_lobbyFragment_to_spectatorWaitingFragment"
-            app:destination="@id/spectatorWaitingFragment" />
+            app:destination="@id/spectatorWaitingFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_lobbyFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -41,7 +45,9 @@
             app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_startScreenFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -50,7 +56,9 @@
         tools:layout="@layout/game_fragment">
         <action
             android:id="@+id/action_gameFragment_to_gameEndFragment"
-            app:destination="@id/gameEndFragment" />
+            app:destination="@id/gameEndFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_gameFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -71,7 +79,9 @@
             app:destination="@id/lobbyFragment" />
         <action
             android:id="@+id/action_gameEndFragment_to_exitGameFragment"
-            app:destination="@id/exitGameFragment" />
+            app:destination="@id/exitGameFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -85,7 +95,9 @@
         tools:layout="@layout/spectatorwaiting_fragment">
         <action
             android:id="@+id/action_spectatorWaitingFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_spectatorWaitingFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
