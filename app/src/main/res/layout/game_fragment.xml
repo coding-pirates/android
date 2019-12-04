@@ -49,7 +49,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:onClick="@{viewmodel::exitGameButtonClicked}"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +56,7 @@
         app:srcCompat="@android:drawable/ic_delete" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="fill"
@@ -92,5 +92,16 @@
             </HorizontalScrollView>
         </ScrollView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="66dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="38dp"
+        android:text="@string/NextBtn"
+        android:onClick="@{viewmodel::nextButtonClicked}"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
