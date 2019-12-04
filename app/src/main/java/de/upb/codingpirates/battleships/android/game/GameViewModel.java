@@ -41,7 +41,7 @@ public class GameViewModel extends ViewModel {
     /**
      * Contains all players of the current game
      */
-    private Collection<Client> players; //TODO Mutable live data so that it changes when Player leaves
+    private ArrayList<Client> players; //TODO Mutable live data so that it changes when Player leaves
 
     /**
      * Contains all points of currently displayed ships
@@ -60,9 +60,6 @@ public class GameViewModel extends ViewModel {
     private Collection<Shot> missed;
     private MutableLiveData<ArrayList<Point2D>> pointsOfShots = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Point2D>> getPointsOfShots(){
-        if(pointsOfShots == null){
-            pointsOfShots = new MutableLiveData<>();
-        }
         return pointsOfShots;
     }
 
@@ -72,27 +69,33 @@ public class GameViewModel extends ViewModel {
        fieldHeight = model.getFieldHeight();
 
        /**
-        * Observer for shots
-        */
-       final Observer<Collection<Shot>> shotsObserver = new Observer<Collection<Shot>>(){
-           public void onChanged(@Nullable final Collection<Shot> newShots) {
-               pointsOfShots.setValue((ArrayList<Point2D>)createShotPointsForUI(model.getShotsOfPlayer(currentPlayer.getId())));
-           }
-       };
-        model.getShots().observeForever(shotsObserver);
-
-       /**
         * Observer for Players in Game
         */
        final Observer<Collection<Client>> playersObserver = new Observer<Collection<Client>>(){
            public void onChanged(@Nullable final Collection<Client> newPlayers) {
-               players = newPlayers;
+               ArrayList<Client> newPlayersList = (ArrayList<Client>) newPlayers;
+               if(currentPlayer == null){
+                   currentPlayer = newPlayersList.get(0);
+               }
+               players = newPlayersList;
            }
        };
        model.getPlayers().observeForever(playersObserver);
 
+       /**
+        * Observer for shots
+        */
+       final Observer<Collection<Shot>> shotsObserver = new Observer<Collection<Shot>>(){
+           public void onChanged(@Nullable final Collection<Shot> newShots) {
+               if(currentPlayer!=null) {
+                   pointsOfShots.setValue((ArrayList<Point2D>) createShotPointsForUI(model.getShotsOfPlayer(currentPlayer.getId())));
+               }
+           }
+       };
+        model.getShots().observeForever(shotsObserver);
 
-   }
+
+    }
 
     public Client getCurrentPlayer() {
         return currentPlayer;
@@ -104,7 +107,7 @@ public class GameViewModel extends ViewModel {
     }
 
 
-    public Collection<Client> getPlayers() {
+    public ArrayList<Client> getPlayers() {
         return players;
     }
 

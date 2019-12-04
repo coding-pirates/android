@@ -73,7 +73,7 @@ public class GameFragment extends Fragment {
         final Observer<ArrayList<Point2D>> shotsObserver = new Observer<ArrayList<Point2D>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Point2D> newShots) {
-                initShots(newShots);
+               initShots(newShots);
             }
         };
 
@@ -123,13 +123,13 @@ public class GameFragment extends Fragment {
      *
      * @param players The players of the game
      */
-    private void initSpinner(Collection<Client> players) {
+    private void initSpinner(ArrayList<Client> players) {
         Spinner playersSpinner = (Spinner) view.findViewWithTag("playerSpinner");
 
         ArrayAdapter<Client> adapter = new ArrayAdapter<Client>(
                 this.getContext(),
                 R.layout.support_simple_spinner_dropdown_item,
-                new ArrayList<Client>(players)
+                players
         );
         playersSpinner.setAdapter(adapter);
 

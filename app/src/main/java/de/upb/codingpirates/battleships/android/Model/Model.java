@@ -5,6 +5,7 @@ import androidx.navigation.Navigation;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -42,9 +43,6 @@ public class Model {
     private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
-        if(serverJoinRequestSuccess == null){
-            serverJoinRequestSuccess = new MutableLiveData<Boolean>();
-        }
         return serverJoinRequestSuccess;
     }
     public void setServerJoinRequestSuccess(Boolean serverJoinSuccess) {
@@ -68,12 +66,15 @@ public class Model {
         return gamesOnServer;
     }
 
-    private MutableLiveData<Boolean> goToSpectatorWaiting;
+    private MutableLiveData<Boolean> goToSpectatorWaiting = new MutableLiveData<>();;
     public MutableLiveData<Boolean> getGoToSpectatorWaiting(){
-        if(goToSpectatorWaiting == null){
-            goToSpectatorWaiting = new MutableLiveData<>();
-        }
         return goToSpectatorWaiting;
+    }
+
+    //data for Spectator Waiting
+    private MutableLiveData<Boolean> goToGameView = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getGoToGameView(){
+        return goToGameView;
     }
 
     //data for GameView
@@ -95,13 +96,16 @@ public class Model {
         return shots;
     }
 
+    /**
+     * LiveData for going to GameEnd View
+     */
+    private MutableLiveData<Boolean> goToGameEnd = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getGoToGameEnd(){
+        return goToGameEnd;
+    }
 
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
     private GameState state; //TODO make LiveData
-    private MutableLiveData<Boolean> goToGameView = new MutableLiveData<>();
-    public MutableLiveData<Boolean> getGoToGameView(){
-        return goToGameView;
-    }
     private Configuration gameConfig;
     private Map<Integer, Integer> pointsOfPlayers; //is no Live Data because the ViewModel only needs the points of one player
 
@@ -368,6 +372,9 @@ public class Model {
     public void goToGameView(){
         this.goToGameView.setValue(true);
     }
+    public void goToGameEnd(){
+        this.goToGameEnd.setValue(true);
+    }
 
     public void setPaused(){
         this.state = GameState.PAUSED;
@@ -376,7 +383,19 @@ public class Model {
         this.state = GameState.IN_PROGRESS;
     }
 
-    public Map<Integer, Integer> getSortedPoints(){
-        return pointsOfPlayers; //TODO sort
+    public ArrayList<Map.Entry<Integer,Integer>> getSortedPoints(){
+         //TODO sort
+        ArrayList<Map.Entry<Integer,Integer>> sortedPoints = new ArrayList<>();
+        for(Map.Entry<Integer,Integer> pointEntry: pointsOfPlayers.entrySet()){
+            for(int i = sortedPoints.size()-1; i>0;i--) {
+                if (pointEntry.getValue() < sortedPoints.get(i).getValue()) {
+                    sortedPoints.set(i+1,sortedPoints.get(i));
+                }
+                else{
+                    sortedPoints.set(i+1, pointEntry);
+                }
+            }
+        }
+        return sortedPoints;
     }
 }

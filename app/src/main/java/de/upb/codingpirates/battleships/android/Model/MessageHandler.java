@@ -36,6 +36,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleFinishNotification(FinishNotification message) {
         Model.getInstance().setPointsOfPlayers(message.getPoints());
+        Model.getInstance().goToGameEnd();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleLeaveNotification(LeaveNotification message) {
-       Model.getInstance().removePlayer(message.getPlayerId());
+      // Model.getInstance().removePlayer(message.getPlayerId()); //Todo
     }
 
     @Override

@@ -24,12 +24,10 @@ public class SpectatorWaitingViewModel extends ViewModel {
     private Model model;
 
     public SpectatorWaitingViewModel(){
+        goToGameView = new MutableLiveData<>();
         model = Model.getInstance();
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newGoToGameView) {
-                if(goToGameView == null){
-                    goToGameView = new MutableLiveData<>();
-                }
                 goToGameView.setValue(newGoToGameView);
             }
         };
