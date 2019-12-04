@@ -20,6 +20,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.logic.ClientType;
 
+/**
+ * @author Lukas Kröger, Fynn Ruppel
+ */
 public class LoginViewModel extends ViewModel {
     private MutableLiveData<Boolean> progressBarShow;
     private MutableLiveData<Boolean> serverJoin;
@@ -147,5 +150,4 @@ public class LoginViewModel extends ViewModel {
         }
         return true;
     }
-
 }

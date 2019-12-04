@@ -18,7 +18,7 @@ public class ExitGameFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyCustomTheme);
         builder.setMessage(R.string.exitGameString)
                 .setPositiveButton(R.string.exitButton, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
