@@ -83,7 +83,7 @@
                     app:srcCompat="@drawable/ic_volume_up_black_24dp" />
 
                 <SeekBar
-                    android:id="@+id/VolumeseekBar"
+                    android:id="@+id/volumeseekBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
