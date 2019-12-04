@@ -171,5 +171,14 @@
     <orderEntry type="module" module-name="client" />
     <orderEntry type="module" module-name="network" />
     <orderEntry type="module" module-name="logic" />
+    <orderEntry type="module" module-name="client" />
+    <orderEntry type="module" module-name="network" />
+    <orderEntry type="module" module-name="logic" />
+    <orderEntry type="module" module-name="client" />
+    <orderEntry type="module" module-name="network" />
+    <orderEntry type="module" module-name="logic" />
+    <orderEntry type="module" module-name="client" />
+    <orderEntry type="module" module-name="network" />
+    <orderEntry type="module" module-name="logic" />
   </component>
 </module>
