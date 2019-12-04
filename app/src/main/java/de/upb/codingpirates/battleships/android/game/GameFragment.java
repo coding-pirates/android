@@ -1,6 +1,10 @@
 package de.upb.codingpirates.battleships.android.game;
 
+import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
+import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
@@ -35,6 +41,9 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 public class GameFragment extends Fragment {
 
+    //get the width of the current device in pixel
+    private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+    //private int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
@@ -81,8 +90,10 @@ public class GameFragment extends Fragment {
      */
     private void initGameField(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
+        int minWidth = 100;
+        //int minHeigth = 100;
 
-        //i = counter,  c = current colum, r = current row
+        //i = counter,  c = current column, r = current row
         for (int i = 0, c = 0, r = 0; i < fieldHeight * fieldWidth; i++) {
             //if one row is filled
             if (c == fieldWidth) {
@@ -91,13 +102,14 @@ public class GameFragment extends Fragment {
             }
             Button btn = new Button(view.getContext());
             btn.setBackground(btn.getContext().getResources().getDrawable(R.drawable.borderfield));
-            btn.setMinHeight(0);
-            btn.setMinWidth(0);
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
-            param.height = 150; //TODO variable size
-            param.width = 150;
+
+            //Scaling the buttons according to the screen size. If the ratio is smaller than the min width then the height and width will be the minimum.
+            param.height = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
+            param.width = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
+
             param.columnSpec = GridLayout.spec(c);
             param.rowSpec = GridLayout.spec(r);
             gameField.addView(btn, param);

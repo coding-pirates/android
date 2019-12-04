@@ -22,7 +22,7 @@ public class Model {
 
     private static final Model globalModel = new Model();
 
-    private int fieldWidth; //TODO delete because its conained in config
+    private int fieldWidth; //TODO get width and heigth from config
     private int fieldHeigth;
 
     private int clientId;
@@ -59,8 +59,8 @@ public class Model {
         //currently sets a hard coded state of a game for testing
 
         //set Field size
-        fieldHeigth = 6;
-        fieldWidth = 6;
+        fieldHeigth = 8;
+        fieldWidth = 10;
 
         players = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
         players.add(new de.upb.codingpirates.battleships.logic.Client(0, "Roman"));
