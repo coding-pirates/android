@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
-import java.io.IOException;
 
 import de.upb.codingpirates.battleships.android.Model.Model;
 import com.google.android.material.textfield.TextInputEditText;
