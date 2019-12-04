@@ -16,9 +16,9 @@
     <string name="rulesStr">Regeln</string>
     <string name="imprintStr">Impressum</string>
     <string name="pointsStr">Punkte</string>
+    <string name="points2Str">Punkte:</string>
     <string name="nameStr">Name</string>
     <string name="placeStr">Platz</string>
-
     <string name="serverIPStr">Server-IP</string>
     <string name="serverPortStr">Server-Port</string>
     <string name="usernameStr">Username</string>
