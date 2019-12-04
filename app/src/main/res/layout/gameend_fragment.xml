@@ -96,7 +96,8 @@
         <TableLayout
             android:id="@+id/playerRankingHeaderLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="fill"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +133,7 @@
             <ScrollView
                 android:id="@+id/scrollViewLayout"
                 android:layout_width="match_parent"
-                android:layout_height="251dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
