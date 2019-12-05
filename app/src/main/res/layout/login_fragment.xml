@@ -17,16 +17,15 @@
         android:animateLayoutChanges="true"
         android:background="@mipmap/lobby_bg">
 
-        <Button
+        <ImageButton
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_login_button"
             android:onClick="@{viewmodel::loginButtonClicked}"
             android:text="@string/loginStr"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,70 +39,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@string/loginStr"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/loginButton"
+            android:textSize="40dp"
+            android:textColor="#472218"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.107" />
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="80dp"
             app:layout_constraintBottom_toTopOf="@+id/loginButton"
-            app:layout_constraintTop_toBottomOf="@+id/loginActivityTitle">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/usernameInputLayout">
+                android:id="@+id/usernameInputLayout"
+                style="@style/TextInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInputView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    style="@style/TextInputEditTextStyle"
                     android:hint="@string/usernameStr" />
                 <!-- TODO MaterialDesign outlines box-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/serverIpInputLayout">
+                android:id="@+id/serverIpInputLayout"
+                style="@style/TextInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverIpInputView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    style="@style/TextInputEditTextStyle"
                     android:hint="@string/serverIPStr" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/serverPortInputLayout">
+                android:id="@+id/serverPortInputLayout"
+                style="@style/TextInputLayoutStyle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverPortInputView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    style="@style/TextInputEditTextStyle"
                     android:hint="@string/serverPortStr"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="603dp">
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
