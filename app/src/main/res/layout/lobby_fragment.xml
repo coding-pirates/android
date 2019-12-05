@@ -12,7 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="718dp">
 
 
         <Button
@@ -20,26 +20,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="28dp"
             android:onClick="@{viewmodel::nextButtonClicked}"
             android:text="@string/NextBtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.973"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id ="@+id/lobbyList"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_gravity="fill"
+            android:id="@+id/lobbyList"
+            android:layout_width="410dp"
+            android:layout_height="532dp"
             app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.824"
+            app:layout_gravity="fill" />
+
+        <TextView
+            android:id="@+id/describing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/todoLobby"
+            android:textColor="#CFBE8E"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/lobbyList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
