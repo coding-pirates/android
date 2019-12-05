@@ -41,7 +41,7 @@ public class LoginViewModel extends ViewModel {
         serverPortField = view.getRootView().findViewById(R.id.serverPortInputView);
 
         //TODO remove dummy placeholder
-        usernameField.setText("Peter Pan");
+        //usernameField.setText("Peter Pan");
         serverIpField.setText("123.123.123.123");
         serverPortField.setText("123");
 
