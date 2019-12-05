@@ -8,102 +8,138 @@
             type="de.upb.codingpirates.battleships.android.game.GameViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Spinner
-        android:id="@+id/spinner"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:spinnerMode="dialog"
-        android:tag="playerSpinner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@mipmap/map_bg">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="90dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/holo_blue_bright"
-        android:text="@string/points2Str"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tf_points"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="12dp"
+            android:background="#472218"
+            android:text="@string/points2Str"
+            android:textAlignment="center"
+            android:textColor="#FCF9F9"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/holo_blue_bright"
-        android:text="11"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tf_timeLeft"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="12dp"
+            android:background="#472218"
+            android:text="@string/timeleft"
+            android:textAlignment="center"
+            android:textColor="#FCF9F9"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.538" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:onClick="@{viewmodel::exitGameButtonClicked}"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_delete" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="fill"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton">
-
-        <ScrollView
+        <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{viewmodel::exitGameButtonClicked}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_delete" />
 
-            <HorizontalScrollView
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="416dp"
+            android:layout_height="586dp"
+            android:layout_gravity="fill"
+            android:foregroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton"
+            app:layout_constraintVertical_bias="1.0">
+
+            <ScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="727dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent">
 
-                <androidx.gridlayout.widget.GridLayout
-                    android:id="@+id/gameField"
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tag="gameField"
-                    app:columnCount="@{viewmodel.fieldWidth}"
-                    app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    app:rowCount="@{viewmodel.fieldHeight}" />
-            </HorizontalScrollView>
-        </ScrollView>
-    </LinearLayout>
+                    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="66dp"
-        android:layout_height="29dp"
-        android:layout_marginBottom="38dp"
-        android:text="@string/NextBtn"
-        android:onClick="@{viewmodel::nextButtonClicked}"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/gameField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="gameField"
+                        app:columnCount="@{viewmodel.fieldWidth}"
+                        app:layout_constraintBottom_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:rowCount="@{viewmodel.fieldHeight}" />
+                </HorizontalScrollView>
+            </ScrollView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_points"
+            android:layout_width="66dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="244dp"
+            android:layout_marginBottom="38dp"
+            android:onClick="@{viewmodel::nextButtonClicked}"
+            android:text="@string/NextBtn"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.435" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="188dp"
+            android:layout_height="53dp"
+            android:background="#472218"
+            android:backgroundTint="#00FDFBFB"
+            android:popupBackground="#472218"
+            android:spinnerMode="dialog"
+            android:tag="playerSpinner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tf_playerSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="618dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/selectPlayer"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.809" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

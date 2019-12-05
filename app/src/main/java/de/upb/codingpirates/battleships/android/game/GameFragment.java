@@ -32,6 +32,7 @@ import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Client;
 import de.upb.codingpirates.battleships.logic.Point2D;
 
+import java.util.Random;
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
  * manages all UI related actions
@@ -85,8 +86,8 @@ public class GameFragment extends Fragment {
     /**
      * Initializes the gameField
      *
-     * @param fieldHeight The game field height specified in the Configruation
-     * @param fieldWidth  The game field width specified in the Configruation
+     * @param fieldHeight The game field height specified in the Configuration
+     * @param fieldWidth  The game field width specified in the Configuration
      */
     private void initGameField(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
@@ -101,7 +102,7 @@ public class GameFragment extends Fragment {
                 r++;
             }
             Button btn = new Button(view.getContext());
-            btn.setBackground(btn.getContext().getResources().getDrawable(R.drawable.borderfield));
+            btn.setBackgroundColor(472218);
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
@@ -155,13 +156,28 @@ public class GameFragment extends Fragment {
     private void initShips(Collection<Point2D> shipPoints) {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
-            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.borderfield));
+            gameField.getChildAt(i).setBackgroundColor(472218);
         }
         for (Point2D point : shipPoints) {
 
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            cell.setBackground(getResources().getDrawable(R.drawable.bordership));
+            switch(getShipImage()){
+                case 1:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
+                    break;
+                case 2:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2));
+                    break;
+                case 3:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3));
+                    break;
+            }
         }
+    }
+
+    private int getShipImage(){
+        return (new Random().nextInt(3));
+
     }
 
 

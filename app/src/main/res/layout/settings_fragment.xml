@@ -45,25 +45,22 @@
 
             <Button
                 android:id="@+id/rules_button"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:drawableBottom="@drawable/ic_button_dark"
-                android:text="@string/rulesStr"
-                app:iconTint="#00FFFFFF"
-                app:srcCompat="@drawable/ic_button_dark" />
+                android:background="@drawable/ic_button_dark"
+                android:backgroundTint="#472218"
+                android:text="@string/rulesStr" />
 
             <Button
                 android:id="@+id/imprint_button"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:drawableBottom="@drawable/ic_button_dark"
-                android:text="@string/imprintStr"
-                app:srcCompat="@drawable/ic_button_dark" />
+                android:backgroundTint="#472218"
+                android:text="@string/imprintStr" />
         </LinearLayout>
 
         <LinearLayout
@@ -86,12 +83,17 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_volume_icon" />
+                    app:srcCompat="@drawable/ic_volume_icon"
+                    tools:srcCompat="@drawable/ic_volume_icon" />
 
                 <SeekBar
                     android:id="@+id/volumeseekBar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:foregroundTint="#472218"
+                    android:indeterminateTint="#472218"
+                    android:progressTint="#472218"
+                    android:thumbTint="#472218" />
 
             </LinearLayout>
 
@@ -114,7 +116,9 @@
                 <SeekBar
                     android:id="@+id/musicSeekbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:progressTint="#472218"
+                    android:thumbTint="#472218" />
 
             </LinearLayout>
 
