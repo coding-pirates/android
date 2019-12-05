@@ -14,10 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="@mipmap/endcreen_bg"><![CDATA[>
-
-
-        ]]>
+        android:background="@mipmap/endcreen_bg">
 
         <TextView
             android:id="@+id/settingsActivityTitle"
@@ -30,7 +27,8 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#472218"/>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -39,9 +37,10 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settingsActivityTitle"
-            app:layout_constraintVertical_bias="0.895">
+            app:layout_constraintVertical_bias="0.82">
 
             <Button
                 android:id="@+id/rules_button"
@@ -81,14 +80,14 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
                     app:srcCompat="@drawable/ic_volume_icon"
                     tools:srcCompat="@drawable/ic_volume_icon" />
 
                 <SeekBar
                     android:id="@+id/volumeseekBar"
-                    android:layout_width="match_parent"
+                    android:layout_width="285dp"
                     android:layout_height="match_parent"
                     android:foregroundTint="#472218"
                     android:indeterminateTint="#472218"
@@ -109,13 +108,13 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="10dp"
                     android:background="@android:color/transparent"
                     app:srcCompat="@drawable/ic_soundeffects_icon" />
 
                 <SeekBar
                     android:id="@+id/musicSeekbar"
-                    android:layout_width="match_parent"
+                    android:layout_width="285dp"
                     android:layout_height="match_parent"
                     android:progressTint="#472218"
                     android:thumbTint="#472218" />
@@ -125,18 +124,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/imageButton8"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_vibration_black_24dp" />
-
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
         </LinearLayout>
 

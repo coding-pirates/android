@@ -120,4 +120,12 @@ public class LoginViewModel extends ViewModel {
         }
         return true;
     }
+
+    /**
+     * Change the Fragment when the Settingsbutton is clicked
+     * @param view
+     */
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_settingsFragment);
+    }
 }
