@@ -20,19 +20,13 @@ import de.upb.codingpirates.battleships.logic.Game;
 public class LobbyViewModel extends ViewModel {
 
     private Model model;
-    private MutableLiveData<ArrayList<Game>> gamesOnServer;
+    private MutableLiveData<ArrayList<Game>> gamesOnServer = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Game>> getGamesOnServer(){
-        if(gamesOnServer == null){
-            gamesOnServer = new MutableLiveData<>();
-        }
         return gamesOnServer;
     }
-    private MutableLiveData<Boolean> goToSpectatorScreen;
+    private MutableLiveData<Boolean> goToSpectatorScreen = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getGoToSpectatorScreen(){
-        if(goToSpectatorScreen == null){
-            goToSpectatorScreen = new MutableLiveData<>();
-        }
         return goToSpectatorScreen;
     }
 
@@ -42,9 +36,6 @@ public class LobbyViewModel extends ViewModel {
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
             @Override
             public void onChanged(@Nullable final Collection<Game>  newGames) {
-                if(gamesOnServer == null){
-                    gamesOnServer = new MutableLiveData<>();
-                }
                 gamesOnServer.setValue((ArrayList<Game>)newGames);
             }
         };
