@@ -34,4 +34,6 @@
     <string name="secondPlacePlayerName">Player 2</string>
     <string name="thirdPlacePlayerName">Player 3</string>
     <string name="log_in">log in</string>
+
+    <string name="todoLobby">Tap on a game to spectate!</string>
 </resources>
