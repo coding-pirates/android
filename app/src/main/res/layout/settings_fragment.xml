@@ -13,24 +13,24 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:background="@mipmap/endcreen_bg"><![CDATA[>
+
+
+        ]]>
 
         <TextView
             android:id="@+id/settingsActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:text="@string/settingsStr"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -45,11 +45,15 @@
 
             <Button
                 android:id="@+id/rules_button"
+                style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="140dp"
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:text="@string/rulesStr" />
+                android:drawableBottom="@drawable/ic_button_dark"
+                android:text="@string/rulesStr"
+                app:iconTint="#00FFFFFF"
+                app:srcCompat="@drawable/ic_button_dark" />
 
             <Button
                 android:id="@+id/imprint_button"
@@ -57,7 +61,9 @@
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:text="@string/imprintStr" />
+                android:drawableBottom="@drawable/ic_button_dark"
+                android:text="@string/imprintStr"
+                app:srcCompat="@drawable/ic_button_dark" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,7 +86,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_volume_up_black_24dp" />
+                    app:srcCompat="@drawable/ic_volume_icon" />
 
                 <SeekBar
                     android:id="@+id/volumeseekBar"
@@ -103,7 +109,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_music_note_black_24dp" />
+                    app:srcCompat="@drawable/ic_soundeffects_icon" />
 
                 <SeekBar
                     android:id="@+id/musicSeekbar"
