@@ -33,4 +33,5 @@
     <string name="firstPlacePlayerName">Player 1</string>
     <string name="secondPlacePlayerName">Player 2</string>
     <string name="thirdPlacePlayerName">Player 3</string>
+    <string name="log_in">log in</string>
 </resources>

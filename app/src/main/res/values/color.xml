@@ -46,7 +46,7 @@
     <!--text fields.-->
     <color name="color_background">#472218</color>
     <color name="color_surface">#ffffff</color>
-    <color name="color_error">#b00020</color>
+    <color name="color_error">#B00020</color>
 
     <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
     <!--on which they appear.-->

@@ -26,6 +26,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_login_button"
+            android:contentDescription="@string/log_in"
             android:onClick="@{viewmodel::loginButtonClicked}"
             android:text="@string/loginStr"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/loginStr"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textColor="#472218"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,44 +53,58 @@
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="80dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/loginButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="60dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameInputLayout"
-                style="@style/TextInputLayoutStyle">
+                style="@style/TextInputLayoutStyle"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                app:boxBackgroundMode="outline">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInputView"
                     style="@style/TextInputEditTextStyle"
-                    android:hint="@string/usernameStr" />
+                    android:hint="@string/usernameStr"
+                    android:textColor="#472218" />
                 <!-- TODO MaterialDesign outlines box-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/serverIpInputLayout"
-                style="@style/TextInputLayoutStyle">
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="#472218">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverIpInputView"
                     style="@style/TextInputEditTextStyle"
-                    android:hint="@string/serverIPStr" />
+                    android:hint="@string/serverIPStr"
+                    android:textColor="#472218"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/serverPortInputLayout"
-                style="@style/TextInputLayoutStyle">
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="#472218">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverPortInputView"
                     style="@style/TextInputEditTextStyle"
                     android:hint="@string/serverPortStr"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="#472218"
+                    app:hintTextColor="#472218"/>
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
