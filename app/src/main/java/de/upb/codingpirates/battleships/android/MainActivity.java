@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        player = MediaPlayer.create(this, R.raw.sot_soundtrack);
+        player = MediaPlayer.create(this, R.raw.sea_of_thieves_theme_song);
         player.start();
     }
 
