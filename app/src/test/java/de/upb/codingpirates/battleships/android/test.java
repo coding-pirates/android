@@ -16,17 +16,5 @@ public class test {
     @Test
     public void test() throws IllegalAccessException, IOException, InstantiationException {
 
-                try {
-                    ClientApplication client = new ClientApplication();
-                    ClientConnector connector = client.getClientConnector();
-                    connector.connect(InetAddress.getLocalHost().getHostAddress(), Properties.PORT);
-                    connector.sendMessageToServer(new ServerJoinRequest("peter", ClientType.SPECTATOR));
-                    connector.sendMessageToServer(new GameJoinPlayerRequest(0));
-                }
-                catch(Exception e){
-                    System.out.println("here is the exception " +e);
-                }
-
-
     }
 }
