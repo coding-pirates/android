@@ -83,7 +83,7 @@ public class GameFragment extends Fragment {
 
         //initialize the timer for the time left
         TextView pointsView = view.findViewById(R.id.tf_timeLeft);
-        viewModel.initTimer(pointsView, 10, view.getContext());
+        viewModel.initTimer(pointsView, 50, view.getContext());
         return view;
     }
 
@@ -135,7 +135,7 @@ public class GameFragment extends Fragment {
 
         ArrayAdapter<Client> adapter = new ArrayAdapter<Client>(
                 this.getContext(),
-                R.layout.support_simple_spinner_dropdown_item,
+                R.layout.spinner_item,
                 new ArrayList<Client>(players)
         );
         playersSpinner.setAdapter(adapter);
