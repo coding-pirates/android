@@ -48,6 +48,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
+                android:onClick="@{viewmodel::rules_buttonClicked}"
                 android:background="@drawable/ic_button_dark"
                 android:backgroundTint="@color/color_brown_main"
                 android:text="@string/rulesStr" />

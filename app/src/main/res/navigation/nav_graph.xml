@@ -91,7 +91,11 @@
         android:id="@+id/settingsFragment"
         android:name="de.upb.codingpirates.battleships.android.settings.SettingsFragment"
         android:label="settings_fragment"
-        tools:layout="@layout/settings_fragment" />
+        tools:layout="@layout/settings_fragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/spectatorWaitingFragment"
         android:name="de.upb.codingpirates.battleships.android.spectatorWaitingscreen.SpectatorWaitingFragment"
@@ -114,4 +118,8 @@
             android:id="@+id/action_exitGameFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/rulesFragment"
+        android:name="de.upb.codingpirates.battleships.android.settings.RulesFragment"
+        android:label="rulesFragment" />
 </navigation>
