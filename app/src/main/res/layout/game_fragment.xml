@@ -47,17 +47,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:onClick="@{viewmodel::exitGameButtonClicked}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_delete" />
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -107,23 +96,23 @@
             android:id="@+id/btn_points"
             android:layout_width="66dp"
             android:layout_height="29dp"
-            android:layout_marginStart="244dp"
             android:layout_marginBottom="38dp"
             android:onClick="@{viewmodel::nextButtonClicked}"
             android:text="@string/NextBtn"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.435" />
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="188dp"
-            android:layout_height="53dp"
-            android:background="#472218"
-            android:backgroundTint="#00FDFBFB"
-            android:dropDownSelector="#472218"
-            android:popupBackground="#472218"
+            android:layout_width="187dp"
+            android:layout_height="45dp"
+            android:background="@color/color_brown_main"
+            android:backgroundTint="@android:color/transparent"
+            android:dropDownSelector="@color/color_brown_main"
+            android:popupBackground="@color/color_brown_main"
             android:spinnerMode="dialog"
             android:tag="playerSpinner"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -136,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="618dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/selectPlayer"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"

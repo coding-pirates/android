@@ -153,7 +153,7 @@ public class GameViewModel extends ViewModel {
             }
 
             public void onFinish() {
-                textView.setText(context.getResources().getString(R.string.points2Str) + " 0");
+                textView.setText(context.getResources().getString(R.string.timeLeft) + " 0");
             }
         }.start();
     }
