@@ -103,7 +103,7 @@ public class GameFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final Boolean newGoToGameEnd) {
                 if(newGoToGameEnd) {
-                    Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_gameEndFragment);
+                   // Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_gameEndFragment);
                 }
             }
         };
@@ -191,6 +191,7 @@ public class GameFragment extends Fragment {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
             gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
+            gameField.getChildAt(i).setTag("waterField");
         }
     }
     /**
@@ -201,16 +202,14 @@ public class GameFragment extends Fragment {
 
         for (Point2D point : shipPoints) {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            cell.setTag("ship");
-            switch((new Random().nextInt(3))){
+            switch((new Random().nextInt(2))){
                 case 1:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
+                    cell.setTag("ship1");
                     break;
                 case 2:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2));
-                    break;
-                case 3:
-                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3));
+                    cell.setTag("ship2");
                     break;
             }
         }
@@ -220,12 +219,14 @@ public class GameFragment extends Fragment {
         for (Point2D point : shotPoints) {
             GridLayout gameField = view.findViewById(R.id.gameField);
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            if(cell.getTag() == "ship" )
-            {
-                cell.setBackground(getResources().getDrawable(R.drawable.hit_ship));
-            }
-            else {
-                cell.setBackground(getResources().getDrawable(R.drawable.shot_field));
+            switch(cell.getTag().toString()){
+                case "ship1":
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1_hit));
+                    break;
+                case "ship2":
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2_hit));
+                case "waterField":
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_destroyed_red_cross));
             }
         }
     }
@@ -233,7 +234,7 @@ public class GameFragment extends Fragment {
     private void initPoints(int pointsOfPlayer){
         TextView pointsView = view.findViewById(R.id.tf_points);
         double pointsConverted = ((double)pointsOfPlayer)/4;
-        pointsView.setText(Double.toString(pointsConverted));
+        pointsView.setText("Punkte: " + pointsConverted);
     }
 
 

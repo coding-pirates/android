@@ -42,7 +42,6 @@ public class GameEndFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(GameEndViewModel.class);
         databinding.setViewmodel(viewModel);
         view = databinding.getRoot();
-        layout = view.findViewById(R.id.playerRankingTableLayout);
        // fillTable(viewModel.getSortedPlayers());
         String[][] threeBestPlayers= viewModel.getThreeBestPlayers();
         ((TextView)view.findViewById(R.id.textView3)).setText(threeBestPlayers[0][0]);
