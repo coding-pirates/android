@@ -83,7 +83,7 @@ public class GameFragment extends Fragment {
 
         //initialize the timer for the time left
         TextView pointsView = view.findViewById(R.id.tf_timeLeft);
-        viewModel.initTimer(pointsView, 50, view.getContext());
+        viewModel.initTimer(pointsView, 20, view.getContext());
         return view;
     }
 
@@ -168,13 +168,13 @@ public class GameFragment extends Fragment {
 
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
             switch((new Random().nextInt(3))){
-                case 1:
+                case 0:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     break;
-                case 2:
+                case 1:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2));
                     break;
-                case 3:
+                case 2:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3));
                     break;
             }

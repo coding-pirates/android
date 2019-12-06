@@ -59,8 +59,8 @@ public class Model {
         //currently sets a hard coded state of a game for testing
 
         //set Field size
-        fieldHeigth = 8;
-        fieldWidth = 10;
+        fieldHeigth = 6;
+        fieldWidth = 6;
 
         players = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
         players.add(new de.upb.codingpirates.battleships.logic.Client(0, "Roman"));
