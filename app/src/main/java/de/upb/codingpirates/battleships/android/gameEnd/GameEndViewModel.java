@@ -16,7 +16,7 @@ import de.upb.codingpirates.battleships.logic.Client;
 
 public class GameEndViewModel extends ViewModel {
     Model model;
-    Object[] threeBestPlayers;
+    String[][] threeBestPlayers;
     public GameEndViewModel(){
         model = Model.getInstance();
     }
@@ -34,4 +34,7 @@ public class GameEndViewModel extends ViewModel {
         return threeBestPlayers;
     }
 
+    public String[][] getThreeBestPlayers(){
+        return model.getThreeBestPlayers();
+    }
 }

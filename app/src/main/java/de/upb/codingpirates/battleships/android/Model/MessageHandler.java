@@ -1,5 +1,7 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import android.widget.Toast;
+
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -22,7 +24,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleContinueNotification(ContinueNotification message, int clientId) {
-        Model.getInstance().setContinued();
+       // Model.getInstance().setContinued(); //TODO
     }
 
     @Override
@@ -49,7 +51,8 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleGameJoinSpectator(GameJoinSpectatorResponse message, int clientId) {
-        Model.getInstance().handlegameJoinSpectatorResponse(message.getGameId());
+        Model.getInstance().setJoinedGameWithId(message.getGameId());
+        Model.getInstance().goToSpectatorWaiting();
     }
 
     @Override
@@ -69,7 +72,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handlePauseNotification(PauseNotification message, int clientId) {
-        Model.getInstance().setPaused();
+       // Model.getInstance().setPaused();
     }
 
     @Override
@@ -122,7 +125,6 @@ public class MessageHandler implements Handler {
         Model.getInstance().setPlayers(message.getPlayers());
         Model.getInstance().setShots(message.getShots());
         Model.getInstance().setShips(message.getShips());
-        Model.getInstance().setState(message.getState());
         Model.getInstance().goToGameView();
     }
 

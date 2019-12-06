@@ -38,7 +38,6 @@ public class LoginViewModel extends ViewModel {
 
 
 
-    //TODO pass the username to the model and validate the username
     public LoginViewModel(){
         /*final Observer<Boolean> connected = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newConnected) {

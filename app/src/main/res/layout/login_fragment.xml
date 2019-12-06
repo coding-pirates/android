@@ -73,6 +73,7 @@
                     android:id="@+id/usernameInputView"
                     style="@style/TextInputEditTextStyle"
                     android:hint="@string/usernameStr"
+                    android:text ="Goofie"
                     android:textColor="#472218" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +85,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverIpInputView"
                     style="@style/TextInputEditTextStyle"
+                    android:text ="192.168.178.45"
                     android:hint="@string/serverIPStr"
                     android:textColor="#472218" />
 
@@ -98,6 +100,7 @@
                     android:id="@+id/serverPortInputView"
                     style="@style/TextInputEditTextStyle"
                     android:hint="@string/serverPortStr"
+                    android:text ="47345"
                     android:inputType="number"
                     android:textColor="#472218"
                     app:hintTextColor="#472218" />

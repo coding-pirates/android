@@ -46,16 +46,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.538" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:onClick="@{viewmodel::exitGameButtonClicked}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_delete" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -98,19 +88,6 @@
             </ScrollView>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_points"
-            android:layout_width="66dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="244dp"
-            android:layout_marginBottom="38dp"
-            android:onClick="@{viewmodel::nextButtonClicked}"
-            android:text="@string/NextBtn"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintStart_toEndOf="@+id/imageButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.435" />
 
         <Spinner
             android:id="@+id/spinner"

@@ -97,10 +97,4 @@ public class LobbyFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
     }
 
-    public void refreshGamesOnServer(ArrayList<Game> gamesOnServer){
-      //TODO  mAdapter.clear();
-      //TODO  mAdapter.addAll(gamesOnServer);
-    }
-
-
 }

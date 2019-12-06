@@ -41,7 +41,7 @@ public class GameViewModel extends ViewModel {
     /**
      * Contains all players of the current game
      */
-    private ArrayList<Client> players; //TODO Mutable live data so that it changes when Player leaves
+    private ArrayList<Client> players; //TODO Make mutable live data so that it changes when Player leaves
 
     /**
      * Contains all points of currently displayed ships

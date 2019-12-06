@@ -184,11 +184,12 @@ public class GameFragment extends Fragment {
 
     }
 
-    private void cleanGameField(){
+    private void cleanGameField() {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
             gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
         }
+    }
     /**
      * Initialises the ships for the selected Player
      */
@@ -196,9 +197,7 @@ public class GameFragment extends Fragment {
         GridLayout gameField = view.findViewById(R.id.gameField);
 
         for (Point2D point : shipPoints) {
-            GridLayout gameField = view.findViewById(R.id.gameField);
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            cell.setBackground(getResources().getDrawable(R.drawable.bordership));
             cell.setTag("ship");
             switch((new Random().nextInt(3))){
                 case 1:
@@ -229,7 +228,7 @@ public class GameFragment extends Fragment {
     }
 
     private void initPoints(int pointsOfPlayer){
-        TextView pointsView = view.findViewById(R.id.textView2);
+        TextView pointsView = view.findViewById(R.id.tf_points);
         double pointsConverted = ((double)pointsOfPlayer)/4;
         pointsView.setText(Double.toString(pointsConverted));
     }
