@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ButtonBarLayout;
@@ -80,6 +81,9 @@ public class GameFragment extends Fragment {
 
         viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
 
+        //initialize the timer for the time left
+        TextView pointsView = view.findViewById(R.id.tf_timeLeft);
+        viewModel.initTimer(pointsView, 10, view.getContext());
         return view;
     }
 

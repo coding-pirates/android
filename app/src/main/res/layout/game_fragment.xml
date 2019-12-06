@@ -19,15 +19,16 @@
             android:layout_height="30dp"
             android:layout_marginTop="64dp"
             android:layout_marginBottom="12dp"
-            android:background="#472218"
+            android:background="@color/color_brown_main"
             android:text="@string/points2Str"
             android:textAlignment="center"
-            android:textColor="#FCF9F9"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintHorizontal_bias="0.909"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tf_timeLeft"
@@ -35,16 +36,16 @@
             android:layout_height="30dp"
             android:layout_marginTop="64dp"
             android:layout_marginBottom="12dp"
-            android:background="#472218"
-            android:text="@string/timeleft"
+            android:background="@color/color_brown_main"
+            android:text="@string/timeLeft"
             android:textAlignment="center"
-            android:textColor="#FCF9F9"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintHorizontal_bias="0.115"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
             android:id="@+id/imageButton"
