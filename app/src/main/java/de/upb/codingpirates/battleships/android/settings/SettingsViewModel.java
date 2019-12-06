@@ -10,7 +10,7 @@ import de.upb.codingpirates.battleships.android.R;
 public class SettingsViewModel extends BaseObservable {
     //TODO Add functionality to the volume seekbar
     /**
-     * Navigates to the game exit dialog, in which the user can select, if he really wants to exit.
+     * Navigates to the rules dialog, in which the user can read the rules for the play.
      * @param view
      */
     public void rules_buttonClicked(View view){
