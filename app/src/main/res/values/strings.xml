@@ -26,7 +26,7 @@
     <string name="serverIpMissingStr">Trage eine Server-Ip ein</string>
     <string name="serverPortMissingStr">Trage einen Server-Port ein</string>
     <string name="selectPlayer">Select one player:</string>
-    <string name="timeleft">Time left: </string>
+    <string name="timeLeft">Zeit übrig: </string>
 
     <string name="exitGameString">Wollen Sie das Spiel wirklich verlassen?</string>
     <string name="exitButton">Jo ich bin raus.</string>
@@ -36,6 +36,9 @@
     <string name="secondPlacePlayerName">Player 2</string>
     <string name="thirdPlacePlayerName">Player 3</string>
     <string name="log_in">log in</string>
-
+    <string name="gameName">GameName</string>
+    <string name="gameState">GameState</string>
+    <string name="fieldSize">FieldSize</string>
+    <string name="countPlayer">PlayerCount</string>
     <string name="todoLobby">Tap on a game to spectate!</string>
 </resources>

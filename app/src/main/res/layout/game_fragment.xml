@@ -19,15 +19,16 @@
             android:layout_height="30dp"
             android:layout_marginTop="64dp"
             android:layout_marginBottom="12dp"
-            android:background="#472218"
+            android:background="@color/color_brown_main"
             android:text="@string/points2Str"
             android:textAlignment="center"
-            android:textColor="#FCF9F9"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.933"
+            app:layout_constraintHorizontal_bias="0.909"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tf_timeLeft"
@@ -35,35 +36,38 @@
             android:layout_height="30dp"
             android:layout_marginTop="64dp"
             android:layout_marginBottom="12dp"
-            android:background="#472218"
-            android:text="@string/timeleft"
+            android:background="@color/color_brown_main"
+            android:text="@string/timeLeft"
             android:textAlignment="center"
-            android:textColor="#FCF9F9"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintHorizontal_bias="0.115"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintVertical_bias="1.0" />
 
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="382dp"
-            android:layout_height="558dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="fill"
             android:foregroundTint="#00FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="40dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
             <ScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="700dp"
-                android:layout_gravity="center"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

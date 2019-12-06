@@ -102,5 +102,4 @@ public class GameEndFragment extends Fragment {
        //add the new row to the existing tableLayout
        layout.addView(row, rowParams);
     }
-
 }

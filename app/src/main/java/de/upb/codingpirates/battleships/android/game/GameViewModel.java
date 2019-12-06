@@ -1,5 +1,6 @@
 package de.upb.codingpirates.battleships.android.game;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,9 @@ import java.util.Map;
 import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.logic.*;
+
+import android.os.CountDownTimer;
+import android.widget.TextView;
 
 /**
  * This class holds all the data for the GameFragment.
@@ -205,4 +209,22 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
+    /**
+     * create a new timer which counts down from @param lengthInSeconds and displays the current time in the Fragment
+     * @param textView the view the timer shall update
+     * @param lengthInSeconds length in seconds the timer takes to finish
+     * @param context context of the main activity so the ids can be called
+     */
+    public void initTimer(TextView textView, long lengthInSeconds, Context context) {
+        new CountDownTimer(lengthInSeconds*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                textView.setText(context.getResources().getString(R.string.timeLeft) + " " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                textView.setText(context.getResources().getString(R.string.points2Str) + " 0");
+            }
+        }.start();
+    }
 }

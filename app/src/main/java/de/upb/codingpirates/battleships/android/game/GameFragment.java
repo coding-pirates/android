@@ -109,6 +109,9 @@ public class GameFragment extends Fragment {
         };
         viewModel.getGoToGameEnd().observe(this.getViewLifecycleOwner(),goToGameViewObserver);
 
+        //initialize the timer for the time left
+        TextView pointsView = view.findViewById(R.id.tf_timeLeft);
+        viewModel.initTimer(pointsView, 10, view.getContext());
         return view;
     }
 
