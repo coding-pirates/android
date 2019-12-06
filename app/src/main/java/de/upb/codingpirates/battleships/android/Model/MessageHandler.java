@@ -52,7 +52,7 @@ public class MessageHandler implements Handler {
     @Override
     public void handleGameJoinSpectator(GameJoinSpectatorResponse message, int clientId) {
         Model.getInstance().setJoinedGameWithId(message.getGameId());
-        Model.getInstance().goToSpectatorWaiting();
+        Model.getInstance().setGoToSpectatorWaiting(true);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleRoundStartNotification(RoundStartNotification message, int clientId) {
-
+        Model.getInstance().setNewRound(true);
     }
 
     @Override

@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Timer;
 
 import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;
@@ -47,6 +48,8 @@ public class GameViewModel extends ViewModel {
      */
     private ArrayList<Client> players; //TODO Make mutable live data so that it changes when Player leaves
 
+    private long roundTime;
+
     /**
      * Contains all points of currently displayed ships
      */
@@ -71,6 +74,11 @@ public class GameViewModel extends ViewModel {
         return goToGameEnd;
     }
 
+    private MutableLiveData<Boolean> newRound = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getNewRound(){
+        return newRound;
+    }
+
     private MutableLiveData<Integer> pointsOfCurrentPlayer = new MutableLiveData<>();
 
     public MutableLiveData<Integer> getPointsOfCurrentPlayer() {
@@ -81,6 +89,7 @@ public class GameViewModel extends ViewModel {
        model = Model.getInstance();
        fieldWidth = model.getFieldWidth();
        fieldHeight = model.getFieldHeight();
+       roundTime = model.getRoundTime();
 
        /**
         * Observer for Players in Game
@@ -128,6 +137,15 @@ public class GameViewModel extends ViewModel {
        };
        model.getPointsOfPlayers().observeForever(pointsOfPlayersObserver);
 
+        /**
+         * Observer for newRound
+         */
+        final Observer<Boolean> newRoundObserver = new Observer<Boolean>(){
+            public void onChanged(@Nullable final Boolean newNewRound) {
+                newRound.setValue(newNewRound);
+            }
+        };
+        model.getPointsOfPlayers().observeForever(pointsOfPlayersObserver);
 
     }
 
@@ -149,6 +167,9 @@ public class GameViewModel extends ViewModel {
         return players;
     }
 
+    public long getRoundTime(){
+        return roundTime;
+    }
 
     public int getFieldWidth() {
         return fieldWidth;
@@ -209,22 +230,5 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
-    /**
-     * create a new timer which counts down from @param lengthInSeconds and displays the current time in the Fragment
-     * @param textView the view the timer shall update
-     * @param lengthInSeconds length in seconds the timer takes to finish
-     * @param context context of the main activity so the ids can be called
-     */
-    public void initTimer(TextView textView, long lengthInSeconds, Context context) {
-        new CountDownTimer(lengthInSeconds*1000, 1000) {
 
-            public void onTick(long millisUntilFinished) {
-                textView.setText(context.getResources().getString(R.string.timeLeft) + " " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                textView.setText(context.getResources().getString(R.string.timeLeft) + " 0");
-            }
-        }.start();
-    }
 }

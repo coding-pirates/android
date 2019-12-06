@@ -1,8 +1,10 @@
 package de.upb.codingpirates.battleships.android.game;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Layout;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -92,6 +94,12 @@ public class GameFragment extends Fragment {
             }
         };
 
+        final Observer<Boolean> newRound = new Observer<Boolean>(){
+            @Override
+            public void onChanged(@Nullable final Boolean newRound) {
+                initTimer(view.findViewById(R.id.tf_timeLeft),viewModel.getRoundTime(),view.getContext());
+            }
+        };
         viewModel.getPointsOfCurrentPlayer().observe(this.getViewLifecycleOwner(), pointsObserver);
 
 
@@ -103,15 +111,15 @@ public class GameFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final Boolean newGoToGameEnd) {
                 if(newGoToGameEnd) {
-                   // Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_gameEndFragment);
+                   Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_gameEndFragment);
                 }
             }
         };
         viewModel.getGoToGameEnd().observe(this.getViewLifecycleOwner(),goToGameViewObserver);
 
         //initialize the timer for the time left
-        TextView pointsView = view.findViewById(R.id.tf_timeLeft);
-        viewModel.initTimer(pointsView, 10, view.getContext());
+        TextView timerView = view.findViewById(R.id.tf_timeLeft);
+        initTimer(timerView,viewModel.getRoundTime(), view.getContext());
         return view;
     }
 
@@ -203,16 +211,22 @@ public class GameFragment extends Fragment {
         for (Point2D point : shipPoints) {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
             switch((new Random().nextInt(2))){
-                case 1:
+                case 0:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     cell.setTag("ship1");
                     break;
-                case 2:
+                case 1:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2));
                     cell.setTag("ship2");
                     break;
+                case 2:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3));
+                    cell.setTag("ship3");
+                    break;
+
             }
         }
+
     }
 
     private void initShots(Collection<Point2D> shotPoints){
@@ -225,8 +239,13 @@ public class GameFragment extends Fragment {
                     break;
                 case "ship2":
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2_hit));
+                    break;
+                case "ship3":
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3_hit));
+                    break;
                 case "waterField":
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_destroyed_red_cross));
+                    break;
             }
         }
     }
@@ -237,5 +256,23 @@ public class GameFragment extends Fragment {
         pointsView.setText("Punkte: " + pointsConverted);
     }
 
+    /**
+     * create a new timer which counts down from @param lengthInSeconds and displays the current time in the Fragment
+     * @param textView the view the timer shall update
+     * @param lengthInSeconds length in seconds the timer takes to finish
+     * @param context context of the main activity so the ids can be called
+     */
+    public void initTimer(TextView textView, long lengthInSeconds, Context context) {
+        CountDownTimer timer = new CountDownTimer(lengthInSeconds, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                textView.setText(context.getResources().getString(R.string.timeLeft) + " " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                textView.setText(context.getResources().getString(R.string.timeLeft) + " 0");
+            }
+        }.start();
+    }
 
 }

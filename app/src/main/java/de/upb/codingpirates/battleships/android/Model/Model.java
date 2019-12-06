@@ -86,6 +86,14 @@ public class Model {
     }
 
     /**
+     * LiveData for a new Round
+     */
+    private MutableLiveData<Boolean> newRound = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getNewRound(){
+        return newRound;
+    }
+
+    /**
      * LiveData for all shots
      */
     private MutableLiveData<Collection<Shot>> shots = new MutableLiveData<>();
@@ -147,7 +155,9 @@ public class Model {
         }
         return shotsOfPlayer;
     }
-
+    public long getRoundTime(){
+            return gameConfig.getRoundTime();
+    }
     /**
      * Returns the ship types of the current game
      * @return Map with ship types
@@ -348,6 +358,9 @@ public class Model {
         }
     }
 
+    public void setNewRound(Boolean newState){
+        this.newRound.setValue(newState);
+    }
    /* public void setPaused(){ //TODO paused
         this.state = GameState.PAUSED;
     }
