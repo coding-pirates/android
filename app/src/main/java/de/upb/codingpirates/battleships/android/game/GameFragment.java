@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ButtonBarLayout;
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,8 +79,34 @@ public class GameFragment extends Fragment {
             }
         };
 
-       // viewModel.getPointsOfShips().observe(this.getViewLifecycleOwner(),shipPointObserver);
         viewModel.getPointsOfShots().observe(this.getViewLifecycleOwner(), shotsObserver);
+
+        /**
+         * Observer for updating Points
+         */
+        final Observer<Integer> pointsObserver = new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable final Integer newPoints) {
+                initPoints(newPoints);
+            }
+        };
+
+        viewModel.getPointsOfCurrentPlayer().observe(this.getViewLifecycleOwner(), pointsObserver);
+
+
+        /**
+         * Observer for GoingToGameEnd
+         */
+
+        final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable final Boolean newGoToGameEnd) {
+                if(newGoToGameEnd) {
+                    Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_gameEndFragment);
+                }
+            }
+        };
+        viewModel.getGoToGameEnd().observe(this.getViewLifecycleOwner(),goToGameViewObserver);
 
         return view;
     }
@@ -140,6 +168,9 @@ public class GameFragment extends Fragment {
                 cleanGameField();
                 initShips(viewModel.getPointsOfShips());
                 initShots(viewModel.getPointsOfShots().getValue());
+                if(viewModel.getPointsOfCurrentPlayer().getValue()!=null) {
+                    initPoints(viewModel.getPointsOfCurrentPlayer().getValue());
+                }
             }
 
             @Override
@@ -181,6 +212,12 @@ public class GameFragment extends Fragment {
                 cell.setBackground(getResources().getDrawable(R.drawable.shot_field));
             }
         }
+    }
+
+    private void initPoints(int pointsOfPlayer){
+        TextView pointsView = view.findViewById(R.id.textView2);
+        double pointsConverted = ((double)pointsOfPlayer)/4;
+        pointsView.setText(Double.toString(pointsConverted));
     }
 
 

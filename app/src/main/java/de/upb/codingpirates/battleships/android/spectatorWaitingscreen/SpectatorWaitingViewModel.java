@@ -14,18 +14,15 @@ import de.upb.codingpirates.battleships.android.R;
 
 public class SpectatorWaitingViewModel extends ViewModel {
 
-    private MutableLiveData<Boolean> goToGameView;
+    private MutableLiveData<Boolean> goToGameView= new MutableLiveData<>();;
     public MutableLiveData<Boolean> getGoToGameView(){
-        if(goToGameView == null){
-            goToGameView = new MutableLiveData<>();
-        }
         return goToGameView;
     }
     private Model model;
 
     public SpectatorWaitingViewModel(){
-        goToGameView = new MutableLiveData<>();
         model = Model.getInstance();
+        model.setGoToSpectatorWaiting(false);
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newGoToGameView) {
                 goToGameView.setValue(newGoToGameView);

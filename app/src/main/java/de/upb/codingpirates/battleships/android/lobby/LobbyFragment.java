@@ -12,11 +12,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.LobbyFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Game;
@@ -26,6 +28,7 @@ public class LobbyFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
+    private SwipeRefreshLayout swipeContainer;
     private RecyclerView.LayoutManager layoutManager;
     private LobbyViewModel viewmodel;
     private View view;
@@ -43,24 +46,41 @@ public class LobbyFragment extends Fragment {
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        //set up recyclerView
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new RecyclerAdapter(new ArrayList<Game>());
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        //set up recyclerView swipe down updater
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewmodel.sendLobbyRequest();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         final Observer<ArrayList<Game> > gamesObserver = new Observer<ArrayList<Game> >() {
             @Override
             public void onChanged(@Nullable final ArrayList<Game>  newGames) {
                 initGamesOnServer(newGames);
+                swipeContainer.setRefreshing(false);
             }
         };
         viewmodel.getGamesOnServer().observe(this.getViewLifecycleOwner(),gamesObserver);
 
         final Observer<Boolean> goToSpectatorScreen = new Observer<Boolean >() {
             @Override
-            public void onChanged(@Nullable final Boolean  newSpectatorSceen) {
-                Navigation.findNavController(getView()).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
+            public void onChanged(@Nullable final Boolean  newSpectatorScreen) {
+                if(newSpectatorScreen) {
+                    Navigation.findNavController(getView()).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
+                }
             }
         };
         viewmodel.getGoToSpectatorScreen().observe(this.getViewLifecycleOwner(),goToSpectatorScreen);
@@ -75,7 +95,11 @@ public class LobbyFragment extends Fragment {
         // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(gamesOnServer);
         recyclerView.setAdapter(mAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+    }
+
+    public void refreshGamesOnServer(ArrayList<Game> gamesOnServer){
+      //TODO  mAdapter.clear();
+      //TODO  mAdapter.addAll(gamesOnServer);
     }
 
 

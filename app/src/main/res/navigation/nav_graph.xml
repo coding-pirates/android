@@ -107,9 +107,6 @@
         android:name="de.upb.codingpirates.battleships.android.game.ExitGameFragment"
         android:label="ExitGameFragment" >
         <action
-            android:id="@+id/action_exitGameFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
-        <action
             android:id="@+id/action_exitGameFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
     </dialog>

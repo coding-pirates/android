@@ -20,11 +20,11 @@ import de.upb.codingpirates.battleships.logic.Game;
 public class LobbyViewModel extends ViewModel {
 
     private Model model;
-    private MutableLiveData<ArrayList<Game>> gamesOnServer = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Game>> gamesOnServer = new MutableLiveData<>();;
     public MutableLiveData<ArrayList<Game>> getGamesOnServer(){
         return gamesOnServer;
     }
-    private MutableLiveData<Boolean> goToSpectatorScreen = new MutableLiveData<>();
+    private MutableLiveData<Boolean> goToSpectatorScreen= new MutableLiveData<>();;
 
     public MutableLiveData<Boolean> getGoToSpectatorScreen(){
         return goToSpectatorScreen;
@@ -32,7 +32,6 @@ public class LobbyViewModel extends ViewModel {
 
     public LobbyViewModel(){
         model = Model.getInstance();
-
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
             @Override
             public void onChanged(@Nullable final Collection<Game>  newGames) {
@@ -40,7 +39,6 @@ public class LobbyViewModel extends ViewModel {
             }
         };
         model.getGamesOnServer().observeForever(gamesObserver);
-
         final Observer<Boolean> goToSpectatorWaiting = new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable final Boolean newGoToSpectatorWaiting) {
@@ -55,4 +53,7 @@ public class LobbyViewModel extends ViewModel {
         Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
     }
 
+    public void sendLobbyRequest(){
+        model.sendLobbyRequest();
+    }
 }

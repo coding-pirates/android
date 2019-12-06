@@ -37,16 +37,17 @@ public class LoginFragment extends Fragment {
                 }
             }
         };
-
+        viewmodel.getProgressbarShow().observe(this.getViewLifecycleOwner(), progressBarShow);
         final Observer<Boolean> serverConnectionComplete = new Observer<Boolean>(){
             @Override
             public void onChanged(@Nullable final Boolean newServerConnection) {
-                // Update the UI, in this case, a TextView.
-                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_lobbyFragment);
+                if(newServerConnection) {
+                    Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_lobbyFragment);
+                }
             }
         };
         viewmodel.getServerJoin().observe(this.getViewLifecycleOwner(), serverConnectionComplete);
-        viewmodel.getProgressbarShow().observe(this.getViewLifecycleOwner(), progressBarShow);
+
 
         // Inflate the layout for this fragment
         return databinding.getRoot();

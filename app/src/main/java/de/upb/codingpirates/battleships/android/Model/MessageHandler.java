@@ -1,8 +1,10 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import de.upb.codingpirates.battleships.client.Handler;
+import de.upb.codingpirates.battleships.logic.Shot;
 import de.upb.codingpirates.battleships.network.exceptions.BattleshipException;
 import de.upb.codingpirates.battleships.network.message.notification.*;
 import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedReport;
@@ -52,7 +54,6 @@ public class MessageHandler implements Handler {
 
     @Override
     public void handleGameStartNotification(GameStartNotification message, int clientId) {
-        System.out.println("GameStart received");
         Model.getInstance().sendSpectatorGameStateRequest();
     }
 
@@ -64,7 +65,6 @@ public class MessageHandler implements Handler {
     @Override
     public void handleLobbyResponse(LobbyResponse message, int clientId) {
         Model.getInstance().setGamesOnServer(message.getGames());
-        //TODO NAvigate to LobbyView
     }
 
     @Override
@@ -85,10 +85,10 @@ public class MessageHandler implements Handler {
     @Override
     public void handleSpectatorUpdateNotification(SpectatorUpdateNotification message, int clientId) {
         Model model  = Model.getInstance();
-        model.addShots(message.getHits());
+        Collection<Shot> shots =  message.getHits();
+        shots.addAll(message.getMissed());
+        model.addShots(shots);
         model.updatePoints(message.getPoints());
-        model.addShots(message.getMissed());
-        //TODO sunk points update
     }
 
     @Override

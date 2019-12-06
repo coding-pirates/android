@@ -12,6 +12,12 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameendFragmentBinding;
@@ -20,6 +26,7 @@ public class GameEndFragment extends Fragment {
 
     private View view;
     TableLayout layout;
+    private GameEndViewModel viewModel;
 
     /**
      * //TODO Beschreibung
@@ -32,21 +39,26 @@ public class GameEndFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         GameendFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.gameend_fragment,container,false);
-        databinding.setViewmodel(new GameEndViewModel());
+        viewModel = new ViewModelProvider(this).get(GameEndViewModel.class);
+        databinding.setViewmodel(viewModel);
         view = databinding.getRoot();
         layout = view.findViewById(R.id.playerRankingTableLayout);
-        fillTable(50);
+        viewModel.getSortedPlayers();
+       // fillTable(viewModel.getSortedPlayers());
+
+
+
         return databinding.getRoot();
     }
 
     /**
      * author Fynn Ruppel
      * //TODO Beschreibung
-     * @param amount amount of rows that need to be added to the table
+     * @param tableData
      */
-    private void fillTable(int amount) {
-        for(int i = 0; i< amount; i++) {
-            addRow(i+1,"Peter",300-i+10,i+1);
+    private void fillTable(ArrayList<Map.Entry<Integer,Integer>> tableData) {
+        for(int i = 0; i<tableData.size();i++) {
+            addRow(i+1,tableData.get(i).getKey().toString(),tableData.get(i).getValue());
         }
     }
 
@@ -56,9 +68,8 @@ public class GameEndFragment extends Fragment {
      * @param p the place in which the player is ranked
      * @param n name of the player being added
      * @param s score of the player being added
-     * @param id id of the row
      */
-    private void addRow(int p, String n, int s, int id) {
+    private void addRow(int p, String n, int s) {
         //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
@@ -91,4 +102,5 @@ public class GameEndFragment extends Fragment {
        //add the new row to the existing tableLayout
        layout.addView(row, rowParams);
     }
+
 }

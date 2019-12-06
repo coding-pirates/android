@@ -107,7 +107,10 @@ public class Model {
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
     private GameState state; //TODO make LiveData
     private Configuration gameConfig;
-    private Map<Integer, Integer> pointsOfPlayers; //is no Live Data because the ViewModel only needs the points of one player
+    private MutableLiveData<Map<Integer, Integer>> pointsOfPlayers = new MutableLiveData<>();
+    public MutableLiveData<Map<Integer, Integer>> getPointsOfPlayers(){
+        return pointsOfPlayers;
+    }
 
 
     //TODO remaining Time ??
@@ -117,83 +120,11 @@ public class Model {
 
 
     public Model() {
-
         Thread thread = new Thread(new Runnable() {
             public void run() {
                     connector = (ClientConnector) ClientApplication.create(ClientModule.class);
             }});
         thread.start();
-
-        gameConfig = Configuration.DEFAULT;
-
-        //currently sets a hard coded state of a game for testing
-        //set gamesOnServer:
-       /* gamesOnServer = new MutableLiveData<>();
-        ArrayList<Game> testList= new ArrayList<>();
-        testList.add(new Game("testGame", 3, GameState.IN_PROGRESS, Configuration.DEFAULT,false));
-        gamesOnServer.setValue(testList);
-        //set Field size
-
-
-        players = new MutableLiveData<>();
-        ArrayList <Client> playersList = new ArrayList<de.upb.codingpirates.battleships.logic.Client>();
-        playersList.add(new de.upb.codingpirates.battleships.logic.Client(0, "Roman"));
-        playersList.add(new de.upb.codingpirates.battleships.logic.Client(1, "Raphael"));
-        playersList.add(new de.upb.codingpirates.battleships.logic.Client(2, "Fynn"));
-        players.setValue(playersList);
-
-        shots = new MutableLiveData<>();
-        ArrayList<Shot> shotsList = new ArrayList<Shot>();
-        shotsList.add(new Shot(0, new Point2D(2, 1)));
-        shotsList.add(new Shot(1, new Point2D(1, 3)));
-        shotsList.add(new Shot(2, new Point2D(2, 3)));
-        shots.setValue(shotsList);
-        //add Ships of Player 0 (Roman)
-        ships = new HashMap<Integer, Map<Integer, PlacementInfo>>();
-        Map<Integer, PlacementInfo> shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
-        shipsOfPlayer.put(0, new PlacementInfo(new Point2D(1, 1), Rotation.CLOCKWISE_90));
-        shipsOfPlayer.put(1, new PlacementInfo(new Point2D(4, 1), Rotation.COUNTERCLOCKWISE_90));
-        shipsOfPlayer.put(2, new PlacementInfo(new Point2D(2, 4), Rotation.NONE));
-        ships.put(0, shipsOfPlayer);
-
-        //add Ships of Player 1(Raphael)
-        shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
-        shipsOfPlayer.put(0, new PlacementInfo(new Point2D(2, 3), Rotation.NONE));
-        shipsOfPlayer.put(1, new PlacementInfo(new Point2D(3, 1), Rotation.NONE));
-        shipsOfPlayer.put(2, new PlacementInfo(new Point2D(0, 0), Rotation.COUNTERCLOCKWISE_90));
-        ships.put(1, shipsOfPlayer);
-
-        //add Ships of Player 2(Fynn)
-        shipsOfPlayer = new HashMap<Integer, PlacementInfo>();
-        shipsOfPlayer.put(0, new PlacementInfo(new Point2D(0, 5), Rotation.CLOCKWISE_90));
-        shipsOfPlayer.put(1, new PlacementInfo(new Point2D(2, 3), Rotation.NONE));
-        shipsOfPlayer.put(2, new PlacementInfo(new Point2D(1, 1), Rotation.NONE));
-        ships.put(2, shipsOfPlayer);
-
-     /*   //create initial Positions of Ships
-        shipsInitial = new HashMap<Integer, ShipType>();
-        //Ship 0
-        Collection<Point2D> shipPoints = new ArrayList<Point2D>();
-        shipPoints.add(new Point2D(0, 0));
-        shipPoints.add(new Point2D(0, 1));
-        shipPoints.add(new Point2D(1, 0));
-        shipsInitial.put(0, new ShipType(shipPoints));
-
-        //Ship 1
-        shipPoints = new ArrayList<Point2D>();
-        shipPoints.add(new Point2D(0, 0));
-        shipPoints.add(new Point2D(1, 0));
-        shipsInitial.put(1, new ShipType(shipPoints));
-
-        //Ship 2
-        shipPoints = new ArrayList<Point2D>();
-        shipPoints.add(new Point2D(0, 0));
-        shipPoints.add(new Point2D(1, 0));
-        shipPoints.add(new Point2D(2, 0));
-        shipsInitial.put(2, new ShipType(shipPoints));
-
-        state = GameState.IN_PROGRESS; */
-
     }
 
     public static Model getInstance(){
@@ -235,6 +166,7 @@ public class Model {
         }
         return shotsOfPlayer;
     }
+
 
     public Map<Integer, ShipType> getShipTypes() {
         return gameConfig.getShipTypes();
@@ -298,20 +230,22 @@ public class Model {
     }
 
     public void setPointsOfPlayers(Map<Integer, Integer> pointsOfPlayers) {
-        this.pointsOfPlayers = pointsOfPlayers;
+        this.pointsOfPlayers.setValue(pointsOfPlayers);
     }
 
 
     public void removePlayer(int playerId){
-       this.pointsOfPlayers.remove(playerId);
-       Collection<Client> oldPlayers = players.getValue();
-       for(Client player: oldPlayers){
+        Map<Integer, Integer> newPointsOfPlayer = this.pointsOfPlayers.getValue();
+        newPointsOfPlayer.remove(playerId);
+       this.pointsOfPlayers.setValue(newPointsOfPlayer);
+       Collection<Client> newPlayers = players.getValue();
+       for(Client player: newPlayers){
            if(player.getId() == playerId){
-               oldPlayers.remove(player);
+               newPlayers.remove(player);
                break;
            }
        }
-       players.postValue(oldPlayers);
+       players.postValue(newPlayers);
     }
 
     public void setWinner(int winner) {
@@ -329,9 +263,14 @@ public class Model {
     }
 
     public void updatePoints(Map<Integer, Integer> newPoints){
-        for(Integer key: newPoints.keySet()){
-            this.pointsOfPlayers.put(key,newPoints.get(key));
+        Map<Integer, Integer> newPointsOfPlayers = this.pointsOfPlayers.getValue();
+        if(newPointsOfPlayers == null){
+            newPointsOfPlayers = newPoints;
         }
+        for(Integer key: newPoints.keySet()){
+            newPointsOfPlayers.put(key,newPoints.get(key));
+        }
+        this.pointsOfPlayers.setValue(newPointsOfPlayers);
     }
 
     public void handlegameJoinSpectatorResponse(int gameId){
@@ -343,7 +282,12 @@ public class Model {
             }
         }
        this.state = joinedGame.getState();
-        this.goToSpectatorWaiting.postValue(true);
+        if(this.goToSpectatorWaiting.getValue()==null||!this.goToSpectatorWaiting.getValue()) {
+            this.goToSpectatorWaiting.postValue(true);
+        }
+    }
+    public void setGoToSpectatorWaiting(Boolean state){
+        this.goToSpectatorWaiting.setValue(state);
     }
     public void disconnectFromServer(){
         //        //connector.disconnect();
@@ -370,10 +314,15 @@ public class Model {
 
 
     public void goToGameView(){
-        this.goToGameView.setValue(true);
+        if(this.goToGameView.getValue()==null || !this.goToGameView.getValue()) {
+            this.goToGameView.setValue(true);
+        }
+        this.goToGameView.setValue(false);
     }
     public void goToGameEnd(){
-        this.goToGameEnd.setValue(true);
+        if(this.goToGameEnd.getValue()==null || !this.goToGameEnd.getValue()) {
+            this.goToGameEnd.setValue(true);
+        }
     }
 
     public void setPaused(){
@@ -383,18 +332,25 @@ public class Model {
         this.state = GameState.IN_PROGRESS;
     }
 
-    public ArrayList<Map.Entry<Integer,Integer>> getSortedPoints(){
+    public Object[] getThreeBestPlayers(){
          //TODO sort
-        ArrayList<Map.Entry<Integer,Integer>> sortedPoints = new ArrayList<>();
-        for(Map.Entry<Integer,Integer> pointEntry: pointsOfPlayers.entrySet()){
-            for(int i = sortedPoints.size()-1; i>0;i--) {
-                if (pointEntry.getValue() < sortedPoints.get(i).getValue()) {
-                    sortedPoints.set(i+1,sortedPoints.get(i));
-                }
-                else{
-                    sortedPoints.set(i+1, pointEntry);
+        String[][] sortedPoints = new String[3][2];
+        Map<Integer,Integer> localPointsOfPlayers= pointsOfPlayers.getValue();
+        for(int i =0 ; i<3 && i<pointsOfPlayers.getValue().size(); i++) {
+            Map.Entry<Integer,Integer> currentBest = null;
+            for (Map.Entry<Integer, Integer> pointEntry : localPointsOfPlayers.entrySet()) {
+                if(currentBest == null || pointEntry.getValue().compareTo(currentBest.getValue())>0){
+                    currentBest = pointEntry;
                 }
             }
+            for(Client player: players.getValue()){
+                if(currentBest.getKey() == player.getId()){
+                    sortedPoints[i][0]=player.getName();
+                    break;
+                }
+            }
+            sortedPoints[i][1]= Integer.toString(currentBest.getValue());
+            localPointsOfPlayers.remove(currentBest.getKey());
         }
         return sortedPoints;
     }

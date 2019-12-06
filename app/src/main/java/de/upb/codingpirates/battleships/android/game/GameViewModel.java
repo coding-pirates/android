@@ -57,13 +57,23 @@ public class GameViewModel extends ViewModel {
      */
     private Client currentPlayer;
 
-    private Collection<Shot> missed;
     private MutableLiveData<ArrayList<Point2D>> pointsOfShots = new MutableLiveData<>();
     public MutableLiveData<ArrayList<Point2D>> getPointsOfShots(){
         return pointsOfShots;
     }
 
-   public GameViewModel(){
+    private MutableLiveData<Boolean> goToGameEnd = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getGoToGameEnd(){
+        return goToGameEnd;
+    }
+
+    private MutableLiveData<Integer> pointsOfCurrentPlayer = new MutableLiveData<>();
+
+    public MutableLiveData<Integer> getPointsOfCurrentPlayer() {
+        return pointsOfCurrentPlayer;
+    }
+
+    public GameViewModel(){
        model = Model.getInstance();
        fieldWidth = model.getFieldWidth();
        fieldHeight = model.getFieldHeight();
@@ -94,6 +104,26 @@ public class GameViewModel extends ViewModel {
        };
         model.getShots().observeForever(shotsObserver);
 
+       /**
+        * Observer for going to End View
+        */
+       final Observer<Boolean> goToGameEndObserver = new Observer<Boolean>(){
+           public void onChanged(@Nullable final Boolean newGoToGameEnd) {
+               goToGameEnd.setValue(newGoToGameEnd);
+           }
+       };
+       model.getGoToGameEnd().observeForever(goToGameEndObserver);
+
+       /**
+        * Observer for pointsOfPlayers
+        */
+       final Observer<Map<Integer,Integer>> pointsOfPlayersObserver = new Observer<Map<Integer,Integer>>(){
+           public void onChanged(@Nullable final Map<Integer,Integer> newPointsOfPlayers) {
+               pointsOfCurrentPlayer.setValue(newPointsOfPlayers.get(currentPlayer.getId()));
+           }
+       };
+       model.getPointsOfPlayers().observeForever(pointsOfPlayersObserver);
+
 
     }
 
@@ -103,6 +133,10 @@ public class GameViewModel extends ViewModel {
 
     public void setCurrentPlayer(Client currentPlayer) {
         this.currentPlayer = currentPlayer;
+        this.pointsOfShots.setValue((ArrayList<Point2D>) createShotPointsForUI(model.getShotsOfPlayer(currentPlayer.getId())));
+        if(model.getPointsOfPlayers().getValue()!=null) {
+            this.pointsOfCurrentPlayer.setValue(model.getPointsOfPlayers().getValue().get(currentPlayer.getId()));
+        }
         refreshShipPoints();
     }
 
@@ -171,15 +205,4 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
-    public void nextButtonClicked(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_gameEndFragment);
-    }
-
-    /**
-     * Navigates to the game exit dialog, in which the user can select, if he really wants to exit.
-     * @param view
-     */
-    public void exitGameButtonClicked(View view){
-        Navigation.findNavController(view).navigate(R.id.action_gameFragment_to_exitGameFragment);
-    }
 }

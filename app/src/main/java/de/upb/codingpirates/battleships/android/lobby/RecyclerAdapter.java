@@ -34,7 +34,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
            Model.getInstance().sendGameJoinSpectatorRequest((int)listItemViw.getTag());
         }
 
-
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -63,9 +62,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyGameName)).setText(mDataset.get(position).getName());
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyFiledSize)).setText(mDataset.get(position).getConfig().getHeight() +"x" +mDataset.get(position).getConfig().getWidth());
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyGameStatus)).setText(mDataset.get(position).getState().toString());
+        ((TextView)holder.listItemViw.findViewById(R.id.lobbyPlayerCount)).setText(Integer.toString(mDataset.get(position).getCurrentPlayerCount()));
         holder.listItemViw.setTag(mDataset.get(position).getId());
-       //TODO ((TextView)holder.listItemViw.findViewById(R.id.lobbyPlayerCount)).setText(mDataset.get(position).getCurrentPlayerCount());
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -73,4 +71,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public int getItemCount() {
         return mDataset.size();
     }
+
 }
