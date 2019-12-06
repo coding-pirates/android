@@ -37,7 +37,7 @@
     <string name="thirdPlacePlayerName">Player 3</string>
     <string name="log_in">log in</string>
     <string name="gameName">GameName</string>
-    <string name="gameState">GameName</string>
+    <string name="gameState">GameState</string>
     <string name="fieldSize">FieldSize</string>
     <string name="countPlayer">PlayerCount</string>
     <string name="todoLobby">Tap on a game to spectate!</string>
