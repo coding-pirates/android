@@ -57,4 +57,5 @@
     <color name="color_on_error">#ffffff</color>
 
     <color name="color_brown_main">#472218</color>
+    <color name="color_light_brown">#CFBE8E</color>
 </resources>
