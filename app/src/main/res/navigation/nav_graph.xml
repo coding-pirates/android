@@ -33,7 +33,9 @@
             app:exitAnim="@anim/fragment_fade_exit" />
         <action
             android:id="@+id/action_lobbyFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
     <fragment
         android:id="@+id/startScreenFragment"

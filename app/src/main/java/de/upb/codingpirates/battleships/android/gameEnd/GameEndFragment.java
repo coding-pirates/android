@@ -34,8 +34,8 @@ public class GameEndFragment extends Fragment {
         GameendFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.gameend_fragment,container,false);
         databinding.setViewmodel(new GameEndViewModel());
         view = databinding.getRoot();
-        layout = view.findViewById(R.id.playerRankingTableLayout);
-        fillTable(50);
+        //layout = view.findViewById(R.id.playerRankingTableLayout);
+        //fillTable(50);
         return databinding.getRoot();
     }
 
