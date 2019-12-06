@@ -13,4 +13,12 @@ public class LobbyViewModel extends BaseObservable {
         Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
     }
 
+    /**
+     * Change the Fragment when the Settingsbutton is clicked
+     * @param view
+     */
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_settingsFragment);
+    }
+
 }
