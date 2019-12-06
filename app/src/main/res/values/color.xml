@@ -35,7 +35,7 @@
     <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
     <!--selection controls.-->
     <color name="color_primary">#224870</color>
-    <color name="color_primary_variant">#122C34</color>
+    <color name="color_primary_variant">#122C34</color>122C34
     <color name="color_secondary">#4EA5D9</color>
     <color name="color_secondary_variant">#018786</color>
   <color name="color_gameField">#1B2CC1</color>
@@ -44,9 +44,9 @@
     <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
     <!--and menus. colorError is used to indicate an error state for components such as-->
     <!--text fields.-->
-    <color name="color_background">#D7D7D7</color>
+    <color name="color_background">#472218</color>
     <color name="color_surface">#ffffff</color>
-    <color name="color_error">#b00020</color>
+    <color name="color_error">#B00020</color>
 
     <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
     <!--on which they appear.-->

@@ -12,8 +12,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@mipmap/lobby_bg">
+        <!-- TODO REMOVE BUTTON-->
         <Button
             android:id="@+id/button8"
             android:layout_width="wrap_content"
@@ -38,25 +39,27 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/spectatorWaitingStr"
+            android:textColor="#472218"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/button8"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.205" />
+            app:layout_constraintVertical_bias="0.251" />
 
         <TextView
             android:id="@+id/spectatorWaitingSecondStr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/patienceStr"
-            android:textSize="18dp"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/spectatorWatingActivityTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.848" />
+            app:layout_constraintVertical_bias="0.848"
+            android:textColor="#472218"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -66,11 +69,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spectatorWatingActivityTitle"
-            app:srcCompat="@drawable/pirates_of_the_caribbean_skull" />
+            app:srcCompat="@drawable/ic_beardedskull_brown" />
 
         <ProgressBar
             android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyle"
+            style="@style/Widget.AppCompat.ProgressBar"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/button8"
@@ -78,6 +82,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:indeterminateDrawable="@drawable/progress"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

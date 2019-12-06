@@ -14,18 +14,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:background="@mipmap/lobby_bg">
 
-        <Button
+        <ImageButton
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_login_button"
+            android:contentDescription="@string/log_in"
             android:onClick="@{viewmodel::loginButtonClicked}"
             android:text="@string/loginStr"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,72 +40,83 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@string/loginStr"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/loginButton"
+            android:textSize="40sp"
+            android:textColor="#472218"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.107" />
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             app:layout_constraintBottom_toTopOf="@+id/loginButton"
-            app:layout_constraintTop_toBottomOf="@+id/loginActivityTitle">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/usernameInputLayout">
+                android:id="@+id/usernameInputLayout"
+                style="@style/TextInputLayoutStyle"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                app:boxBackgroundMode="outline">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/usernameInputView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="Goofie"
-                    android:hint="@string/usernameStr" />
-                <!-- TODO MaterialDesign outlines box-->
+                    style="@style/TextInputEditTextStyle"
+                    android:hint="@string/usernameStr"
+                    android:textColor="#472218" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/serverIpInputLayout">
+                android:id="@+id/serverIpInputLayout"
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="#472218">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverIpInputView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text ="192.168.178.42"
-                    android:hint="@string/serverIPStr" />
+                    style="@style/TextInputEditTextStyle"
+                    android:hint="@string/serverIPStr"
+                    android:textColor="#472218" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/serverPortInputLayout">
+                android:id="@+id/serverPortInputLayout"
+                style="@style/TextInputLayoutStyle"
+                app:boxStrokeColor="#472218">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverPortInputView"
-                    android:text = "47345"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    style="@style/TextInputEditTextStyle"
                     android:hint="@string/serverPortStr"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:textColor="#472218"
+                    app:hintTextColor="#472218" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.843"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_settings_icon"
+            android:onClick="@{viewmodel::settingsButtonClicked}"/>
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -116,5 +128,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

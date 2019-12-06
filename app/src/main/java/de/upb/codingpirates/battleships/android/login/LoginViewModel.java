@@ -80,6 +80,9 @@ public class LoginViewModel extends ViewModel {
         usernameLayout = view.getRootView().findViewById(R.id.usernameInputLayout);
         serverIpLayout = view.getRootView().findViewById(R.id.serverIpInputLayout);
         serverPortLayout = view.getRootView().findViewById(R.id.serverPortInputLayout);
+
+
+        //reset all possible errorStates of the TextEditInputViews
         usernameLayout.setErrorEnabled(false);
         serverIpLayout.setErrorEnabled(false);
         serverPortLayout.setErrorEnabled(false);
@@ -149,5 +152,13 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Change the Fragment when the Settingsbutton is clicked
+     * @param view
+     */
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_settingsFragment);
     }
 }

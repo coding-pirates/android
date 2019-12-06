@@ -7,24 +7,26 @@
     <string name="gameStr">Game Activity</string>
     <string name="gameEndStr">Beim Klabautermann! Die Seeschlacht ist vollendet</string>
     <string name="lobbyStr">Lobby Fragment</string>
-    <string name="loginStr">Login</string>
+    <string name="loginStr">Log In</string>
     <string name="mainStr">Main Activity</string>
     <string name="placeShipStr">Placeship Activity</string>
-    <string name="settingsStr">Settings Activity</string>
+    <string name="settingsStr">Einstellungen</string>
     <string name="spectatorWaitingStr">Die Piraten planen noch ihre Schlacht</string>
     <string name="patienceStr">Geduld!</string>
-    <string name="rulesStr">Regeln</string>
+    <string name="rulesStr">Piratenkodex</string>
     <string name="imprintStr">Impressum</string>
     <string name="pointsStr">Punkte</string>
+    <string name="points2Str">Punkte:</string>
     <string name="nameStr">Name</string>
     <string name="placeStr">Platz</string>
-
     <string name="serverIPStr">Server-IP</string>
     <string name="serverPortStr">Server-Port</string>
     <string name="usernameStr">Username</string>
-    <string name="usernameMissingStr">Trage einen Nutzernamen ein</string>
+    <string name="usernameMissingStr">Trage deinen Kapitänsnamen ein</string>
     <string name="serverIpMissingStr">Trage eine Server-Ip ein</string>
     <string name="serverPortMissingStr">Trage einen Server-Port ein</string>
+    <string name="selectPlayer">Select one player:</string>
+    <string name="timeleft">Time left: </string>
 
     <string name="exitGameString">Wollen Sie das Spiel wirklich verlassen?</string>
     <string name="exitButton">Jo ich bin raus.</string>
@@ -33,4 +35,7 @@
     <string name="firstPlacePlayerName">Player 1</string>
     <string name="secondPlacePlayerName">Player 2</string>
     <string name="thirdPlacePlayerName">Player 3</string>
+    <string name="log_in">log in</string>
+
+    <string name="todoLobby">Tap on a game to spectate!</string>
 </resources>

@@ -33,6 +33,7 @@ import de.upb.codingpirates.battleships.android.databinding.GameFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Client;
 import de.upb.codingpirates.battleships.logic.Point2D;
 
+import java.util.Random;
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
  * manages all UI related actions
@@ -42,9 +43,9 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 public class GameFragment extends Fragment {
 
-    int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-
-    int height = Resources.getSystem().getDisplayMetrics().heightPixels;
+    //get the width of the current device in pixel
+    private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
+    //private int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
@@ -114,11 +115,13 @@ public class GameFragment extends Fragment {
     /**
      * Initializes the gameField
      *
-     * @param fieldHeight The game field height specified in the Configruation
-     * @param fieldWidth  The game field width specified in the Configruation
+     * @param fieldHeight The game field height specified in the Configuration
+     * @param fieldWidth  The game field width specified in the Configuration
      */
     private void initGameFild(int fieldHeight, int fieldWidth) {
         GridLayout gameField = view.getRootView().findViewById(R.id.gameField);
+        int minWidth = 100;
+        //int minHeigth = 100;
 
         //i = counter,  c = current column, r = current row
         for (int i = 0, c = 0, r = 0; i < fieldHeight * fieldWidth; i++) {
@@ -128,14 +131,14 @@ public class GameFragment extends Fragment {
                 r++;
             }
             Button btn = new Button(view.getContext());
-            btn.setBackground(btn.getContext().getResources().getDrawable(R.drawable.borderfield));
+            btn.setBackground((getResources().getDrawable(R.drawable.ic_quadrat)));
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
 
-            //TODO comment and make max. Height and Width so the buttons are square
-            param.height = height/fieldHeight < 100 ? 100 : height/fieldHeight;
-            param.width = width/fieldWidth < 100 ? 100 : width/fieldWidth;
+            //Scaling the buttons according to the screen size. If the ratio is smaller than the min width then the height and width will be the minimum.
+            param.height = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
+            param.width = width/fieldWidth < minWidth ? minWidth : width/fieldWidth;
 
             param.columnSpec = GridLayout.spec(c);
             param.rowSpec = GridLayout.spec(r);
@@ -184,19 +187,30 @@ public class GameFragment extends Fragment {
     private void cleanGameField(){
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
-            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.borderfield));
+            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
         }
-    }
-
     /**
      * Initialises the ships for the selected Player
      */
     private void initShips(Collection<Point2D> shipPoints) {
+        GridLayout gameField = view.findViewById(R.id.gameField);
+
         for (Point2D point : shipPoints) {
             GridLayout gameField = view.findViewById(R.id.gameField);
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
             cell.setBackground(getResources().getDrawable(R.drawable.bordership));
             cell.setTag("ship");
+            switch((new Random().nextInt(3))){
+                case 1:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
+                    break;
+                case 2:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_2));
+                    break;
+                case 3:
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3));
+                    break;
+            }
         }
     }
 

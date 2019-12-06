@@ -56,4 +56,13 @@ public class LobbyViewModel extends ViewModel {
     public void sendLobbyRequest(){
         model.sendLobbyRequest();
     }
+    /**
+     * Change the Fragment when the Settingsbutton is clicked
+     * @param view
+     */
+    public void settingsButtonClicked(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_settingsFragment);
+    }
+
+}
 }
