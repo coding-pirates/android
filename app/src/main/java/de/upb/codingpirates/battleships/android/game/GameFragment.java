@@ -61,6 +61,7 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
         databinding = DataBindingUtil.inflate(inflater, R.layout.game_fragment,container,false);
         databinding.setViewmodel(viewModel);
@@ -68,7 +69,6 @@ public class GameFragment extends Fragment {
         //view = inflater.inflate(R.layout.game_fragment, container, false);
         this.initSpinner(viewModel.getPlayers());
         this.initGameField(viewModel.getFieldHeight(), viewModel.getFieldWidth());
-
         // Create the observer which updates the Ships.
         final Observer<ArrayList<Point2D>> shipPointObserver = new Observer<ArrayList<Point2D>>() {
             @Override
@@ -102,7 +102,7 @@ public class GameFragment extends Fragment {
                 r++;
             }
             Button btn = new Button(view.getContext());
-            btn.setBackgroundColor(472218);
+            btn.setBackground((getResources().getDrawable(R.drawable.ic_quadrat)));
             btn.setPadding(0, 0, 0, 0);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
@@ -128,6 +128,7 @@ public class GameFragment extends Fragment {
     private void initSpinner(Collection<Client> players) {
         Spinner playersSpinner = (Spinner) view.findViewWithTag("playerSpinner");
 
+
         ArrayAdapter<Client> adapter = new ArrayAdapter<Client>(
                 this.getContext(),
                 R.layout.support_simple_spinner_dropdown_item,
@@ -140,6 +141,7 @@ public class GameFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 viewModel.setCurrentPlayer((Client) parent.getItemAtPosition(position));
+
             }
 
             @Override
@@ -156,12 +158,12 @@ public class GameFragment extends Fragment {
     private void initShips(Collection<Point2D> shipPoints) {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
-            gameField.getChildAt(i).setBackgroundColor(472218);
+            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
         }
         for (Point2D point : shipPoints) {
 
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            switch(getShipImage()){
+            switch((new Random().nextInt(3))){
                 case 1:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     break;
@@ -173,11 +175,6 @@ public class GameFragment extends Fragment {
                     break;
             }
         }
-    }
-
-    private int getShipImage(){
-        return (new Random().nextInt(3));
-
     }
 
 
