@@ -59,6 +59,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:layout_weight="1"
+                android:onClick="@{viewmodel::impressum_buttonClicked}"
                 android:backgroundTint="@color/color_brown_main"
                 android:text="@string/imprintStr" />
         </LinearLayout>

@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_rulesFragment"
             app:destination="@id/rulesFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_impressumFragment"
+            app:destination="@+id/impressumFragment" />
     </fragment>
     <fragment
         android:id="@+id/spectatorWaitingFragment"
@@ -125,4 +128,8 @@
         android:id="@+id/rulesFragment"
         android:name="de.upb.codingpirates.battleships.android.settings.RulesFragment"
         android:label="rulesFragment" />
+    <dialog
+        android:id="@+id/impressumFragment"
+        android:name="de.upb.codingpirates.battleships.android.settings.ImpressumFragment"
+        android:label="impressumFragment" />
 </navigation>
