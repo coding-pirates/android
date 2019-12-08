@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
     }
     buildTypes {
         release {
@@ -41,8 +42,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:2.1.0"
     implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-rc02"
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.29'
-    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     implementation group: 'org.roboguice', name: 'roboguice', version: '4.0.0'
 
     implementation "com.google.android.material:material:1.2.0-alpha02"
@@ -55,4 +54,9 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
+
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    //noinspection GradleDependency
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: '2.3'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha1'
 }
