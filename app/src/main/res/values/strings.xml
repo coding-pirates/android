@@ -16,7 +16,7 @@
     <string name="rulesStr">Piratenkodex</string>
     <string name="imprintStr">Impressum</string>
     <string name="pointsStr">Punkte</string>
-    <string name="points2Str">Punkte:</string>
+    <string name="points2Str">Punkte: 0.0</string>
     <string name="nameStr">Name</string>
     <string name="placeStr">Platz</string>
     <string name="serverIPStr">Server-IP</string>
