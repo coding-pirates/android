@@ -3,14 +3,15 @@ package de.upb.codingpirates.battleships.android.Model;
 import androidx.lifecycle.MutableLiveData;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.logic.*;
@@ -26,7 +27,7 @@ import de.upb.codingpirates.battleships.network.message.request.SpectatorGameSta
  * @author Lukas Kröger
  */
 public class Model {
-    private static final Logger LOGGER = Logger.getLogger(Model.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final Model globalModel = new Model();
 
     private String clientName;
@@ -52,7 +53,7 @@ public class Model {
             connector.sendMessageToServer(new ServerJoinRequest(clientName, clientType));
         }
         catch(IOException e){
-            LOGGER.log(Level.SEVERE,"Could not send ServerJoinRequest to Server",e);
+            LOGGER.error("Could not send ServerJoinRequest to Server",e);
         }
 
     }
@@ -163,7 +164,7 @@ public class Model {
      * @return Map with ship types
      */
     public Map<Integer, ShipType> getShipTypes() {
-        return gameConfig.getShipTypes();
+        return gameConfig.getShips();
     }
 
     /**
@@ -197,7 +198,7 @@ public class Model {
             connector.connect(ipAddress, port);
         }
         catch(IOException e){
-            LOGGER.log(Level.SEVERE,"Could not connect to Server",e);
+            LOGGER.error("Could not connect to Server",e);
         }
     }
 
@@ -218,7 +219,7 @@ public class Model {
             connector.sendMessageToServer(new SpectatorGameStateRequest());
         }
         catch(IOException e){
-            LOGGER.log(Level.SEVERE,"Could not send SpectatorGameStateRequest to Server",e);
+            LOGGER.error("Could not send SpectatorGameStateRequest to Server",e);
         }
     }
 
@@ -321,7 +322,7 @@ public class Model {
             connector.sendMessageToServer(new LobbyRequest());
         }
         catch(IOException e){
-            LOGGER.log(Level.SEVERE,"Could not send LobbyRequest to Server",e);
+            LOGGER.error("Could not send LobbyRequest to Server",e);
         }
     }
 
@@ -334,7 +335,7 @@ public class Model {
             connector.sendMessageToServer(new GameJoinSpectatorRequest(gameId));
         }
         catch(IOException e){
-            LOGGER.log(Level.SEVERE,"Could not send GameJoinSpectatorRequest to Server",e);
+            LOGGER.error("Could not send GameJoinSpectatorRequest to Server",e);
         }
 
     }

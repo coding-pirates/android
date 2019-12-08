@@ -2,8 +2,10 @@ package de.upb.codingpirates.battleships.android.Model;
 
 import android.widget.Toast;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import de.upb.codingpirates.battleships.client.Handler;
 import de.upb.codingpirates.battleships.logic.Shot;
@@ -13,7 +15,7 @@ import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedR
 import de.upb.codingpirates.battleships.network.message.response.*;
 
 public class MessageHandler implements Handler {
-    private static final Logger LOGGER = Logger.getLogger(MessageHandler.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger();
 
 
     @Override
