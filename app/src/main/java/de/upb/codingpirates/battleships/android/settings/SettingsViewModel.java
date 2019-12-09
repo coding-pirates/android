@@ -16,4 +16,11 @@ public class SettingsViewModel extends BaseObservable {
     public void rules_buttonClicked(View view){
         Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_rulesFragment);
     }
+    /**
+     * Navigates to the impressum dialog, in which the user can read the impressum.
+     * @param view
+     */
+    public void impressum_buttonClicked(View view){
+        Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_impressumFragment);
+    }
 }
