@@ -52,6 +52,7 @@ public class GameFragment extends Fragment {
     private GameViewModel viewModel;
     private View view;
     private GameFragmentBinding databinding;
+    private CountDownTimer timer;
 
     /**
      * Creates the GamesView if it should be displayed on the screen
@@ -97,10 +98,11 @@ public class GameFragment extends Fragment {
         final Observer<Boolean> newRound = new Observer<Boolean>(){
             @Override
             public void onChanged(@Nullable final Boolean newRound) {
-                initTimer(view.findViewById(R.id.tf_timeLeft),viewModel.getRoundTime(),view.getContext());
+                timer.cancel();
+                timer.start();
             }
         };
-        viewModel.getPointsOfCurrentPlayer().observe(this.getViewLifecycleOwner(), pointsObserver);
+        viewModel.getNewRound().observe(this.getViewLifecycleOwner(), newRound);
 
 
         /**
@@ -170,7 +172,7 @@ public class GameFragment extends Fragment {
 
         ArrayAdapter<Client> adapter = new ArrayAdapter<Client>(
                 this.getContext(),
-                R.layout.support_simple_spinner_dropdown_item,
+                R.layout.spinner_item,
                 players
         );
         playersSpinner.setAdapter(adapter);
@@ -263,7 +265,7 @@ public class GameFragment extends Fragment {
      * @param context context of the main activity so the ids can be called
      */
     public void initTimer(TextView textView, long lengthInSeconds, Context context) {
-        CountDownTimer timer = new CountDownTimer(lengthInSeconds, 1000) {
+        timer = new CountDownTimer(lengthInSeconds, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 textView.setText(context.getResources().getString(R.string.timeLeft) + " " + millisUntilFinished / 1000);
