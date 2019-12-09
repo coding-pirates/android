@@ -1,5 +1,7 @@
 package de.upb.codingpirates.battleships.android.Model;
 
+import android.annotation.SuppressLint;
+
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -17,17 +19,18 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AndroidReader implements ClientReaderMethod {
 
+    @SuppressLint("CheckResult")
     @Override
     public void get(Connection connection, Consumer<Pair<Connection, Message>> dispatch, Consumer<Throwable> error) {
         Observable.create((ObservableEmitter<Pair<Connection, Message>> emitter) -> {
             while (!connection.isClosed()) {
                 try {
                     Message message = connection.read();
-                    emitter.onNext(new Pair<>(connection, message));
+                    emitter.onNext(Pair.of(connection, message));
                     break;
                 } catch (SocketException e) {
                     connection.close();
-                    emitter.onNext(new Pair<>(connection, new ConnectionClosedReport()));
+                    emitter.onNext(Pair.of(connection, new ConnectionClosedReport()));
                 } catch (IOException | ParserException e) {
                     emitter.onError(e);
                 }
