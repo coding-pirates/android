@@ -246,7 +246,7 @@ public class GameFragment extends Fragment {
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3_hit));
                     break;
                 case "waterField":
-                    cell.setBackground(getResources().getDrawable(R.drawable.ic_destroyed_red_cross));
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_field_hit));
                     break;
             }
         }

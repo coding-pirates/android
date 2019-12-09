@@ -294,6 +294,7 @@ public class Model {
         for(Game game: gamesOnServer.getValue()){
             if(game.getId() == gameId){
                 joinedGame = game;
+                setGameConfig(game.getConfig());
                 break;
             }
         }

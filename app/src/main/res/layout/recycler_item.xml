@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/lobbyGameName"
-        android:layout_width="109dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gameName"
         android:textColor="@color/color_brown_main"
@@ -23,9 +23,10 @@
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="34dp"
-        android:padding="1dp"
         android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
         android:background="@color/color_light_brown"
+        android:padding="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lobbyGameStatus"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,9 +34,10 @@
 
     <TextView
         android:id="@+id/lobbyGameStatus"
-        android:layout_width="70dp"
-        android:padding="1dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:padding="1dp"
         android:text="@string/gameState"
         android:textColor="@color/color_brown_main"
         android:textSize="14sp"
@@ -46,8 +48,9 @@
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="34dp"
-        android:padding="1dp"
         android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:padding="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lobbyPlayerCount"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,8 +58,9 @@
 
     <TextView
         android:id="@+id/lobbyPlayerCount"
-        android:layout_width="69dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:padding="1dp"
         android:text="@string/countPlayer"
         android:textColor="@color/color_brown_main"
@@ -67,9 +71,10 @@
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="34dp"
-        android:padding="1dp"
         android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
         android:background="@color/color_light_brown"
+        android:padding="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/lobbyFiledSize"
         app:layout_constraintTop_toTopOf="parent"
@@ -77,7 +82,7 @@
 
     <TextView
         android:id="@+id/lobbyFiledSize"
-        android:layout_width="56dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="1dp"
         android:text="@string/fieldSize"

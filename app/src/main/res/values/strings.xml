@@ -25,7 +25,7 @@
     <string name="usernameMissingStr">Trage deinen Kapitänsnamen ein</string>
     <string name="serverIpMissingStr">Trage eine Server-Ip ein</string>
     <string name="serverPortMissingStr">Trage einen Server-Port ein</string>
-    <string name="selectPlayer">Select one player:</string>
+    <string name="selectPlayer">Wähle einen Spieler:</string>
     <string name="timeLeft">Zeit übrig: </string>
 
     <string name="exitGameString">Wollen Sie das Spiel wirklich verlassen?</string>
