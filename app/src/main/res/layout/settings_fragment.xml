@@ -75,6 +75,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -89,7 +90,7 @@
 
                 <SeekBar
                     android:id="@+id/volumeseekBar"
-                    android:layout_width="285dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:foregroundTint="@color/color_brown_main"
                     android:indeterminateTint="@color/color_brown_main"
@@ -101,6 +102,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp">
@@ -116,7 +118,7 @@
 
                 <SeekBar
                     android:id="@+id/musicSeekbar"
-                    android:layout_width="285dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:progressTint="@color/color_brown_main"
                     android:thumbTint="@color/color_brown_main" />
