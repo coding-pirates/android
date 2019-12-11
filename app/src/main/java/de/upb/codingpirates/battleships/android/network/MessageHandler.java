@@ -1,12 +1,11 @@
-package de.upb.codingpirates.battleships.android.Model;
-
-import android.widget.Toast;
+package de.upb.codingpirates.battleships.android.network;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.client.Handler;
 import de.upb.codingpirates.battleships.logic.Shot;
 import de.upb.codingpirates.battleships.network.exceptions.BattleshipException;

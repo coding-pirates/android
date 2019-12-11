@@ -3,13 +3,12 @@ package de.upb.codingpirates.battleships.android.spectatorWaitingscreen;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
 
 public class SpectatorWaitingViewModel extends ViewModel {

@@ -1,4 +1,4 @@
-package de.upb.codingpirates.battleships.android.Model;
+package de.upb.codingpirates.battleships.android.network;
 
 import java.io.IOException;
 import java.net.SocketException;

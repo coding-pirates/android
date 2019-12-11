@@ -1,25 +1,16 @@
 package de.upb.codingpirates.battleships.android.game;
 
-import android.content.Context;
-import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Timer;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
-import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.logic.*;
-
-import android.os.CountDownTimer;
-import android.widget.TextView;
 
 /**
  * This class holds all the data for the GameFragment.

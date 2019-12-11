@@ -1,4 +1,4 @@
-package de.upb.codingpirates.battleships.android.Model;
+package de.upb.codingpirates.battleships.android.model;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -6,17 +6,16 @@ import androidx.lifecycle.MutableLiveData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
+import de.upb.codingpirates.battleships.android.network.AndroidReader;
+import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
+import de.upb.codingpirates.battleships.android.network.MessageHandler;
+import de.upb.codingpirates.battleships.client.network.ClientModule;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.logic.*;
-import de.upb.codingpirates.battleships.network.Properties;
-import de.upb.codingpirates.battleships.network.message.request.GameJoinPlayerRequest;
 import de.upb.codingpirates.battleships.network.message.request.GameJoinSpectatorRequest;
 import de.upb.codingpirates.battleships.network.message.request.LobbyRequest;
 import de.upb.codingpirates.battleships.network.message.request.ServerJoinRequest;
@@ -37,7 +36,7 @@ public class Model {
     private int clientId;
 
     //for Server communication
-    private ClientConnector connector;
+    private ClientConnectorAndroid connector;
 
     private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
@@ -49,13 +48,7 @@ public class Model {
 
 
     public void setConnected(Boolean connected){
-        try {
-            connector.sendMessageToServer(new ServerJoinRequest(clientName, clientType));
-        }
-        catch(IOException e){
-            LOGGER.error("Could not send ServerJoinRequest to Server",e);
-        }
-
+        connector.sendMessageToServer(new ServerJoinRequest(clientName, clientType));
     }
 
     //data for LobbyView
@@ -119,14 +112,10 @@ public class Model {
 
     /**
      * Consturctor for the Model.
-     * Instatiates the ClientConnector
+     * Instatiates the ClientConnectorAndroid
      */
     public Model() {
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                    connector = (ClientConnector) ClientApplication.create(ClientModule.class);
-            }});
-        thread.start();
+        new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class, MessageHandler.class))).start();
     }
 
     public static Model getInstance(){
@@ -194,12 +183,7 @@ public class Model {
         this.clientType =clientType;
         this.clientName = name;
         this.serverIP = ipAddress;
-        try {
-            connector.connect(ipAddress, port);
-        }
-        catch(IOException e){
-            LOGGER.error("Could not connect to Server",e);
-        }
+        connector.connect(ipAddress, port);
     }
 
 
@@ -215,12 +199,7 @@ public class Model {
      * Sends a SpectatorGameStateRequest to the connected Server
      */
     public void sendSpectatorGameStateRequest(){
-        try {
-            connector.sendMessageToServer(new SpectatorGameStateRequest());
-        }
-        catch(IOException e){
-            LOGGER.error("Could not send SpectatorGameStateRequest to Server",e);
-        }
+        connector.sendMessageToServer(new SpectatorGameStateRequest());
     }
 
     public void setPlayers(Collection<Client> players){
@@ -318,12 +297,7 @@ public class Model {
      * Sends a LobbyRequest to the connected server
      */
     public void sendLobbyRequest() {
-        try {
-            connector.sendMessageToServer(new LobbyRequest());
-        }
-        catch(IOException e){
-            LOGGER.error("Could not send LobbyRequest to Server",e);
-        }
+        connector.sendMessageToServer(new LobbyRequest());
     }
 
     /**
@@ -331,13 +305,7 @@ public class Model {
      * @param gameId The id of the game you want to join
      */
     public void sendGameJoinSpectatorRequest(int gameId){
-        try {
-            connector.sendMessageToServer(new GameJoinSpectatorRequest(gameId));
-        }
-        catch(IOException e){
-            LOGGER.error("Could not send GameJoinSpectatorRequest to Server",e);
-        }
-
+        connector.sendMessageToServer(new GameJoinSpectatorRequest(gameId));
     }
 
     /**

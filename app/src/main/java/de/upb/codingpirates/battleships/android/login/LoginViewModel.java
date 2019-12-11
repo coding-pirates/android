@@ -2,18 +2,15 @@ package de.upb.codingpirates.battleships.android.login;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.BaseObservable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
 
-import de.upb.codingpirates.battleships.android.Model.Model;
+import de.upb.codingpirates.battleships.android.model.Model;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
