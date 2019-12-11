@@ -34,14 +34,10 @@ public class LoginViewModel extends ViewModel {
     private TextInputLayout serverPortLayout;
 
 
-
+    /**
+     * Constructor for the LoginViewModel. Sets up the Observers.
+     */
     public LoginViewModel(){
-        /*final Observer<Boolean> connected = new Observer<Boolean>(){
-            public void onChanged(@Nullable final Boolean newConnected) {
-                progressBarShow.setValue(newConnected);
-            }
-        };
-        model.getConnected().observeForever(connected); */
 
         final Observer<Boolean> serverJoinResponse = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newServerJoinResponse) {
@@ -66,7 +62,10 @@ public class LoginViewModel extends ViewModel {
         return serverJoin;
     }
 
-
+    /**
+     * OnClick Method for the Login Button. Gets all input data, validates the input and calls the connectToServer() method of the model, if the input was correct.
+     * @param view The button which called the function.(Automatically delivered by the button)
+     */
     public void loginButtonClicked(View view){
         usernameField = view.getRootView().findViewById(R.id.usernameInputView);
         serverIpField = view.getRootView().findViewById(R.id.serverIpInputView);

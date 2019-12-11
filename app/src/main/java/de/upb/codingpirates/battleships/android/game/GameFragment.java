@@ -42,12 +42,10 @@ import java.util.Random;
  *
  * @author Lukas Kröger
  */
-
 public class GameFragment extends Fragment {
 
     //get the width of the current device in pixel
     private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-    //private int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
@@ -126,7 +124,7 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Initializes the gameField
+     * Initializes the game field
      *
      * @param fieldHeight The game field height specified in the Configuration
      * @param fieldWidth  The game field width specified in the Configuration
@@ -163,7 +161,7 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Initialises the Spinner for selecting displayed players
+     * Initialises the spinner for selecting displayed players
      *
      * @param players The players of the game
      */

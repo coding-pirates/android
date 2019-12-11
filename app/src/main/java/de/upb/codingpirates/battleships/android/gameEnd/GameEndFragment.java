@@ -52,7 +52,7 @@ public class GameEndFragment extends Fragment {
 
     /**
      * author Fynn Ruppel
-     * //TODO Beschreibung
+     * Method to fill the table with players and points. (Currently not used)
      * @param tableData
      */
     private void fillTable(ArrayList<Map.Entry<Integer,Integer>> tableData) {
@@ -69,7 +69,6 @@ public class GameEndFragment extends Fragment {
      * @param s score of the player being added
      */
     private void addRow(int p, String n, int s) {
-        //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
         TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
