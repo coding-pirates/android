@@ -2,6 +2,4 @@ include ':app'
 includeFlat('client')
 includeFlat('network')
 includeFlat('logic')
-includeFlat('server')
-includeFlat('ai')
 rootProject.name='android'
