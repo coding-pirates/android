@@ -136,7 +136,7 @@ public class GameViewModel extends ViewModel {
                 newRound.setValue(newNewRound);
             }
         };
-        model.getPointsOfPlayers().observeForever(pointsOfPlayersObserver);
+        model.getNewRound().observeForever(newRoundObserver);
 
     }
 
