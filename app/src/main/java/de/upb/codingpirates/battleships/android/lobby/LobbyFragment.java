@@ -60,7 +60,7 @@ public class LobbyFragment extends Fragment {
             public void onRefresh() {
                 viewmodel.sendLobbyRequest();
             }
-        });
+             });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -85,14 +85,14 @@ public class LobbyFragment extends Fragment {
         };
         viewmodel.getGoToSpectatorScreen().observe(this.getViewLifecycleOwner(),goToSpectatorScreen);
 
-
-        // Inflate the layout for this fragment
         return databinding.getRoot();
     }
 
+    /**
+     * Sets a new Recycling Adapter to the recycler view
+     * @param gamesOnServer
+     */
     public void initGamesOnServer(ArrayList<Game> gamesOnServer){
-
-        // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(gamesOnServer);
         recyclerView.setAdapter(mAdapter);
     }

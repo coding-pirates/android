@@ -300,14 +300,6 @@ public class Model {
         }
     }
 
-    /**
-     * Sets the goToSpectatorWaiting Boolean true, if its was false or null before
-     */
-    public void goToSpectatorWaiting(){//TODO could be unneccecary because its set to false every time the navigation  was completed
-        if(this.goToSpectatorWaiting.getValue()==null||!this.goToSpectatorWaiting.getValue()) {
-            this.goToSpectatorWaiting.postValue(true);
-        }
-    }
     public void setGoToSpectatorWaiting(Boolean state){
         this.goToSpectatorWaiting.setValue(state);
     }

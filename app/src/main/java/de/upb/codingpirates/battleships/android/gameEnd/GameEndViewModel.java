@@ -29,11 +29,10 @@ public class GameEndViewModel extends ViewModel {
         Navigation.findNavController(view).navigate(R.id.action_gameEndFragment_to_lobbyFragment);
     }
 
-    public Object[] getSortedPlayers(){
-        threeBestPlayers = model.getThreeBestPlayers();
-        return threeBestPlayers;
-    }
-
+    /**
+     * Gets the tree best players form the model
+     * @return two dimensional array including each of the tree best players with his points
+     */
     public String[][] getThreeBestPlayers(){
         return model.getThreeBestPlayers();
     }

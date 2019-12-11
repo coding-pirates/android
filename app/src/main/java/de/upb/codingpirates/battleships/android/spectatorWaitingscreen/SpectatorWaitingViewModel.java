@@ -20,6 +20,9 @@ public class SpectatorWaitingViewModel extends ViewModel {
     }
     private Model model;
 
+    /**
+     * Cosntructor for the SpectatorWaitingViewModel. Binds the Model and sets up the Observer for the goToGameView Boolean.
+     */
     public SpectatorWaitingViewModel(){
         model = Model.getInstance();
         model.setGoToSpectatorWaiting(false);
@@ -29,10 +32,5 @@ public class SpectatorWaitingViewModel extends ViewModel {
             }
         };
         model.getGoToGameView().observeForever(goToGameViewObserver);
-    }
-
-    public void nextButtonClicked(View view){
-        //do something
-        Navigation.findNavController(view).navigate(R.id.action_spectatorWaitingFragment_to_gameFragment);
     }
 }

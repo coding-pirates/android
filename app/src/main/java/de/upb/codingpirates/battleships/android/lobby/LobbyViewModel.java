@@ -30,6 +30,9 @@ public class LobbyViewModel extends ViewModel {
         return goToSpectatorScreen;
     }
 
+    /**
+     * Constructor for the LobbyViewModel binds the Model and sets up the Observer.
+     */
     public LobbyViewModel(){
         model = Model.getInstance();
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
@@ -48,11 +51,9 @@ public class LobbyViewModel extends ViewModel {
         model.getGoToSpectatorWaiting().observeForever(goToSpectatorWaiting);
     }
 
-    public void nextButtonClicked(View view){
-        //do something
-        Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
-    }
-
+    /**
+     * Calls the sendLobbyRequest() method of the Model
+     */
     public void sendLobbyRequest(){
         model.sendLobbyRequest();
     }
