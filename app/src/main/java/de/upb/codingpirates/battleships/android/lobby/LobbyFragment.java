@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.LobbyFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Game;
@@ -60,7 +57,7 @@ public class LobbyFragment extends Fragment {
             public void onRefresh() {
                 viewmodel.sendLobbyRequest();
             }
-        });
+             });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -85,14 +82,14 @@ public class LobbyFragment extends Fragment {
         };
         viewmodel.getGoToSpectatorScreen().observe(this.getViewLifecycleOwner(),goToSpectatorScreen);
 
-
-        // Inflate the layout for this fragment
         return databinding.getRoot();
     }
 
+    /**
+     * Sets a new Recycling Adapter to the recycler view
+     * @param gamesOnServer
+     */
     public void initGamesOnServer(ArrayList<Game> gamesOnServer){
-
-        // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(gamesOnServer);
         recyclerView.setAdapter(mAdapter);
     }

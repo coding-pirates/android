@@ -73,7 +73,8 @@
                     android:id="@+id/usernameInputView"
                     style="@style/TextInputEditTextStyle"
                     android:hint="@string/usernameStr"
-                    android:textColor="@color/color_brown_main" />
+                    android:textColor="@color/color_brown_main"
+                    android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -84,9 +85,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/serverIpInputView"
                     style="@style/TextInputEditTextStyle"
-                    android:text ="192.168.178.45"
+                    android:text ="131.234.64.48"
                     android:hint="@string/serverIPStr"
-                    android:textColor="@color/color_brown_main" />
+                    android:textColor="@color/color_brown_main"
+                    android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

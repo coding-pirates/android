@@ -1,25 +1,16 @@
 package de.upb.codingpirates.battleships.android.game;
 
-import android.content.Context;
-import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Timer;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
-import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.logic.*;
-
-import android.os.CountDownTimer;
-import android.widget.TextView;
 
 /**
  * This class holds all the data for the GameFragment.
@@ -145,7 +136,7 @@ public class GameViewModel extends ViewModel {
                 newRound.setValue(newNewRound);
             }
         };
-        model.getPointsOfPlayers().observeForever(pointsOfPlayersObserver);
+        model.getNewRound().observeForever(newRoundObserver);
 
     }
 
@@ -153,6 +144,10 @@ public class GameViewModel extends ViewModel {
         return currentPlayer;
     }
 
+    /**
+     * This method sets the current player, the pointsOfShots of the player and the pointsOfCurrentPlayer. It also refreshs the Ship positions
+     * @param currentPlayer The client to set
+     */
     public void setCurrentPlayer(Client currentPlayer) {
         this.currentPlayer = currentPlayer;
         this.pointsOfShots.setValue((ArrayList<Point2D>) createShotPointsForUI(model.getShotsOfPlayer(currentPlayer.getId())));
@@ -206,6 +201,11 @@ public class GameViewModel extends ViewModel {
         }
     }
 
+    /**
+     * Turns the points to the right coordinate system quadrant
+     * @param shotsOfPlayer points of shots in the first quadrant
+     * @return points of shots in the fourth quadrant
+     */
     private Collection<Point2D> createShotPointsForUI(Collection<Shot> shotsOfPlayer){
         Collection<Point2D> createdPoints = new ArrayList<>();
         for(Shot shot: shotsOfPlayer){

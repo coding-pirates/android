@@ -3,8 +3,6 @@ package de.upb.codingpirates.battleships.android.lobby;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.BaseObservable;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -13,7 +11,7 @@ import androidx.navigation.Navigation;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.logic.Game;
 
@@ -30,6 +28,9 @@ public class LobbyViewModel extends ViewModel {
         return goToSpectatorScreen;
     }
 
+    /**
+     * Constructor for the LobbyViewModel binds the Model and sets up the Observer.
+     */
     public LobbyViewModel(){
         model = Model.getInstance();
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
@@ -48,11 +49,9 @@ public class LobbyViewModel extends ViewModel {
         model.getGoToSpectatorWaiting().observeForever(goToSpectatorWaiting);
     }
 
-    public void nextButtonClicked(View view){
-        //do something
-        Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
-    }
-
+    /**
+     * Calls the sendLobbyRequest() method of the Model
+     */
     public void sendLobbyRequest(){
         model.sendLobbyRequest();
     }

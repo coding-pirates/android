@@ -42,16 +42,15 @@ import java.util.Random;
  *
  * @author Lukas Kröger
  */
-
 public class GameFragment extends Fragment {
 
     //get the width of the current device in pixel
     private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
-    //private int height = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     private GameViewModel viewModel;
     private View view;
     private GameFragmentBinding databinding;
+    private CountDownTimer timer;
 
     /**
      * Creates the GamesView if it should be displayed on the screen
@@ -97,10 +96,11 @@ public class GameFragment extends Fragment {
         final Observer<Boolean> newRound = new Observer<Boolean>(){
             @Override
             public void onChanged(@Nullable final Boolean newRound) {
-                initTimer(view.findViewById(R.id.tf_timeLeft),viewModel.getRoundTime(),view.getContext());
+                timer.cancel();
+                timer.start();
             }
         };
-        viewModel.getPointsOfCurrentPlayer().observe(this.getViewLifecycleOwner(), pointsObserver);
+        viewModel.getNewRound().observe(this.getViewLifecycleOwner(), newRound);
 
 
         /**
@@ -124,7 +124,7 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Initializes the gameField
+     * Initializes the game field
      *
      * @param fieldHeight The game field height specified in the Configuration
      * @param fieldWidth  The game field width specified in the Configuration
@@ -161,7 +161,7 @@ public class GameFragment extends Fragment {
     }
 
     /**
-     * Initialises the Spinner for selecting displayed players
+     * Initialises the spinner for selecting displayed players
      *
      * @param players The players of the game
      */
@@ -170,7 +170,7 @@ public class GameFragment extends Fragment {
 
         ArrayAdapter<Client> adapter = new ArrayAdapter<Client>(
                 this.getContext(),
-                R.layout.support_simple_spinner_dropdown_item,
+                R.layout.spinner_item,
                 players
         );
         playersSpinner.setAdapter(adapter);
@@ -244,7 +244,7 @@ public class GameFragment extends Fragment {
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_3_hit));
                     break;
                 case "waterField":
-                    cell.setBackground(getResources().getDrawable(R.drawable.ic_destroyed_red_cross));
+                    cell.setBackground(getResources().getDrawable(R.drawable.ic_field_hit));
                     break;
             }
         }
@@ -263,7 +263,7 @@ public class GameFragment extends Fragment {
      * @param context context of the main activity so the ids can be called
      */
     public void initTimer(TextView textView, long lengthInSeconds, Context context) {
-        CountDownTimer timer = new CountDownTimer(lengthInSeconds, 1000) {
+        timer = new CountDownTimer(lengthInSeconds, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 textView.setText(context.getResources().getString(R.string.timeLeft) + " " + millisUntilFinished / 1000);
