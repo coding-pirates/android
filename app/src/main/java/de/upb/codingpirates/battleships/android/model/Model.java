@@ -13,7 +13,7 @@ import java.util.Map;
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
 import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
-import de.upb.codingpirates.battleships.client.Handler;
+import de.upb.codingpirates.battleships.client.ListenerHandler;
 import de.upb.codingpirates.battleships.client.network.ClientModule;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.logic.*;
@@ -127,7 +127,7 @@ public class Model implements ModelMessageListener {
      */
     public Model() {
         new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class))).start();
-        Handler.registerListener(this);
+        ListenerHandler.registerListener(this);
     }
 
     public static Model getInstance(){

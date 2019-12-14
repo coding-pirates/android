@@ -7,14 +7,14 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collection;
 
 import de.upb.codingpirates.battleships.android.model.Model;
-import de.upb.codingpirates.battleships.client.Handler;
+import de.upb.codingpirates.battleships.client.ListenerHandler;
 import de.upb.codingpirates.battleships.logic.Shot;
 import de.upb.codingpirates.battleships.network.exceptions.BattleshipException;
 import de.upb.codingpirates.battleships.network.message.notification.*;
 import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedReport;
 import de.upb.codingpirates.battleships.network.message.response.*;
 
-public class MessageHandler implements Handler {
+public class MessageHandler implements ListenerHandler {
     private static final Logger LOGGER = LogManager.getLogger();
 
 
