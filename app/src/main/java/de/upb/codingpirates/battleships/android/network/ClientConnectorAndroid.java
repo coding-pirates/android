@@ -21,8 +21,8 @@ public class ClientConnectorAndroid extends ClientConnector {
     private Boolean connected = false;
 
     @Inject
-    public ClientConnectorAndroid(Handler handler, ClientConnectionManager clientConnector) {
-        super(handler, clientConnector);
+    public ClientConnectorAndroid(ClientConnectionManager clientConnector) {
+        super(clientConnector);
     }
 
     public boolean isConnected(){

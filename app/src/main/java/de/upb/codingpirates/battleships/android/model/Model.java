@@ -12,20 +12,30 @@ import java.util.Map;
 
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
 import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
-import de.upb.codingpirates.battleships.android.network.MessageHandler;
+import de.upb.codingpirates.battleships.client.Handler;
 import de.upb.codingpirates.battleships.client.network.ClientModule;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.logic.*;
+import de.upb.codingpirates.battleships.network.message.notification.FinishNotification;
+import de.upb.codingpirates.battleships.network.message.notification.GameInitNotification;
+import de.upb.codingpirates.battleships.network.message.notification.GameStartNotification;
+import de.upb.codingpirates.battleships.network.message.notification.RoundStartNotification;
+import de.upb.codingpirates.battleships.network.message.notification.SpectatorUpdateNotification;
 import de.upb.codingpirates.battleships.network.message.request.GameJoinSpectatorRequest;
 import de.upb.codingpirates.battleships.network.message.request.LobbyRequest;
 import de.upb.codingpirates.battleships.network.message.request.ServerJoinRequest;
 import de.upb.codingpirates.battleships.network.message.request.SpectatorGameStateRequest;
+import de.upb.codingpirates.battleships.network.message.response.GameJoinSpectatorResponse;
+import de.upb.codingpirates.battleships.network.message.response.LobbyResponse;
+import de.upb.codingpirates.battleships.network.message.response.PointsResponse;
+import de.upb.codingpirates.battleships.network.message.response.ServerJoinResponse;
+import de.upb.codingpirates.battleships.network.message.response.SpectatorGameStateResponse;
 
 /**
  * This class holds and gets the data form the Server
  * @author Lukas Kröger
  */
-public class Model {
+public class Model implements ModelMessageListener {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Model globalModel = new Model();
 
@@ -115,7 +125,8 @@ public class Model {
      * Instatiates the ClientConnectorAndroid
      */
     public Model() {
-        new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class, MessageHandler.class))).start();
+        new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class))).start();
+        Handler.registerListener(this);
     }
 
     public static Model getInstance(){
@@ -354,5 +365,65 @@ public class Model {
             localPointsOfPlayers.remove(currentBest.getKey());
         }
         return sortedPoints;
+    }
+
+    @Override
+    public void onFinishNotification(FinishNotification message, int clientId) {
+        this.setPointsOfPlayers(message.getPoints());
+        this.goToGameEnd();
+    }
+
+    @Override
+    public void onGameInitNotification(GameInitNotification message, int clientId) {
+        this.setPlayers(message.getClientList());
+        this.setGameConfig(message.getConfiguration());
+    }
+
+    @Override
+    public void onGameJoinSpectatorResponse(GameJoinSpectatorResponse message, int clientId) {
+        this.setJoinedGameWithId(message.getGameId());
+        this.setGoToSpectatorWaiting(true);
+    }
+
+    @Override
+    public void onGameStartNotification(GameStartNotification message, int clientId) {
+        this.sendSpectatorGameStateRequest();
+    }
+
+    @Override
+    public void onLobbyResponse(LobbyResponse message, int clientId) {
+        this.setGamesOnServer(message.getGames());
+    }
+
+    @Override
+    public void onPointsResponse(PointsResponse message, int clientId) {
+        this.setPointsOfPlayers(message.getPoints());
+    }
+
+    @Override
+    public void onRoundStartNotification(RoundStartNotification message, int clientId) {
+        this.setNewRound(true);
+    }
+
+    @Override
+    public void onServerJoinResponse(ServerJoinResponse message, int clientId) {
+        this.setClientId(message.getClientId());
+        this.setServerJoinRequestSuccess(true);
+    }
+
+    @Override
+    public void onSpectatorGameStateResponse(SpectatorGameStateResponse message, int clientId) {
+        this.setPlayers(message.getPlayers());
+        this.setShots(message.getShots());
+        this.setShips(message.getShips());
+        this.goToGameView();
+    }
+
+    @Override
+    public void onSpectatorUpdateNotification(SpectatorUpdateNotification message, int clientId) {
+        Collection<Shot> shots =  message.getHits();
+        shots.addAll(message.getMissed());
+        this.addShots(shots);
+        this.updatePoints(message.getPoints());
     }
 }

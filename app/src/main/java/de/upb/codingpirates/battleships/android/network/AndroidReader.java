@@ -1,5 +1,7 @@
 package de.upb.codingpirates.battleships.android.network;
 
+import android.annotation.SuppressLint;
+
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -17,6 +19,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AndroidReader implements ClientReaderMethod {
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    @SuppressLint("CheckResult")
     @Override
     public void get(Connection connection, Consumer<Pair<Connection, Message>> dispatch, Consumer<Throwable> error) {
         Observable.create((ObservableEmitter<Pair<Connection, Message>> emitter) -> {
