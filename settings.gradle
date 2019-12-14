@@ -2,4 +2,5 @@ include ':app'
 includeFlat('client')
 includeFlat('network')
 includeFlat('logic')
+includeFlat('desktop')
 rootProject.name='android'

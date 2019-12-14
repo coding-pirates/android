@@ -1,4 +1,4 @@
-package de.upb.codingpirates.battleships.android.network;
+package de.upb.codingpirates.battleships.android.model;
 
 import de.upb.codingpirates.battleships.client.listener.FinishNotificationListener;
 import de.upb.codingpirates.battleships.client.listener.GameInitNotificationListener;
@@ -11,4 +11,4 @@ import de.upb.codingpirates.battleships.client.listener.ServerJoinResponseListen
 import de.upb.codingpirates.battleships.client.listener.SpectatorGameStateResponseListener;
 import de.upb.codingpirates.battleships.client.listener.SpectatorUpdateNotificationListener;
 
-public interface ModelMessageListener extends GameInitNotificationListener, FinishNotificationListener, GameJoinSpectatorResponseListener, GameStartNotificationListener, LobbyResponseListener, SpectatorUpdateNotificationListener, PointsResponseListener, RoundStartNotificationListener, ServerJoinResponseListener, SpectatorGameStateResponseListener {}
+interface ModelMessageListener extends GameInitNotificationListener, FinishNotificationListener, GameJoinSpectatorResponseListener, GameStartNotificationListener, LobbyResponseListener, SpectatorUpdateNotificationListener, PointsResponseListener, RoundStartNotificationListener, ServerJoinResponseListener, SpectatorGameStateResponseListener {}
