@@ -9,7 +9,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -34,7 +33,7 @@ public class GameEndFragment extends Fragment {
         GameendFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.gameend_fragment,container,false);
         databinding.setViewmodel(new GameEndViewModel());
         view = databinding.getRoot();
-        //layout = view.findViewById(R.id.playerRankingTableLayout);
+        layout = view.findViewById(R.id.playerRankingTableLayout);
         //fillTable(50);
         return databinding.getRoot();
     }
@@ -46,7 +45,7 @@ public class GameEndFragment extends Fragment {
      */
     private void fillTable(int amount) {
         for(int i = 0; i< amount; i++) {
-            addRow(i+1,"Peter",300-i+10,i+1);
+            addRow(i+1,"Peter",300-i+10,i+1, i+1);
         }
     }
 
@@ -58,7 +57,7 @@ public class GameEndFragment extends Fragment {
      * @param s score of the player being added
      * @param id id of the row
      */
-    private void addRow(int p, String n, int s, int id) {
+    private void addRow(int p, String n, int s, int id, int clrCount) {
         //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
@@ -88,6 +87,14 @@ public class GameEndFragment extends Fragment {
        row.addView(name,1);
        row.addView(score,2);
 
+       //two colored playerRankingTable in the End
+       if (clrCount%2==0) {
+           row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_2_translucent));
+        }
+       else {
+           row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_translucent));
+       }
+       
        //add the new row to the existing tableLayout
        layout.addView(row, rowParams);
     }
