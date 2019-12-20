@@ -44,9 +44,9 @@ public class GameEndFragment extends Fragment {
         view = databinding.getRoot();
        // fillTable(viewModel.getSortedPlayers());
         String[][] threeBestPlayers= viewModel.getThreeBestPlayers();
-        ((TextView)view.findViewById(R.id.textView3)).setText(threeBestPlayers[0][0]);
-        ((TextView)view.findViewById(R.id.textView4)).setText(threeBestPlayers[1][0]);
-        ((TextView)view.findViewById(R.id.textView5)).setText(threeBestPlayers[2][0]);
+        ((TextView)view.findViewById(R.id.firstPlaceTextView)).setText(threeBestPlayers[0][0]);
+        ((TextView)view.findViewById(R.id.secondPlaceTextView)).setText(threeBestPlayers[1][0]);
+        ((TextView)view.findViewById(R.id.thirdPlaceTextView)).setText(threeBestPlayers[2][0]);
         layout = view.findViewById(R.id.playerRankingTableLayout);
         //fillTable(50);
         return databinding.getRoot();
@@ -59,7 +59,7 @@ public class GameEndFragment extends Fragment {
      */
     private void fillTable(ArrayList<Map.Entry<Integer,Integer>> tableData) {
         for(int i = 0; i<tableData.size();i++) {
-            addRow(i+1,tableData.get(i).getKey().toString(),tableData.get(i).getValue());
+            addRow(i+1,tableData.get(i).getKey().toString(),tableData.get(i).getValue(), i+1, i+1);
         }
     }
 
