@@ -47,6 +47,8 @@ public class GameEndFragment extends Fragment {
         ((TextView)view.findViewById(R.id.textView3)).setText(threeBestPlayers[0][0]);
         ((TextView)view.findViewById(R.id.textView4)).setText(threeBestPlayers[1][0]);
         ((TextView)view.findViewById(R.id.textView5)).setText(threeBestPlayers[2][0]);
+        layout = view.findViewById(R.id.playerRankingTableLayout);
+        //fillTable(50);
         return databinding.getRoot();
     }
 
@@ -67,8 +69,10 @@ public class GameEndFragment extends Fragment {
      * @param p the place in which the player is ranked
      * @param n name of the player being added
      * @param s score of the player being added
+     * @param id id of the row
      */
-    private void addRow(int p, String n, int s) {
+    private void addRow(int p, String n, int s, int id, int clrCount) {
+        //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
         TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
@@ -96,6 +100,14 @@ public class GameEndFragment extends Fragment {
        row.addView(place, 0);
        row.addView(name,1);
        row.addView(score,2);
+
+       //two colored playerRankingTable in the End
+       if (clrCount%2==0) {
+           row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_2_translucent));
+        }
+       else {
+           row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_translucent));
+       }
 
        //add the new row to the existing tableLayout
        layout.addView(row, rowParams);
