@@ -24,6 +24,7 @@ import de.upb.codingpirates.battleships.network.message.notification.RoundStartN
 import de.upb.codingpirates.battleships.network.message.notification.SpectatorUpdateNotification;
 import de.upb.codingpirates.battleships.network.message.request.GameJoinSpectatorRequest;
 import de.upb.codingpirates.battleships.network.message.request.LobbyRequest;
+import de.upb.codingpirates.battleships.network.message.request.RequestBuilder;
 import de.upb.codingpirates.battleships.network.message.request.ServerJoinRequest;
 import de.upb.codingpirates.battleships.network.message.request.SpectatorGameStateRequest;
 import de.upb.codingpirates.battleships.network.message.response.GameJoinSpectatorResponse;
@@ -59,7 +60,7 @@ public class Model implements ModelMessageListener {
 
 
     public void setConnected(Boolean connected){
-        connector.sendMessageToServer(new ServerJoinRequest(clientName, clientType));
+        connector.sendMessageToServer(RequestBuilder.serverJoinRequest(clientName, clientType));
     }
 
     //data for LobbyView
@@ -211,7 +212,7 @@ public class Model implements ModelMessageListener {
      * Sends a SpectatorGameStateRequest to the connected Server
      */
     public void sendSpectatorGameStateRequest(){
-        connector.sendMessageToServer(new SpectatorGameStateRequest());
+        connector.sendMessageToServer(RequestBuilder.spectatorGameStateRequest());
     }
 
     public void setPlayers(Collection<Client> players){
@@ -302,7 +303,7 @@ public class Model implements ModelMessageListener {
      * Sends a LobbyRequest to the connected server
      */
     public void sendLobbyRequest() {
-        connector.sendMessageToServer(new LobbyRequest());
+        connector.sendMessageToServer(RequestBuilder.lobbyRequest());
     }
 
     /**
@@ -310,7 +311,7 @@ public class Model implements ModelMessageListener {
      * @param gameId The id of the game you want to join
      */
     public void sendGameJoinSpectatorRequest(int gameId){
-        connector.sendMessageToServer(new GameJoinSpectatorRequest(gameId));
+        connector.sendMessageToServer(RequestBuilder.gameJoinSpectatorRequest(gameId));
     }
 
     /**
