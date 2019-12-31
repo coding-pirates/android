@@ -44,30 +44,30 @@
 
     <string name="spielregeln">Unser Piratenkodex</string>
     <string name="spielregelnText"><b>Zahl der Spieler: </b>mindestens 2\n
-<b>Größe der Schiffe: </b>mindestens 2 (in unterschiedlichen Formen)\n
-<b>Ziel des Spiels: </b>\n
-        Jeder Spieler versteckt seine Schiffe auf dem eigenen Spielfeld vor seinen Gegnern und versucht, durch das Abschießen und Versenken gegnerischer Schiffe eine möglichst hohe Punktzahl zu erzielen.\n
-<b>Platzieren der eigenen Schiffe: </b>\n
-        Zu Spielbeginn platziert jeder Spieler seine Schiffe im eigenen Spielfeld. Schafft er dies nicht in der vorgegebenen Zeit, werden die übrigen Schiffe automatisch auf das Spielfeld gesetzt. Die Schiffe dürfen am Rand liegen, dürfen sich aber nicht überschneiden oder an den Seiten oder Kanten aneinanderstoßen.
-<b>Ablauf einer Spielrunde: </b>\n
-        Alle Spieler, die am Anfang der Runde noch nicht-versenkte Schiffe auf ihrem Spielfeld haben, wählen innerhalb der vorgegebenen Zeit gleichzeitig die gewünschten Ziele ihrer Schüsse aus. Diese kann man beliebig auf alle Felder aufteilen und auch auf eigene Schiffe zielen.
-        Am Ende einer Spielrunde bekommt jeder Spieler alle Treffer und die versenkten Schiffe dieser Runde mitgeteilt.\n
-<b>Versenken von Schiffen: </b>\n
-        Ein Schiff gilt als versenkt, wenn jede Koordinate eines Schiffes mindestens einmal getroffen wurde.\n
-<b>Punkte: </b>\n
-        Für jeden Treffer und jedes davon versenkte Schiff erhält der verantwortliche Spieler entsprechende Punkte. Schießt ein Spieler auf sein eigenes Schiff oder auf Ziele, die bereit getroffen wurden, bekommt er dafür keine Punkte.\n
-<b>Spielende: </b>\n
-        Das Spiel endet, wenn nur noch ein Spieler nicht-versenkte Schiffe besitzt.
-        Anhand der Punktzahlen aller Spieler wird dann die Platzierung bestimmt.
-</string>
+        <b>Größe der Schiffe: </b>mindestens 2 (in unterschiedlichen Formen)\n
+        <b>Ziel des Spiels: </b>\n
+                Jeder Spieler versteckt seine Schiffe auf dem eigenen Spielfeld vor seinen Gegnern und versucht, durch das Abschießen und Versenken gegnerischer Schiffe eine möglichst hohe Punktzahl zu erzielen.\n
+        <b>Platzieren der eigenen Schiffe: </b>\n
+                Zu Spielbeginn platziert jeder Spieler seine Schiffe im eigenen Spielfeld. Schafft er dies nicht in der vorgegebenen Zeit, werden die übrigen Schiffe automatisch auf das Spielfeld gesetzt. Die Schiffe dürfen am Rand liegen, dürfen sich aber nicht überschneiden oder an den Seiten oder Kanten aneinanderstoßen.
+        <b>Ablauf einer Spielrunde: </b>\n
+                Alle Spieler, die am Anfang der Runde noch nicht-versenkte Schiffe auf ihrem Spielfeld haben, wählen innerhalb der vorgegebenen Zeit gleichzeitig die gewünschten Ziele ihrer Schüsse aus. Diese kann man beliebig auf alle Felder aufteilen und auch auf eigene Schiffe zielen.
+                Am Ende einer Spielrunde bekommt jeder Spieler alle Treffer und die versenkten Schiffe dieser Runde mitgeteilt.\n
+        <b>Versenken von Schiffen: </b>\n
+                Ein Schiff gilt als versenkt, wenn jede Koordinate eines Schiffes mindestens einmal getroffen wurde.\n
+        <b>Punkte: </b>\n
+                Für jeden Treffer und jedes davon versenkte Schiff erhält der verantwortliche Spieler entsprechende Punkte. Schießt ein Spieler auf sein eigenes Schiff oder auf Ziele, die bereit getroffen wurden, bekommt er dafür keine Punkte.\n
+        <b>Spielende: </b>\n
+                Das Spiel endet, wenn nur noch ein Spieler nicht-versenkte Schiffe besitzt.
+                Anhand der Punktzahlen aller Spieler wird dann die Platzierung bestimmt.
+    </string>
     <string name="impressum">Impressum</string>
     <string name="impressumText">
         <b>Ansprechpartner: </b>\n Raphael Reimann\n
         <b>Anschrift: </b>\n Universität Paderborn\n Warburger Str. 100,\n 33100 Paderborn \n
         <b>Music by Sea of Thieves: </b>\n 1.Maiden Voyage,\n
-2.Sea of Thieves Main Track,\n
-3.Bosun Bill (Concertina and Hurdy Gurdy), \n
-4.Becalmed - Concertina and Hurdy-Gurdy, \n
-5.Grogg Mayles (Concertina and Hurdy-Gurdy), \n
-6.Ride of the Valkyries (Concertina)</string>
+        2.Sea of Thieves Main Track,\n
+        3.Bosun Bill (Concertina and Hurdy Gurdy), \n
+        4.Becalmed - Concertina and Hurdy-Gurdy, \n
+        5.Grogg Mayles (Concertina and Hurdy-Gurdy), \n
+        6.Ride of the Valkyries (Concertina)</string>
 </resources>
