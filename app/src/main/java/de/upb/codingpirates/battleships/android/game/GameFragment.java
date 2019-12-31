@@ -198,7 +198,7 @@ public class GameFragment extends Fragment {
     private void cleanGameField() {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
-            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
+            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadratic));
             gameField.getChildAt(i).setTag("waterField");
         }
     }
