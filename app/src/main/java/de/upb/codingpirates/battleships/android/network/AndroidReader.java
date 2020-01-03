@@ -10,6 +10,7 @@ import de.upb.codingpirates.battleships.network.Connection;
 import de.upb.codingpirates.battleships.network.exceptions.parser.ParserException;
 import de.upb.codingpirates.battleships.network.message.Message;
 import de.upb.codingpirates.battleships.network.message.report.ConnectionClosedReport;
+import de.upb.codingpirates.battleships.network.message.report.ReportBuilder;
 import de.upb.codingpirates.battleships.network.util.ClientReaderMethod;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -31,7 +32,7 @@ public class AndroidReader implements ClientReaderMethod {
                     break;
                 } catch (SocketException e) {
                     connection.close();
-                    emitter.onNext(new Pair<>(connection, new ConnectionClosedReport()));
+                    emitter.onNext(new Pair<>(connection, ReportBuilder.connectionClosedReport()));
                 } catch (IOException | ParserException e) {
                     emitter.onError(e);
                 }
