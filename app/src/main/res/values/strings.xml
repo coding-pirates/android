@@ -43,12 +43,15 @@
     <string name="todoLobby">Tap on a game to spectate!</string>
 
     <string name="spielregeln">Unser Piratenkodex</string>
-    <string name="spielregelnText"><b>Zahl der Spieler: </b>mindestens 2\n
-        <b>Größe der Schiffe: </b>mindestens 2 (in unterschiedlichen Formen)\n
+    <string name="spielregelnText">
+        <b>Zahl der Spieler: </b>
+        \n mindestens 2\n
+        <b>Größe der Schiffe: </b>
+        \n mindestens 2 (in unterschiedlichen Formen)\n
         <b>Ziel des Spiels: </b>\n
                 Jeder Spieler versteckt seine Schiffe auf dem eigenen Spielfeld vor seinen Gegnern und versucht, durch das Abschießen und Versenken gegnerischer Schiffe eine möglichst hohe Punktzahl zu erzielen.\n
         <b>Platzieren der eigenen Schiffe: </b>\n
-                Zu Spielbeginn platziert jeder Spieler seine Schiffe im eigenen Spielfeld. Schafft er dies nicht in der vorgegebenen Zeit, werden die übrigen Schiffe automatisch auf das Spielfeld gesetzt. Die Schiffe dürfen am Rand liegen, dürfen sich aber nicht überschneiden oder an den Seiten oder Kanten aneinanderstoßen.
+                Zu Spielbeginn platziert jeder Spieler seine Schiffe im eigenen Spielfeld. Schafft er dies nicht in der vorgegebenen Zeit, werden die übrigen Schiffe automatisch auf das Spielfeld gesetzt. Die Schiffe dürfen am Rand liegen, dürfen sich aber nicht überschneiden oder an den Seiten oder Kanten aneinanderstoßen.\n
         <b>Ablauf einer Spielrunde: </b>\n
                 Alle Spieler, die am Anfang der Runde noch nicht-versenkte Schiffe auf ihrem Spielfeld haben, wählen innerhalb der vorgegebenen Zeit gleichzeitig die gewünschten Ziele ihrer Schüsse aus. Diese kann man beliebig auf alle Felder aufteilen und auch auf eigene Schiffe zielen.
                 Am Ende einer Spielrunde bekommt jeder Spieler alle Treffer und die versenkten Schiffe dieser Runde mitgeteilt.\n

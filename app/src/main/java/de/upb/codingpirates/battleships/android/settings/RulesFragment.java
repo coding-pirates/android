@@ -22,6 +22,7 @@ public class RulesFragment extends DialogFragment {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.RulesDialogTheme);
             builder.setTitle(R.string.rulesStr)
+                    .setIcon(R.drawable.ic_codex_icon_colored)
                     .setMessage(R.string.spielregelnText);
             // Create the AlertDialog object and return it
             return builder.create();
