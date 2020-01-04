@@ -3,12 +3,14 @@ package de.upb.codingpirates.battleships.android.Model;
 import androidx.lifecycle.MutableLiveData;
 
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -363,13 +365,16 @@ public class Model {
     } */
 
     /**
-     * Returns the three best players
-     * @return A 2-dimensional String Array with gameID and points in ordered sequence
+     * return a 2 dimensional String array which contains the players and their points in descending order
+     *  * @return 2 dimensional String array which contains the players and their points in descending order
      */
-    public String[][] getThreeBestPlayers(){ //TODO replace gameID with player name
-        String[][] sortedPoints = new String[3][2];
-        Map<Integer,Integer> localPointsOfPlayers= pointsOfPlayers.getValue();
-        for(int i =0 ; i<3 && localPointsOfPlayers.size()>0; i++) {
+    public String[][] getAllPlayerNamesAndPoints() {
+        int playersConnected = players.getValue().size();
+        String[][] sortedPoints = new String[playersConnected][2];
+
+        Map<Integer,Integer> localPointsOfPlayers= new HashMap(pointsOfPlayers.getValue());
+
+        for(int i =0 ; i<playersConnected; i++) {
             Map.Entry<Integer,Integer> currentBest = null;
             for (Map.Entry<Integer, Integer> pointEntry : localPointsOfPlayers.entrySet()) {
                 if(currentBest == null || pointEntry.getValue().compareTo(currentBest.getValue())>0){

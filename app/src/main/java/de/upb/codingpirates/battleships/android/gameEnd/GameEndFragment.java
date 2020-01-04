@@ -22,11 +22,14 @@ import java.util.Map;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.GameendFragmentBinding;
 
+import static java.lang.String.*;
+
 public class GameEndFragment extends Fragment {
 
     private View view;
     TableLayout layout;
     private GameEndViewModel viewModel;
+    private String[][] allPlayersAndPoints;
 
     /**
      * //TODO Beschreibung
@@ -42,7 +45,11 @@ public class GameEndFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(GameEndViewModel.class);
         databinding.setViewmodel(viewModel);
         view = databinding.getRoot();
-       // fillTable(viewModel.getSortedPlayers());
+        layout = view.findViewById(R.id.playerRankingTableLayout);
+
+        int numberOfPlayersConnected = viewModel.getNumberOfPlayersConnected();
+        fillTable(numberOfPlayersConnected);
+
         String[][] threeBestPlayers= viewModel.getThreeBestPlayers();
         ((TextView)view.findViewById(R.id.firstPlaceTextView)).setText(threeBestPlayers[0][0]);
         ((TextView)view.findViewById(R.id.secondPlaceTextView)).setText(threeBestPlayers[1][0]);
@@ -56,19 +63,21 @@ public class GameEndFragment extends Fragment {
         else {
             ((TextView) view.findViewById(R.id.thirdPlacePointsTextView)).setText("");
         }
-        layout = view.findViewById(R.id.playerRankingTableLayout);
-        //fillTable(50);
+
+
         return databinding.getRoot();
     }
 
     /**
      * author Fynn Ruppel
      * Method to fill the table with players and points. (Currently not used)
-     * @param tableData
+     * @param count
      */
-    private void fillTable(ArrayList<Map.Entry<Integer,Integer>> tableData) {
-        for(int i = 0; i<tableData.size();i++) {
-            addRow(i+1,tableData.get(i).getKey().toString(),tableData.get(i).getValue(), i+1, i+1);
+    private void fillTable(int count) {
+        allPlayersAndPoints = viewModel.getAllPlayersAndPoints();
+
+        for(int i = 0; i<count;i++) {
+            addRow(i+1,allPlayersAndPoints[i][0],Integer.parseInt(allPlayersAndPoints[i][1]), i+1);
         }
     }
 
@@ -80,7 +89,7 @@ public class GameEndFragment extends Fragment {
      * @param s score of the player being added
      * @param id id of the row
      */
-    private void addRow(int p, String n, int s, int id, int clrCount) {
+    private void addRow(int p, String n, int s, int id) {
         //TODO actually fill the table with live data
         //create a new row and define the layout style
         TableRow row = new TableRow(this.getContext());
@@ -98,9 +107,6 @@ public class GameEndFragment extends Fragment {
        TextView score = new TextView(this.getContext());
         score.setLayoutParams(textViewParams);
         score.setGravity(Gravity.CENTER);
-       /*place.setId(id+1);
-       name.setId(id+2);
-       score.setId(id+3);*/
        place.setText("" + p);
        name.setText(n);
        score.setText("" + s);
@@ -111,7 +117,7 @@ public class GameEndFragment extends Fragment {
        row.addView(score,2);
 
        //two colored playerRankingTable in the End
-       if (clrCount%2==0) {
+       if (id%2==0) {
            row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_2_translucent));
         }
        else {
