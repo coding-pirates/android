@@ -1,5 +1,0 @@
-include ':app'
-includeFlat('client')
-includeFlat('network')
-includeFlat('logic')
-rootProject.name='android'
