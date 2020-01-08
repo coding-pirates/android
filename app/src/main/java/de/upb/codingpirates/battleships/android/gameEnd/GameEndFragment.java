@@ -57,7 +57,7 @@ public class GameEndFragment extends Fragment {
         ((TextView)view.findViewById(R.id.firstPlacePointsTextView)).setText("Punkte: "+ threeBestPlayers[0][1]);
         ((TextView)view.findViewById(R.id.secondPlacePointsTextView)).setText("Punkte: "+ threeBestPlayers[1][1]);
         //prevents the endView from displaying null text in the gameEnd
-        if (threeBestPlayers[2][1] != null) {
+        if (threeBestPlayers[2][1].equals("") ) {
             ((TextView) view.findViewById(R.id.thirdPlacePointsTextView)).setText("Punkte: " + threeBestPlayers[2][1]);
         }
         else {
@@ -115,7 +115,7 @@ public class GameEndFragment extends Fragment {
        row.addView(place, 0);
        row.addView(name,1);
        row.addView(score,2);
-
+       
        //two colored playerRankingTable in the End
        if (id%2==0) {
            row.setBackgroundColor(getResources().getColor(R.color.color_light_brown_2_translucent));
