@@ -136,7 +136,7 @@ public class LoginViewModel extends ViewModel {
             return true;
         }
 
-        //check if the IP adress is like x.x.x.x where x is between 0 and 255
+        //check if the IP address is like x.x.x.x where x is between 0 and 255
         else if (!serverIp.matches("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")) {
             serverIpLayout.setErrorEnabled(true);
             String str = context.getString(R.string.serverIpWrongChar);

@@ -42,12 +42,6 @@
     <style name="RulesDialogTheme" parent="@style/Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="android:textColor">#000000</item>
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
-        <item name="android:windowTitleStyle">@style/RulesHeaderTheme</item>
     </style>
 
-    <style name="RulesHeaderTheme">
-        <item name="android:textColor">#FFEB3B</item>
-        <item name="android:background">@color/color_brown_main</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
-    </style>
 </resources>
