@@ -74,7 +74,7 @@ public class LoginViewModel extends ViewModel {
         serverIpField = view.getRootView().findViewById(R.id.serverIpInputView);
         serverPortField = view.getRootView().findViewById(R.id.serverPortInputView);
 
-        //get the insances of the input layouts
+        //get the instances of the input layouts
         usernameLayout = view.getRootView().findViewById(R.id.usernameInputLayout);
         serverIpLayout = view.getRootView().findViewById(R.id.serverIpInputLayout);
         serverPortLayout = view.getRootView().findViewById(R.id.serverPortInputLayout);
@@ -102,8 +102,8 @@ public class LoginViewModel extends ViewModel {
      * checks whether the username input is empty (can be changed if something else shall happen when validating the input)
      * if the input is invalid, then the username TextInputEditText field will be set to an error state
      * @author Fynn Ruppel
-     * @param username
-     * @param context
+     * @param username string of the user name that needs to be checked
+     * @param context the context of the current view
      * @return true, if input is not empty; false, if input is empty
      */
     private Boolean isUsernameValid(String username, Context context) {
@@ -120,14 +120,26 @@ public class LoginViewModel extends ViewModel {
      * checks whether the serverIp input is empty (can be changed if something else shall happen when validating the input)
      * if the input is invalid, then the serverIp TextInputEditText field will be set to an error state
      * @author Fynn Ruppel
-     * @param serverIp
-     * @param context
-     * @return true, if input is not empty; false, if input is empty
+     * @param serverIp string of the serverIP that needs to be checked
+     * @param context the context of the current view
+     * @return true, if input is not empty; false, if input is empty or not only numbers and "." was used
      */
     private Boolean isServerIpValid(String serverIp, Context context) {
         if(serverIp.isEmpty()) {
             serverIpLayout.setErrorEnabled(true);
             String str = context.getString(R.string.serverIpMissingStr);
+            serverIpLayout.setError(str);
+            return false;
+        }
+
+        else if (serverIp.equals("localhost")) {
+            return true;
+        }
+
+        //check if the IP adress is like x.x.x.x where x is between 0 and 255
+        else if (!serverIp.matches("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")) {
+            serverIpLayout.setErrorEnabled(true);
+            String str = context.getString(R.string.serverIpWrongChar);
             serverIpLayout.setError(str);
             return false;
         }
@@ -138,12 +150,12 @@ public class LoginViewModel extends ViewModel {
      * checks whether the serverPort input is empty (can be changed if something else shall happen when validating the input)
      * if the input is invalid, then the serverPort TextInputEditText field will be set to an error state
      * @author Fynn Ruppel
-     * @param username
-     * @param context
+     * @param serverPort string of the server port that needs to be checked
+     * @param context the context of the current view
      * @return true, if input is not empty; false, if input is empty
      */
-    private Boolean isServerPortValid(String username, Context context) {
-        if(username.isEmpty()) {
+    private Boolean isServerPortValid(String serverPort, Context context) {
+        if(serverPort.isEmpty()) {
             serverPortLayout.setErrorEnabled(true);
             String str = context.getString(R.string.serverPortMissingStr);
             serverPortLayout.setError(str);
