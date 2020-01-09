@@ -26,6 +26,7 @@ public class ClientConnectorAndroid extends ClientConnector {
         return !clientConnector.getConnection().isClosed();
     }
 
+    @Override
     public void connect(String host, int port) {
         Thread thread = new Thread(() -> {
             try {
@@ -42,6 +43,7 @@ public class ClientConnectorAndroid extends ClientConnector {
         thread.start();
     }
 
+    @Override
     public void sendMessageToServer(Message message) {
         Thread thread = new Thread(() -> {
             try {
@@ -56,6 +58,7 @@ public class ClientConnectorAndroid extends ClientConnector {
         thread.start();
     }
 
+    @Override
     public void disconnect() {
         Thread thread = new Thread(() -> {
             try {
