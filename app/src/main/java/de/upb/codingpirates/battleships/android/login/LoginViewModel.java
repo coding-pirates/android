@@ -132,7 +132,7 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
 
-        else if (serverIp.equals("localhost")) {
+        else if (serverIp.equals("localhost") || serverIp.equals("swtpra.cs.upb.de")) {
             return true;
         }
 
