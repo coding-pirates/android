@@ -369,7 +369,7 @@ public class Model implements ModelMessageListener {
     @Override
     public void onGameJoinSpectatorResponse(GameJoinSpectatorResponse message, int clientId) {
         this.setJoinedGameWithId(message.getGameId());
-        this.setGoToSpectatorWaiting(true);
+        this.sendSpectatorGameStateRequest();
     }
 
     @Override
@@ -400,10 +400,15 @@ public class Model implements ModelMessageListener {
 
     @Override
     public void onSpectatorGameStateResponse(SpectatorGameStateResponse message, int clientId) {
-        this.setPlayers(message.getPlayers());
-        this.setShots(message.getShots());
-        this.setShips(message.getShips());
-        this.goToGameView();
+        if(message.getShips().size() == 0){
+            this.goToSpectatorWaiting.setValue(true);
+        }
+        else {
+            this.setPlayers(message.getPlayers());
+            this.setShots(message.getShots());
+            this.setShips(message.getShips());
+            this.goToGameView();
+        }
     }
 
     @Override
