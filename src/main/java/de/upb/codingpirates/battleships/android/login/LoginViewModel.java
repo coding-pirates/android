@@ -42,6 +42,18 @@ public class LoginViewModel extends ViewModel {
             }
         };
         model.getServerJoinRequestSuccess().observeForever(serverJoinResponse);
+
+        final Observer<Boolean> connectionTookTooLongResponse = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean tookTooLong) {
+                if (tookTooLong) {
+                    serverIpLayout.setErrorEnabled(true);
+                    progressBarShow.setValue(false);
+                    serverIpLayout.setError("Verbindung konnte nicht hergestellt werden");
+                }
+            }
+        };
+        model.getConnectionTookTooLong().observeForever(connectionTookTooLongResponse);
     }
 
     public MutableLiveData<Boolean> getProgressbarShow(){

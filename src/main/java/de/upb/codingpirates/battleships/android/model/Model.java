@@ -107,6 +107,18 @@ public class Model implements ModelMessageListener {
         return pointsOfPlayers;
     }
 
+
+    /**
+     * Live Data and timer for checking if the connection took too long
+     */
+    private MutableLiveData<Boolean> connectionTookTooLong = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getConnectionTookTooLong() {
+        return connectionTookTooLong;
+    }
+    public void setConnectionTookTooLong(Boolean value) {
+        connectionTookTooLong.postValue(value);
+    }
+
     /**
      * Consturctor for the Model.
      * Instatiates the ClientConnectorAndroid
