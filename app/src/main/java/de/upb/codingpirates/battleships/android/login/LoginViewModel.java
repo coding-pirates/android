@@ -132,18 +132,32 @@ public class LoginViewModel extends ViewModel {
             return false;
         }
 
-        else if (serverIp.equals("localhost") || serverIp.equals("swtpra.cs.upb.de")) {
+        //localhost allowed
+        else if (serverIp.equals("localhost")) {
             return true;
         }
-
-        //check if the IP address is like x.x.x.x where x is between 0 and 255
-        else if (!serverIp.matches("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")) {
-            serverIpLayout.setErrorEnabled(true);
-            String str = context.getString(R.string.serverIpWrongChar);
-            serverIpLayout.setError(str);
-            return false;
+        //check if the ipString consists of minimum 2 parts separated by '.'
+        else {
+            String[] ipString = serverIp.split("[.]");
+            if (ipString.length > 1) {
+               return true;
+            }
         }
-        return true;
+
+        /*will not be executed because the validation of the pure Ip is obsolete (connection via domain is also possible), but stays in code so the validation can quickly
+        be adapted*/
+        if (false) {
+            //check if the IP address is like x.x.x.x where x is between 0 and 255
+            if (!serverIp.matches("\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b")) {
+                serverIpLayout.setErrorEnabled(true);
+                String str = context.getString(R.string.serverIpWrongChar);
+                serverIpLayout.setError(str);
+                return false;
+            }
+        }
+        String str = context.getString(R.string.serverIpMissingStr);
+        serverIpLayout.setError(str);
+        return false;
     }
 
     /**
