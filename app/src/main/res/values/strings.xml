@@ -16,7 +16,7 @@
     <string name="rulesStr">Piratenkodex</string>
     <string name="imprintStr">Impressum</string>
     <string name="pointsStr">Punkte</string>
-    <string name="points2Str">Punkte: 0.0</string>
+    <string name="points2Str">Punkte:</string>
     <string name="nameStr">Name</string>
     <string name="placeStr">Platz</string>
     <string name="serverIPStr">Server-IP</string>
@@ -25,8 +25,7 @@
     <string name="usernameMissingStr">Trage deinen Kapitänsnamen ein</string>
     <string name="serverIpMissingStr">Trage eine Server-Ip ein</string>
     <string name="serverPortMissingStr">Trage einen Server-Port ein</string>
-    <string name="serverIpWrongChar">Bitte gib eine gültige IP-Adresse ein</string>
-    <string name="selectPlayer">Wähle einen Spieler:</string>
+    <string name="selectPlayer">Spieler auswählen: </string>
     <string name="timeLeft">Zeit übrig: </string>
 
     <string name="exitGameString">Wollen Sie das Spiel wirklich verlassen?</string>
