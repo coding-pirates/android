@@ -82,6 +82,15 @@ public class LobbyFragment extends Fragment {
         };
         viewmodel.getGoToSpectatorScreen().observe(this.getViewLifecycleOwner(),goToSpectatorScreen);
 
+        final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
+            public void onChanged(@Nullable final Boolean newGoToGameView) {
+                if(newGoToGameView) {
+                    Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_gameFragment);
+                }
+            }
+        };
+        viewmodel.getGoToGameView().observeForever(goToGameViewObserver);
+
         return databinding.getRoot();
     }
 

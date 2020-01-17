@@ -22,6 +22,11 @@ public class LobbyViewModel extends ViewModel {
     }
     private MutableLiveData<Boolean> goToSpectatorScreen= new MutableLiveData<>();;
 
+    private MutableLiveData<Boolean> goToGameView= new MutableLiveData<>();;
+    public MutableLiveData<Boolean> getGoToGameView(){
+        return goToGameView;
+    }
+
     public MutableLiveData<Boolean> getGoToSpectatorScreen(){
         return goToSpectatorScreen;
     }
@@ -45,6 +50,13 @@ public class LobbyViewModel extends ViewModel {
             }
         };
         model.getGoToSpectatorWaiting().observeForever(goToSpectatorWaiting);
+
+        final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
+            public void onChanged(@Nullable final Boolean newGoToGameView) {
+                goToGameView.setValue(newGoToGameView);
+            }
+        };
+        model.getGoToGameView().observeForever(goToGameViewObserver);
     }
 
     /**
