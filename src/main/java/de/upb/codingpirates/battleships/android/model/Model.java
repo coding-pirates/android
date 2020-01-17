@@ -1,6 +1,8 @@
 package de.upb.codingpirates.battleships.android.model;
 
 import androidx.lifecycle.MutableLiveData;
+
+import de.upb.codingpirates.battleships.android.lobby.SortLobbyGamesComparator;
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
 import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
@@ -209,7 +211,7 @@ public class Model implements ModelMessageListener {
     }
 
     /**
-     * this method sorts the games on the server by state and then by name
+     * this method sorts the games on the server by name using the SortLobbyGamesComparator class
      * @author Fynn Ruppel
      * @param gamesOnServer collection of the current games on the server
      * @return sorted collection with the games
@@ -217,7 +219,8 @@ public class Model implements ModelMessageListener {
     private Collection<Game> sortGamesOnServer(Collection<Game> gamesOnServer) {
         try {
             ArrayList<Game> sortedGames = new ArrayList<>( gamesOnServer);
-            sortedGames.sort(Comparator.comparing(Game::getState).thenComparing(Game::getName));
+            //sortedGames.sort(Comparator.comparing(Game::getState).thenComparing(Game::getName));
+            Collections.sort(sortedGames, new SortLobbyGamesComparator());
             gamesOnServer = sortedGames;
         } catch (Exception e) {
             e.printStackTrace();
