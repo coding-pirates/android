@@ -16,6 +16,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -203,6 +205,17 @@ public class Model implements ModelMessageListener {
 
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
         this.gamesOnServer.postValue(gamesOnServer);
+    }
+
+    private Collection<Game> sortGamesOnServer(Collection<Game> gamesOnServer) {
+        try {
+            ArrayList<Game> sortedGames = new ArrayList<>( gamesOnServer);
+            sortedGames.sort(Comparator.comparing(Game::getState).thenComparing(Game::getName));
+            gamesOnServer = sortedGames;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gamesOnServer;
     }
 
     /**
