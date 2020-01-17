@@ -204,9 +204,16 @@ public class Model implements ModelMessageListener {
     }
 
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
+        gamesOnServer = this.sortGamesOnServer(gamesOnServer);
         this.gamesOnServer.postValue(gamesOnServer);
     }
 
+    /**
+     * this method sorts the games on the server by state and then by name
+     * @author Fynn Ruppel
+     * @param gamesOnServer collection of the current games on the server
+     * @return sorted collection with the games
+     */
     private Collection<Game> sortGamesOnServer(Collection<Game> gamesOnServer) {
         try {
             ArrayList<Game> sortedGames = new ArrayList<>( gamesOnServer);
