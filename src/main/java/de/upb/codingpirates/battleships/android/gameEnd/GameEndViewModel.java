@@ -9,9 +9,8 @@ import androidx.navigation.Navigation;
 import java.util.ArrayList;
 import java.util.Map;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
-import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.model.Model;
+import de.upb.codingpirates.battleships.android.R;
 
 public class GameEndViewModel extends ViewModel {
     private Model model;
@@ -36,21 +35,21 @@ public class GameEndViewModel extends ViewModel {
      * @return two dimensional array including each of the tree best players with their points
      */
     public String[][] getThreeBestPlayers(){
-        String[][] bla = this.getAllPlayersAndPoints();
+        String[][] allPlayersAndPoints = this.getAllPlayersAndPoints();
         threeBestPlayers = new String[3][2];
-        threeBestPlayers[0][0] = bla[0][0];
-        threeBestPlayers[0][1] = bla[0][1];
-        threeBestPlayers[1][0] = bla[1][0];
-        threeBestPlayers[1][1] = bla[1][1];
+        threeBestPlayers[0][0] = allPlayersAndPoints[0][0];
+        threeBestPlayers[0][1] = allPlayersAndPoints[0][1];
+        threeBestPlayers[1][0] = allPlayersAndPoints[1][0];
+        threeBestPlayers[1][1] = allPlayersAndPoints[1][1];
 
         //check if there even is a third player
         try {
-            if (bla[2][0] == null) {
+            if (allPlayersAndPoints[2][0] == null) {
                 threeBestPlayers[2][0] = "";
                 threeBestPlayers[2][1] = "";
             } else {
-                threeBestPlayers[2][0] = bla[2][0];
-                threeBestPlayers[2][1] = bla[2][1];
+                threeBestPlayers[2][0] = allPlayersAndPoints[2][0];
+                threeBestPlayers[2][1] = allPlayersAndPoints[2][1];
 
             }
         }

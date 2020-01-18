@@ -19,7 +19,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import de.upb.codingpirates.battleships.android.Model.Model;
+import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.LobbyFragmentBinding;
 import de.upb.codingpirates.battleships.logic.Game;
