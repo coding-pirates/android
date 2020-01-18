@@ -28,14 +28,14 @@
             app:srcCompat="@drawable/ic_gameleave"
             android:background="@android:color/transparent"/>
 
-        <TextView
+        <ImageView
             android:id="@+id/gameEndActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="@string/gameEndStr"
+            android:background="@drawable/ic_gameendtag"
             android:textAlignment="center"
             android:textColor="@color/color_brown_main"
             android:textSize="20sp"
