@@ -132,6 +132,7 @@ public class GameFragment extends Fragment {
             Button btn = new Button(view.getContext());
             btn.setBackground((getResources().getDrawable(R.drawable.ic_quadrat)));
             btn.setPadding(0, 0, 0, 0);
+            btn.setTag("waterField");
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
 

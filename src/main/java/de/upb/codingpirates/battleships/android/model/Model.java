@@ -241,8 +241,9 @@ public class Model implements ModelMessageListener {
      */
     public void addShots(Collection<Shot> newShots){
         Collection<Shot> oldShots = this.shots.getValue();
-        oldShots.addAll(newShots);
-       this.shots.setValue(oldShots);
+        if(oldShots != null)
+            newShots.addAll(oldShots);
+        this.shots.setValue(newShots);
     }
 
     public void setShots(Collection<Shot> newShots){

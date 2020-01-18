@@ -75,7 +75,7 @@ public class LobbyFragment extends Fragment {
         final Observer<Boolean> goToSpectatorScreen = new Observer<Boolean >() {
             @Override
             public void onChanged(@Nullable final Boolean  newSpectatorScreen) {
-                if(newSpectatorScreen) {
+                if(newSpectatorScreen != null && newSpectatorScreen) {
                     Navigation.findNavController(getView()).navigate(R.id.action_lobbyFragment_to_spectatorWaitingFragment);
                 }
             }
@@ -84,8 +84,13 @@ public class LobbyFragment extends Fragment {
 
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newGoToGameView) {
-                if(newGoToGameView) {
-                    Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_gameFragment);
+                if(newGoToGameView != null && newGoToGameView) {
+                    try {
+                        Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_gameFragment);
+                    }
+                    catch (Exception e) {
+                        System.out.println(e);
+                    }
                 }
             }
         };
