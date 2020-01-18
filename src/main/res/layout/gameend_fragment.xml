@@ -20,13 +20,12 @@
             android:id="@+id/exitGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:onClick="@{viewmodel::exitGameEndButtonClicked}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
-            app:srcCompat="@drawable/ic_gameleave"
-            android:background="@android:color/transparent"/>
+            app:srcCompat="@drawable/ic_gameleave" />
 
         <ImageView
             android:id="@+id/gameEndActivityTitle"
@@ -86,11 +85,8 @@
             android:layout_marginStart="52dp"
             android:text="@string/secondPlacePlayerName"
             android:textColor="@color/color_brown_main"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintStart_toStartOf="parent" />
             app:layout_constraintBottom_toTopOf="@+id/secondPlaceImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gameEndActivityTitle" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/secondPlaceImageView"
@@ -208,34 +204,5 @@
             </ScrollView>
         </TableLayout>
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="92dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
-            app:srcCompat="@drawable/ic_winner_1" />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
-            android:layout_marginTop="165dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
-            app:srcCompat="@drawable/ic_winner_2" />
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:layout_marginTop="184dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
-            app:srcCompat="@drawable/ic_winner_3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
