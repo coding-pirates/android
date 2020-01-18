@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import de.upb.codingpirates.battleships.android.model.Model;
-import de.upb.codingpirates.battleships.client.Handler;
 import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.network.connectionmanager.ClientConnectionManager;
 import de.upb.codingpirates.battleships.network.exceptions.BattleshipException;
@@ -21,8 +20,8 @@ public class ClientConnectorAndroid extends ClientConnector {
     private Boolean connected = false;
 
     @Inject
-    public ClientConnectorAndroid(Handler handler, ClientConnectionManager clientConnector) {
-        super(handler, clientConnector);
+    public ClientConnectorAndroid(ClientConnectionManager clientConnector) {
+        super(clientConnector);
     }
 
     public boolean isConnected(){
