@@ -229,5 +229,11 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
+    /**
+     * calls the sendGameLeaveRequest method of the model
+     */
+    public void sendLeaveRequest() {
+        model.sendGameLeaveRequest();
+    }
 
 }

@@ -72,6 +72,7 @@ public class LobbyViewModel extends ViewModel {
     public void sendLobbyRequest(){
         model.sendLobbyRequest();
     }
+
     /**
      * Change the Fragment when the Settingsbutton is clicked
      * @param view

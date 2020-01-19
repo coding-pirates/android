@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -94,7 +96,6 @@ public class GameFragment extends Fragment {
         /**
          * Observer for GoingToGameEnd
          */
-
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable final Boolean newGoToGameEnd) {
@@ -108,6 +109,16 @@ public class GameFragment extends Fragment {
         //initialize the timer for the time left
         TextView timerView = view.findViewById(R.id.tf_timeLeft);
         initTimer(timerView,viewModel.getRoundTime(), view.getContext());
+
+        //handles the phones back button pressed event to return to lobby view
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_lobbyFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
         return view;
     }
 

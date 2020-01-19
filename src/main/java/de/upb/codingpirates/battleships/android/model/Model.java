@@ -248,6 +248,13 @@ public class Model implements ModelMessageListener {
         connector.sendMessageToServer(RequestBuilder.spectatorGameStateRequest());
     }
 
+    /**
+     * sends a leave request to the server to leave current game
+     */
+    public void sendGameLeaveRequest() {
+        connector.sendMessageToServer(RequestBuilder.gameLeaveRequest());
+    }
+
     public void setPlayers(Collection<Client> players){
         this.players.postValue(players);
     }
