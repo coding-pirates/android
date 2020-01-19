@@ -26,6 +26,7 @@ public class ClientConnectorAndroid extends ClientConnector {
         return !clientConnector.getConnection().isClosed();
     }
 
+    @Override
     public void connect(String host, int port) {
         Thread thread = new Thread(() -> {
             try {
@@ -34,28 +35,28 @@ public class ClientConnectorAndroid extends ClientConnector {
                 }
                 Model.getInstance().setConnected(true);
 
-            }
-            catch(IOException e){
-                LOGGER.error("Could not connect to Server",e);
+            } catch (IOException e) {
+                LOGGER.error("Could not connect to Server", e);
             }
         });
         thread.start();
     }
 
+    @Override
     public void sendMessageToServer(Message message) {
         Thread thread = new Thread(() -> {
             try {
                 synchronized (clientConnector) {
                     clientConnector.send(message);
                 }
-            }
-            catch(IOException e){
-                LOGGER.error("Could not send " + message.getClass() + " to Server",e);
+            } catch (IOException e) {
+                LOGGER.error("Could not send " + message.getClass() + " to Server", e);
             }
         });
         thread.start();
     }
 
+    @Override
     public void disconnect() {
         Thread thread = new Thread(() -> {
             try {
@@ -63,9 +64,8 @@ public class ClientConnectorAndroid extends ClientConnector {
                     clientConnector.disconnect();
                 }
                 Model.getInstance().setConnected(false);
-            }
-            catch(IOException e){
-                LOGGER.error("Could not disconnect from Server",e);
+            } catch (IOException e) {
+                LOGGER.error("Could not disconnect from Server", e);
             }
         });
         thread.start();
