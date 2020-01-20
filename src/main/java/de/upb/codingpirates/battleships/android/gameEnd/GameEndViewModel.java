@@ -20,6 +20,7 @@ public class GameEndViewModel extends ViewModel {
     public GameEndViewModel(){
         model = Model.getInstance();
         numberOfPlayersConnected = model.getPlayers().getValue().size();
+        model.setGoToGameEnd(false);
     }
     /**
      * exits the game and returns to the LobbyView, when the button is clicked

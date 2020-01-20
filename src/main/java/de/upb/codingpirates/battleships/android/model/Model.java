@@ -394,6 +394,9 @@ public class Model implements ModelMessageListener {
             this.goToGameEnd.setValue(true);
         }
     }
+    public void setGoToGameEnd(Boolean status) {
+        this.goToGameEnd.setValue(status);
+    }
 
     public void setNewRound(Boolean newState){
         this.newRound.setValue(newState);
