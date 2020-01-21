@@ -101,32 +101,6 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
-
-                <ImageButton
-                    android:id="@+id/musicButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_soundeffects_icon" />
-
-                <SeekBar
-                    android:id="@+id/musicSeekbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:progressTint="@color/color_brown_main"
-                    android:thumbTint="@color/color_brown_main" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"/>
 
