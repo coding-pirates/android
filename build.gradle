@@ -89,3 +89,10 @@ dependencies {
     implementation group: 'com.google.guava', name: 'guava', version: '28.1-android'
 }
 
+configurations {
+    compile.exclude module: 'server'
+    compile.exclude module: 'ai'
+    compile.exclude module: 'desktop'
+    compile.exclude module: 'network'
+}
+
