@@ -8,6 +8,7 @@ import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
 import de.upb.codingpirates.battleships.client.ListenerHandler;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.client.network.ClientModule;
 import de.upb.codingpirates.battleships.logic.*;
 import de.upb.codingpirates.battleships.network.message.notification.*;
@@ -500,5 +501,9 @@ public class Model implements ModelMessageListener {
         shots.addAll(message.getMissed());
         this.addShots(shots);
         this.updatePoints(message.getPoints());
+    }
+
+    public ClientConnector getClientConnector() {
+        return this.connector;
     }
 }

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +25,7 @@ import java.util.Collection;
 import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.LobbyFragmentBinding;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.logic.Game;
 
 import java.util.ArrayList;
@@ -101,6 +105,22 @@ public class LobbyFragment extends Fragment {
             }
         };
         viewmodel.getGoToGameView().observeForever(goToGameViewObserver);
+
+        //handles the behavior when the phones back button is pressed
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                try {
+                    //closes the connection to the server and return to the loginView
+                    viewmodel.getClientConnector().disconnect();
+                    Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_loginFragment);
+                }
+                catch (IOException e) {
+
+                }
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         return databinding.getRoot();
     }

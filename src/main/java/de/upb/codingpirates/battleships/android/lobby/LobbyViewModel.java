@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.logic.Game;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class LobbyViewModel extends ViewModel {
      */
     public LobbyViewModel(){
         model = Model.getInstance();
+        //set to false so reconnection is possible, when the server is left from the lobbyView
+        model.setServerJoinRequestSuccess(false);
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
             @Override
             public void onChanged(@Nullable final Collection<Game>  newGames) {
@@ -74,12 +77,15 @@ public class LobbyViewModel extends ViewModel {
     }
 
     /**
-     * Change the Fragment when the Settingsbutton is clicked
-     * @param view
+     * navigate to the  the SettingsFragment when the Settingsbutton is clicked
+     * @param view current view (generic passed parameter)
      */
     public void settingsButtonClicked(View view) {
         Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_settingsFragment);
     }
 
+    public ClientConnector getClientConnector() {
+        return model.getClientConnector();
+    }
 }
 

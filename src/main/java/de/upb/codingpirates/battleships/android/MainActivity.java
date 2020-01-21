@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        //Create a playlist with all the songs from the raw folder in the order the songs are addded
-        //TODO Methode erstellen zum Automatisieren
+        //Create a playlist with all the songs from the raw folder in the order the songs are added
         playlist = new ArrayList<>();
         playlist.add(R.raw.sea_of_thieves_theme_song);
         playlist.add(R.raw.becalmed_concertina_hurdygurdy);
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         playlist.add(R.raw.grogg_mayler_concertina_hurdygurdy);
         playlist.add(R.raw.buson_bill_concertina_hurdygurdy);
         playlist.add(R.raw.rise_of_the_valkyries_concertina);
-        playlist.add(R.raw.test);
 
         player = MediaPlayer.create(this, playlist.get(0));
         addCompletionListener(player, 0);
@@ -62,13 +60,21 @@ public class MainActivity extends AppCompatActivity {
                     _index.set(0);
                 }
                 //create new MediaPlayer with the next song
-                MediaPlayer mp2 = MediaPlayer.create(MainActivity.this, playlist.get(_index.get()+1));
-                mp2.start();
-
-                //set the variable player to the new created MediaPlayer mp2 so the onPause and onResume work properly
-                player = mp2;
-                mp.release();
-                addCompletionListener(mp2, _index.get()+1);
+                if (playlist.size()>1) {
+                    MediaPlayer mp2 = MediaPlayer.create(MainActivity.this, playlist.get(_index.get() + 1));
+                    mp2.start();
+                    //set the variable player to the new created MediaPlayer mp2 so the onPause and onResume work properly
+                    player = mp2;
+                    mp.release();
+                    addCompletionListener(mp2, _index.get() + 1);
+                }
+                else {
+                    //reset the player and start the first song again if the playlist only contains one song
+                    player.reset();
+                    player = MediaPlayer.create(MainActivity.this, playlist.get(0));
+                    addCompletionListener(player, 0);
+                    player.start();
+                }
             }
         });
 

@@ -20,6 +20,9 @@
             app:destination="@+id/settingsFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_loginFragment_to_startScreenFragment"
+            app:destination="@id/startScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/lobbyFragment"
@@ -39,6 +42,9 @@
         <action
             android:id="@+id/action_lobbyFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_lobbyFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/startScreenFragment"
