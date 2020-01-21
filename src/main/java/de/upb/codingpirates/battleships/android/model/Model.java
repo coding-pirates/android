@@ -1,6 +1,8 @@
 package de.upb.codingpirates.battleships.android.model;
 
+import android.os.Build;
 import androidx.lifecycle.MutableLiveData;
+import com.google.common.collect.Lists;
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
 import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
@@ -14,9 +16,7 @@ import de.upb.codingpirates.battleships.network.message.response.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class holds and gets the data form the Server
@@ -96,15 +96,31 @@ public class Model implements ModelMessageListener {
      * LiveData for going to GameEnd View
      */
     private MutableLiveData<Boolean> goToGameEnd = new MutableLiveData<>();
-    public MutableLiveData<Boolean> getGoToGameEnd(){
+
+    public MutableLiveData<Boolean> getGoToGameEnd() {
         return goToGameEnd;
     }
 
     private Map<Integer, Map<Integer, PlacementInfo>> ships;
     private Configuration gameConfig;
     private MutableLiveData<Map<Integer, Integer>> pointsOfPlayers = new MutableLiveData<>();
-    public MutableLiveData<Map<Integer, Integer>> getPointsOfPlayers(){
+
+    public MutableLiveData<Map<Integer, Integer>> getPointsOfPlayers() {
         return pointsOfPlayers;
+    }
+
+
+    /**
+     * Live Data and timer for checking if the connection took too long
+     */
+    private MutableLiveData<Boolean> connectionTookTooLong = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> getConnectionTookTooLong() {
+        return connectionTookTooLong;
+    }
+
+    public void setConnectionTookTooLong(Boolean value) {
+        connectionTookTooLong.postValue(value);
     }
 
     /**
@@ -190,17 +206,67 @@ public class Model implements ModelMessageListener {
     }
 
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
+        gamesOnServer = this.sortGamesOnServer(gamesOnServer);
         this.gamesOnServer.postValue(gamesOnServer);
+    }
+
+    /**
+     * this method sorts the games on the server by name using the SortLobbyGamesComparator class
+     *
+     * @param gamesOnServer collection of the current games on the server
+     * @return sorted collection with the games
+     * @author Fynn Ruppel
+     */
+    private Collection<Game> sortGamesOnServer(Collection<Game> gamesOnServer) {
+        try {
+            List<Game> sortedGames = Lists.newArrayList(gamesOnServer);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                sortedGames.sort(Comparator.comparing(Game::getState).thenComparing(Game::getName));
+            } else {
+                Iterator<Game> games = sortedGames.iterator();
+                List<Game> finished = Lists.newArrayList();
+                List<Game> inProgress = Lists.newArrayList();
+                while (games.hasNext()) {
+                    Game game = games.next();
+                    switch (game.getState()) {
+                        case LOBBY:
+                            break;
+                        case PAUSED:
+                        case IN_PROGRESS:
+                            inProgress.add(game);
+                            sortedGames.remove(game);
+                            break;
+                        case FINISHED:
+                            finished.add(game);
+                            sortedGames.remove(game);
+                            break;
+                    }
+                }
+                Collections.sort(sortedGames, this::sortGameByName);
+                Collections.sort(finished, this::sortGameByName);
+                Collections.sort(inProgress, this::sortGameByName);
+                sortedGames.addAll(inProgress);
+                sortedGames.addAll(finished);
+            }
+            gamesOnServer = sortedGames;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gamesOnServer;
+    }
+
+    private int sortGameByName(Game first, Game second) {
+        return first.getName().compareTo(second.getName());
     }
 
     /**
      * Sends a SpectatorGameStateRequest to the connected Server
      */
-    public void sendSpectatorGameStateRequest(){
+    public void sendSpectatorGameStateRequest() {
         connector.sendMessageToServer(RequestBuilder.spectatorGameStateRequest());
     }
 
-    public void setPlayers(Collection<Client> players){
+    public void setPlayers(Collection<Client> players) {
         this.players.postValue(players);
     }
 

@@ -23,7 +23,8 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
+import java.util.Objects;
+
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
  * manages all UI related actions
@@ -198,7 +199,7 @@ public class GameFragment extends Fragment {
 
         for (Point2D point : shipPoints) {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            switch((new Random().nextInt(2))){
+            switch (Objects.hash(point.hashCode(), viewModel.getCurrentPlayer().getId()) % 3) {
                 case 0:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     cell.setTag("ship1");

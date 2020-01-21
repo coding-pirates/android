@@ -36,7 +36,8 @@ public class ClientConnectorAndroid extends ClientConnector {
                 Model.getInstance().setConnected(true);
 
             } catch (IOException e) {
-                LOGGER.error("Could not connect to Server", e);
+                LOGGER.error("Could not connect to Server");
+                Model.getInstance().setConnectionTookTooLong(true);
             }
         });
         thread.start();
