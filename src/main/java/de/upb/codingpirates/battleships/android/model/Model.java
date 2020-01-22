@@ -4,12 +4,10 @@ import android.os.Build;
 import androidx.lifecycle.MutableLiveData;
 import com.google.common.collect.Lists;
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
-import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
 import de.upb.codingpirates.battleships.client.ListenerHandler;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
 import de.upb.codingpirates.battleships.client.network.ClientConnector;
-import de.upb.codingpirates.battleships.client.network.ClientModule;
 import de.upb.codingpirates.battleships.logic.*;
 import de.upb.codingpirates.battleships.network.message.notification.*;
 import de.upb.codingpirates.battleships.network.message.request.RequestBuilder;
@@ -18,14 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Map;
 
 /**
  * This class holds and gets the data form the Server
@@ -42,7 +32,7 @@ public class Model implements ModelMessageListener {
     private int clientId;
 
     //for Server communication
-    private ClientConnectorAndroid connector;
+    private ClientConnector connector;
 
     private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
@@ -133,7 +123,7 @@ public class Model implements ModelMessageListener {
      * Instatiates the ClientConnectorAndroid
      */
     public Model() {
-        new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class))).start();
+        connector = ClientApplication.create(AndroidReader.class);
         ListenerHandler.registerListener(this);
     }
 
@@ -202,7 +192,7 @@ public class Model implements ModelMessageListener {
         this.clientType =clientType;
         this.clientName = name;
         this.serverIP = ipAddress;
-        connector.connect(ipAddress, port);
+        this.connector.connect(ipAddress, port, ()->this.setConnected(true),()-> this.setConnectionTookTooLong(true));
     }
 
 
