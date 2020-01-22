@@ -58,4 +58,8 @@
 
     <color name="color_brown_main">#472218</color>
     <color name="color_light_brown">#CFBE8E</color>
+
+    <color name="color_light_brown_translucent">#7ACFBE8E</color>
+    <color name="color_light_brown_2_translucent">#7EE6D09E</color>
+
 </resources>

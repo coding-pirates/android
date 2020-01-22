@@ -1,12 +1,13 @@
 package de.upb.codingpirates.battleships.android.model;
 
+import android.os.Build;
 import androidx.lifecycle.MutableLiveData;
+import com.google.common.collect.Lists;
 import de.upb.codingpirates.battleships.android.network.AndroidReader;
-import de.upb.codingpirates.battleships.android.network.ClientConnectorAndroid;
 import de.upb.codingpirates.battleships.android.network.ModelMessageListener;
 import de.upb.codingpirates.battleships.client.ListenerHandler;
 import de.upb.codingpirates.battleships.client.network.ClientApplication;
-import de.upb.codingpirates.battleships.client.network.ClientModule;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.logic.*;
 import de.upb.codingpirates.battleships.network.message.notification.*;
 import de.upb.codingpirates.battleships.network.message.request.RequestBuilder;
@@ -14,9 +15,7 @@ import de.upb.codingpirates.battleships.network.message.response.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class holds and gets the data form the Server
@@ -33,7 +32,7 @@ public class Model implements ModelMessageListener {
     private int clientId;
 
     //for Server communication
-    private ClientConnectorAndroid connector;
+    private ClientConnector connector;
 
     private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
@@ -107,12 +106,24 @@ public class Model implements ModelMessageListener {
         return pointsOfPlayers;
     }
 
+
+    /**
+     * Live Data and timer for checking if the connection took too long
+     */
+    private MutableLiveData<Boolean> connectionTookTooLong = new MutableLiveData<>();
+    public MutableLiveData<Boolean> getConnectionTookTooLong() {
+        return connectionTookTooLong;
+    }
+    public void setConnectionTookTooLong(Boolean value) {
+        connectionTookTooLong.postValue(value);
+    }
+
     /**
      * Consturctor for the Model.
      * Instatiates the ClientConnectorAndroid
      */
     public Model() {
-        new Thread(() -> connector = ClientApplication.create(new ClientModule<>(ClientConnectorAndroid.class, AndroidReader.class))).start();
+        connector = ClientApplication.create(AndroidReader.class);
         ListenerHandler.registerListener(this);
     }
 
@@ -181,7 +192,7 @@ public class Model implements ModelMessageListener {
         this.clientType =clientType;
         this.clientName = name;
         this.serverIP = ipAddress;
-        connector.connect(ipAddress, port);
+        this.connector.connect(ipAddress, port, ()->this.setConnected(true),()-> this.setConnectionTookTooLong(true));
     }
 
 
@@ -190,7 +201,56 @@ public class Model implements ModelMessageListener {
     }
 
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
+        gamesOnServer = this.sortGamesOnServer(gamesOnServer);
         this.gamesOnServer.postValue(gamesOnServer);
+    }
+
+    /**
+     * this method sorts the games on the server by name using the SortLobbyGamesComparator class
+     * @author Fynn Ruppel
+     * @param gamesOnServer collection of the current games on the server
+     * @return sorted collection with the games
+     */
+    private Collection<Game> sortGamesOnServer(Collection<Game> gamesOnServer) {
+        try {
+            List<Game> sortedGames = Lists.newArrayList(gamesOnServer);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                sortedGames.sort(Comparator.comparing(Game::getState).thenComparing(Game::getName));
+            }else {
+                Iterator<Game> games = sortedGames.iterator();
+                List<Game> finished = Lists.newArrayList();
+                List<Game> inProgress = Lists.newArrayList();
+                while (games.hasNext()){
+                    Game game = games.next();
+                    switch (game.getState()){
+                        case LOBBY:
+                            break;
+                        case PAUSED:
+                        case IN_PROGRESS:
+                            inProgress.add(game);
+                            sortedGames.remove(game);
+                            break;
+                        case FINISHED:
+                            finished.add(game);
+                            sortedGames.remove(game);
+                            break;
+                    }
+                }
+                Collections.sort(sortedGames, this::sortGameByName);
+                Collections.sort(finished, this::sortGameByName);
+                Collections.sort(inProgress, this::sortGameByName);
+                sortedGames.addAll(inProgress);
+                sortedGames.addAll(finished);
+            }
+            gamesOnServer = sortedGames;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gamesOnServer;
+    }
+
+    private int sortGameByName(Game first, Game second){
+        return first.getName().compareTo(second.getName());
     }
 
     /**
@@ -198,6 +258,13 @@ public class Model implements ModelMessageListener {
      */
     public void sendSpectatorGameStateRequest(){
         connector.sendMessageToServer(RequestBuilder.spectatorGameStateRequest());
+    }
+
+    /**
+     * sends a leave request to the server to leave current game
+     */
+    public void sendGameLeaveRequest() {
+        connector.sendMessageToServer(RequestBuilder.gameLeaveRequest());
     }
 
     public void setPlayers(Collection<Client> players){
@@ -241,8 +308,9 @@ public class Model implements ModelMessageListener {
      */
     public void addShots(Collection<Shot> newShots){
         Collection<Shot> oldShots = this.shots.getValue();
-        oldShots.addAll(newShots);
-       this.shots.setValue(oldShots);
+        if(oldShots != null)
+            newShots.addAll(oldShots);
+        this.shots.setValue(newShots);
     }
 
     public void setShots(Collection<Shot> newShots){
@@ -317,6 +385,9 @@ public class Model implements ModelMessageListener {
             this.goToGameEnd.setValue(true);
         }
     }
+    public void setGoToGameEnd(Boolean status) {
+        this.goToGameEnd.setValue(status);
+    }
 
     public void setNewRound(Boolean newState){
         this.newRound.setValue(newState);
@@ -329,13 +400,16 @@ public class Model implements ModelMessageListener {
     } */
 
     /**
-     * Returns the three best players
-     * @return A 2-dimensional String Array with gameID and points in ordered sequence
+     * return a 2 dimensional String array which contains the players and their points in descending order
+     *  * @return 2 dimensional String array which contains the players and their points in descending order
      */
-    public String[][] getThreeBestPlayers(){ //TODO replace gameID with player name
-        String[][] sortedPoints = new String[3][2];
-        Map<Integer,Integer> localPointsOfPlayers= pointsOfPlayers.getValue();
-        for(int i =0 ; i<3 && localPointsOfPlayers.size()>0; i++) {
+    public String[][] getAllPlayerNamesAndPoints() {
+        int playersConnected = players.getValue().size();
+        String[][] sortedPoints = new String[playersConnected][2];
+
+        Map<Integer,Integer> localPointsOfPlayers= new HashMap(pointsOfPlayers.getValue());
+
+        for(int i =0 ; i<playersConnected; i++) {
             Map.Entry<Integer,Integer> currentBest = null;
             for (Map.Entry<Integer, Integer> pointEntry : localPointsOfPlayers.entrySet()) {
                 if(currentBest == null || pointEntry.getValue().compareTo(currentBest.getValue())>0){
@@ -369,7 +443,7 @@ public class Model implements ModelMessageListener {
     @Override
     public void onGameJoinSpectatorResponse(GameJoinSpectatorResponse message, int clientId) {
         this.setJoinedGameWithId(message.getGameId());
-        this.setGoToSpectatorWaiting(true);
+        this.sendSpectatorGameStateRequest();
     }
 
     @Override
@@ -400,10 +474,15 @@ public class Model implements ModelMessageListener {
 
     @Override
     public void onSpectatorGameStateResponse(SpectatorGameStateResponse message, int clientId) {
-        this.setPlayers(message.getPlayers());
-        this.setShots(message.getShots());
-        this.setShips(message.getShips());
-        this.goToGameView();
+        if(message.getShips().size() == 0){
+            this.goToSpectatorWaiting.setValue(true);
+        }
+        else {
+            this.setPlayers(message.getPlayers());
+            this.setShots(message.getShots());
+            this.setShips(message.getShips());
+            this.goToGameView();
+        }
     }
 
     @Override
@@ -412,5 +491,9 @@ public class Model implements ModelMessageListener {
         shots.addAll(message.getMissed());
         this.addShots(shots);
         this.updatePoints(message.getPoints());
+    }
+
+    public ClientConnector getClientConnector() {
+        return this.connector;
     }
 }

@@ -29,7 +29,7 @@ public class SettingsFragment extends Fragment {
     }
 
     /**
-     * TODO Description
+     * this method is used to initiate the control function of the volume bar
      * @param databinding
      */
     private void initControls(SettingsFragmentBinding databinding)

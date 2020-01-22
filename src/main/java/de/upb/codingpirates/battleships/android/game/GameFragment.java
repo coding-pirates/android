@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -23,7 +25,8 @@ import de.upb.codingpirates.battleships.logic.Point2D;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
+import java.util.Objects;
+
 /**
  * GameFragment represents the GameView for the App. This class initializes the view and
  * manages all UI related actions
@@ -94,7 +97,6 @@ public class GameFragment extends Fragment {
         /**
          * Observer for GoingToGameEnd
          */
-
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable final Boolean newGoToGameEnd) {
@@ -108,6 +110,16 @@ public class GameFragment extends Fragment {
         //initialize the timer for the time left
         TextView timerView = view.findViewById(R.id.tf_timeLeft);
         initTimer(timerView,viewModel.getRoundTime(), view.getContext());
+
+        //handles the phones back button pressed event to return to lobby view
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getView()).navigate(R.id.action_gameFragment_to_lobbyFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
         return view;
     }
 
@@ -132,6 +144,7 @@ public class GameFragment extends Fragment {
             Button btn = new Button(view.getContext());
             btn.setBackground((getResources().getDrawable(R.drawable.ic_quadrat)));
             btn.setPadding(0, 0, 0, 0);
+            btn.setTag("waterField");
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
             param.setGravity(Gravity.CENTER);
 
@@ -186,7 +199,7 @@ public class GameFragment extends Fragment {
     private void cleanGameField() {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
-            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadrat));
+            gameField.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.ic_quadratic));
             gameField.getChildAt(i).setTag("waterField");
         }
     }
@@ -198,7 +211,7 @@ public class GameFragment extends Fragment {
 
         for (Point2D point : shipPoints) {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            switch((new Random().nextInt(2))){
+            switch(Objects.hash(point.hashCode(), viewModel.getCurrentPlayer().getId()) % 3){
                 case 0:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     cell.setTag("ship1");

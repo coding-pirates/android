@@ -1,13 +1,21 @@
 package de.upb.codingpirates.battleships.android.lobby;
 
 import android.view.View;
+
 import androidx.annotation.Nullable;
+import androidx.databinding.BaseObservable;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
-import de.upb.codingpirates.battleships.android.R;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 import de.upb.codingpirates.battleships.android.model.Model;
+import de.upb.codingpirates.battleships.android.R;
+import de.upb.codingpirates.battleships.client.network.ClientConnector;
 import de.upb.codingpirates.battleships.logic.Game;
 
 import java.util.ArrayList;
@@ -22,6 +30,11 @@ public class LobbyViewModel extends ViewModel {
     }
     private MutableLiveData<Boolean> goToSpectatorScreen= new MutableLiveData<>();;
 
+    private MutableLiveData<Boolean> goToGameView= new MutableLiveData<>();;
+    public MutableLiveData<Boolean> getGoToGameView(){
+        return goToGameView;
+    }
+
     public MutableLiveData<Boolean> getGoToSpectatorScreen(){
         return goToSpectatorScreen;
     }
@@ -31,6 +44,8 @@ public class LobbyViewModel extends ViewModel {
      */
     public LobbyViewModel(){
         model = Model.getInstance();
+        //set to false so reconnection is possible, when the server is left from the lobbyView
+        model.setServerJoinRequestSuccess(false);
         final Observer<Collection<Game> > gamesObserver = new Observer<Collection<Game> >() {
             @Override
             public void onChanged(@Nullable final Collection<Game>  newGames) {
@@ -45,6 +60,13 @@ public class LobbyViewModel extends ViewModel {
             }
         };
         model.getGoToSpectatorWaiting().observeForever(goToSpectatorWaiting);
+
+        final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
+            public void onChanged(@Nullable final Boolean newGoToGameView) {
+                goToGameView.setValue(newGoToGameView);
+            }
+        };
+        model.getGoToGameView().observeForever(goToGameViewObserver);
     }
 
     /**
@@ -53,13 +75,17 @@ public class LobbyViewModel extends ViewModel {
     public void sendLobbyRequest(){
         model.sendLobbyRequest();
     }
+
     /**
-     * Change the Fragment when the Settingsbutton is clicked
-     * @param view
+     * navigate to the  the SettingsFragment when the Settingsbutton is clicked
+     * @param view current view (generic passed parameter)
      */
     public void settingsButtonClicked(View view) {
         Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_settingsFragment);
     }
 
+    public ClientConnector getClientConnector() {
+        return model.getClientConnector();
+    }
 }
 
