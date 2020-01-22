@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_weight="25"/>
+        android:layout_weight="30"/>
 
     <ImageView
         android:id="@+id/imageView4"
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_gravity="center_vertical"
-        android:layout_weight="15"/>
+        android:layout_weight="10"/>
 
     <ImageView
         android:id="@+id/imageView8"
