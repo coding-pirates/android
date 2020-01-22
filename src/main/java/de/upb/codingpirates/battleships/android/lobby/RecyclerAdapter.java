@@ -55,7 +55,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        ((TextView)holder.listItemViw.findViewById(R.id.lobbyGameName)).setText(mDataset.get(position).getName());
+        String formattedGameName = mDataset.get(position).getName().replace(" ", "_"); //used to fix a display bug when the name contains a space
+        ((TextView)holder.listItemViw.findViewById(R.id.lobbyGameName)).setText(formattedGameName);
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyFiledSize)).setText(mDataset.get(position).getConfig().getHeight() +"x" +mDataset.get(position).getConfig().getWidth());
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyGameStatus)).setText(mDataset.get(position).getState().toString());
         ((TextView)holder.listItemViw.findViewById(R.id.lobbyPlayerCount)).setText(Integer.toString(mDataset.get(position).getCurrentPlayerCount()));
