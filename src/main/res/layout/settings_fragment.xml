@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:background="@mipmap/endcreen_bg">
 
-        <TextView
+        <ImageView
             android:id="@+id/settingsActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/color_brown_main"/>
+            android:background="@drawable/ic_einstellungen"/>
 
         <LinearLayout
             android:id="@+id/linearLayout"
