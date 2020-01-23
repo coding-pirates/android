@@ -77,7 +77,9 @@ public class LobbyFragment extends Fragment {
 
         final Observer<Boolean> goToGameViewObserver = newGoToGameView -> {
             if(newGoToGameView != null && newGoToGameView) {
-                Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_gameFragment);
+                try {
+                    Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_gameFragment);
+                }catch (IllegalStateException ignored){} //duplicated navcontroller
             }
         };
         viewmodel.getGoToGameView().observeForever(goToGameViewObserver);
