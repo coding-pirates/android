@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:background="@mipmap/endcreen_bg">
 
-        <TextView
+        <ImageView
             android:id="@+id/settingsActivityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/color_brown_main"/>
+            android:background="@drawable/ic_einstellungen"/>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -94,32 +94,6 @@
                     android:layout_height="match_parent"
                     android:foregroundTint="@color/color_brown_main"
                     android:indeterminateTint="@color/color_brown_main"
-                    android:progressTint="@color/color_brown_main"
-                    android:thumbTint="@color/color_brown_main" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
-
-                <ImageButton
-                    android:id="@+id/musicButton"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_soundeffects_icon" />
-
-                <SeekBar
-                    android:id="@+id/musicSeekbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:progressTint="@color/color_brown_main"
                     android:thumbTint="@color/color_brown_main" />
 

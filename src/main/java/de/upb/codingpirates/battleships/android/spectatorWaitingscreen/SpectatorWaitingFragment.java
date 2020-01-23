@@ -28,8 +28,13 @@ public class SpectatorWaitingFragment extends Fragment {
 
         final Observer<Boolean> goToGameViewObserver = new Observer<Boolean>(){
             public void onChanged(@Nullable final Boolean newGoToGameView) {
-                if(newGoToGameView) {
-                    Navigation.findNavController(view).navigate(R.id.action_spectatorWaitingFragment_to_gameFragment);
+                if(newGoToGameView != null && newGoToGameView) {
+                    try {
+                        Navigation.findNavController(view).navigate(R.id.action_spectatorWaitingFragment_to_gameFragment);
+                    }
+                    catch (Exception e) {
+                        System.out.println(e);
+                    }
                 }
             }
         };

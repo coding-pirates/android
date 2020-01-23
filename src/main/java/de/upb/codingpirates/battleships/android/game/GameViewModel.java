@@ -112,7 +112,9 @@ public class GameViewModel extends ViewModel {
         */
        final Observer<Boolean> goToGameEndObserver = new Observer<Boolean>(){
            public void onChanged(@Nullable final Boolean newGoToGameEnd) {
-               goToGameEnd.setValue(newGoToGameEnd);
+               if (newGoToGameEnd) {
+                   goToGameEnd.setValue(newGoToGameEnd);
+               }
            }
        };
        model.getGoToGameEnd().observeForever(goToGameEndObserver);
@@ -229,5 +231,11 @@ public class GameViewModel extends ViewModel {
         return new Point2D(x, y);
     }
 
+    /**
+     * calls the sendGameLeaveRequest method of the model
+     */
+    public void sendLeaveRequest() {
+        model.sendGameLeaveRequest();
+    }
 
 }
