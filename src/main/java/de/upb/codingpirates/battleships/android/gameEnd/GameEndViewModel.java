@@ -38,11 +38,24 @@ public class GameEndViewModel extends ViewModel {
     public String[][] getThreeBestPlayers(){
         String[][] allPlayersAndPoints = this.getAllPlayersAndPoints();
         threeBestPlayers = new String[3][2];
-        threeBestPlayers[0][0] = allPlayersAndPoints[0][0];
-        threeBestPlayers[0][1] = allPlayersAndPoints[0][1];
-        threeBestPlayers[1][0] = allPlayersAndPoints[1][0];
-        threeBestPlayers[1][1] = allPlayersAndPoints[1][1];
-
+        //check if there is on player
+        try {
+            threeBestPlayers[0][0] = allPlayersAndPoints[0][0];
+            threeBestPlayers[0][1] = allPlayersAndPoints[0][1];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            threeBestPlayers[0][0] = "";
+            threeBestPlayers[0][1] = "";
+        }
+        //check if there is a second player
+        try {
+            threeBestPlayers[1][0] = allPlayersAndPoints[1][0];
+            threeBestPlayers[1][1] = allPlayersAndPoints[1][1];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            threeBestPlayers[1][0] = "";
+            threeBestPlayers[1][1] = "";
+        }
         //check if there even is a third player
         try {
             if (allPlayersAndPoints[2][0] == null) {
