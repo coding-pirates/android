@@ -143,8 +143,8 @@ public class Model implements ModelMessageListener {
     }
 
     /**
-     * Consturctor for the Model.
-     * Instatiates the ClientConnectorAndroid
+     * Constructor for the Model.
+     * Instantiates the ClientConnectorAndroid
      */
     public Model() {
         connector = ClientApplication.create(AndroidReader.class);
