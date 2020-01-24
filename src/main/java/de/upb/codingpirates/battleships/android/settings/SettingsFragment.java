@@ -13,10 +13,20 @@ import androidx.fragment.app.Fragment;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.SettingsFragmentBinding;
 
+/**
+ * The class for showing the settings dialog.
+ */
 public class SettingsFragment extends Fragment {
     private SeekBar volumeSeekbar = null;
     private AudioManager audioManager = null;
 
+    /**
+     * creates view if it should be displayed on the screen
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the created view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

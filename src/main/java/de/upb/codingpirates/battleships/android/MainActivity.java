@@ -11,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer player;
     ArrayList<Integer> playlist;
 
+    /**
+     * creates a mediaplayer
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
         player.start();
     }
 
+    /**
+     * pauses the mediaplayer
+     */
     @Override
     protected void onPause() {
         super.onPause();
         player.pause();
     }
 
+    /**
+     * resumes the mediaplayer
+     */
     @Override
     protected void onResume() {
         if(player != null && !player.isPlaying())

@@ -15,6 +15,13 @@ import de.upb.codingpirates.battleships.android.databinding.StartscreenFragmentB
 
 public class StartScreenFragment extends Fragment {
 
+    /**
+     * creates view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the created view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

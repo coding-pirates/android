@@ -196,6 +196,9 @@ public class GameFragment extends Fragment {
 
     }
 
+    /**
+     * cleans game field of the selsected player
+     */
     private void cleanGameField() {
         GridLayout gameField = view.findViewById(R.id.gameField);
         for (int i = 0; i < gameField.getChildCount(); i++) {
@@ -230,6 +233,10 @@ public class GameFragment extends Fragment {
 
     }
 
+    /**
+     * initialises the ships for the selected player
+     * @param shotPoints
+     */
     private void initShots(Collection<Point2D> shotPoints){
         for (Point2D point : shotPoints) {
             GridLayout gameField = view.findViewById(R.id.gameField);
@@ -251,6 +258,10 @@ public class GameFragment extends Fragment {
         }
     }
 
+    /**
+     * initialises the points of the selected player
+     * @param pointsOfPlayer
+     */
     private void initPoints(int pointsOfPlayer){
         TextView pointsView = view.findViewById(R.id.tf_points);
         double pointsConverted = ((double)pointsOfPlayer)/4;

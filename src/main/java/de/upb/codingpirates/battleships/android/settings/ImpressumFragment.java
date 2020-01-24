@@ -5,7 +5,17 @@ import android.app.Dialog;
 import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import de.upb.codingpirates.battleships.android.R;
+
+/**
+ * The class for showing the impressum dialog.
+ */
 public class ImpressumFragment extends DialogFragment {
+
+    /**
+     * created dialog
+     * @param savedInstanceState
+     * @return the created dialog
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
