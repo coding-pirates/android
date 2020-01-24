@@ -56,8 +56,14 @@ public class GameEndFragment extends Fragment {
         ((TextView)view.findViewById(R.id.secondPlaceTextView)).setText(threeBestPlayers[1][0]);
         ((TextView)view.findViewById(R.id.thirdPlaceTextView)).setText(threeBestPlayers[2][0]);
         ((TextView)view.findViewById(R.id.firstPlacePointsTextView)).setText("Punkte: "+ threeBestPlayers[0][1]);
-        ((TextView)view.findViewById(R.id.secondPlacePointsTextView)).setText("Punkte: "+ threeBestPlayers[1][1]);
-        //prevents the endView from displaying null text in the gameEnd
+        //only set text when player data is available
+        if (!threeBestPlayers[1][1].equals("") ) {
+            ((TextView) view.findViewById(R.id.secondPlacePointsTextView)).setText("Punkte: " + threeBestPlayers[1][1]);
+        }
+        else {
+            ((TextView) view.findViewById(R.id.secondPlacePointsTextView)).setText("");
+        }
+        //only set text when player data is available
         if (!threeBestPlayers[2][1].equals("") ) {
             ((TextView) view.findViewById(R.id.thirdPlacePointsTextView)).setText("Punkte: " + threeBestPlayers[2][1]);
         }
