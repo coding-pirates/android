@@ -211,7 +211,7 @@ public class GameFragment extends Fragment {
 
         for (Point2D point : shipPoints) {
             Button cell = (Button) gameField.getChildAt(point.getX() + point.getY() * viewModel.getFieldWidth());
-            switch(Objects.hash(point.hashCode(), viewModel.getCurrentPlayer().getId()) % 3){
+            switch (Objects.hash(point.hashCode(), viewModel.getCurrentPlayer().getId()) % 3) {
                 case 0:
                     cell.setBackground(getResources().getDrawable(R.drawable.ic_ship_1));
                     cell.setTag("ship1");

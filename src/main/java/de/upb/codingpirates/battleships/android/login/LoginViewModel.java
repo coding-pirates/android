@@ -35,7 +35,7 @@ public class LoginViewModel extends ViewModel {
      */
     public LoginViewModel(){
 
-        final Observer<Boolean> serverJoinResponse = new Observer<Boolean>(){
+        final Observer<Boolean> serverJoinResponse = new Observer<Boolean>() {
             public void onChanged(@Nullable final Boolean newServerJoinResponse) {
                 if (newServerJoinResponse) {
                     serverJoin.setValue(newServerJoinResponse);
