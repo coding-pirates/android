@@ -13,6 +13,12 @@ import de.upb.codingpirates.battleships.android.R;
  * @author: Lukas Kröger, Fynn Ruppel
  */
 public class ExitGameFragment extends DialogFragment {
+
+    /**
+     * creates dialog
+     * @param savedInstanceState
+     * @return the created dialog
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction

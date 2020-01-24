@@ -14,9 +14,19 @@ import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.LoginFragmentBinding;
 
 
-
+/**
+ * LoginFragment represents the LoginView. This class initializes the view.
+ */
 public class LoginFragment extends Fragment {
     private LoginViewModel viewmodel;
+
+    /**
+     * creates view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the created view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

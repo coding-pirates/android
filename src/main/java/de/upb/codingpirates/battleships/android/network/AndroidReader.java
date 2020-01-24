@@ -11,6 +11,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AndroidReader extends ClientReaderMethod {
 
+    /**
+     * Belongs to the network. Ensures that messages will be handled on the right threads
+     * @param connection
+     * @param dispatch
+     * @param error
+     */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     @Override

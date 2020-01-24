@@ -13,11 +13,21 @@ import androidx.navigation.Navigation;
 import de.upb.codingpirates.battleships.android.R;
 import de.upb.codingpirates.battleships.android.databinding.SpectatorwaitingFragmentBinding;
 
+/**
+ * SpectatorWaitingFragment represents the WaitingView for the App. This class initializes the view.
+ */
 public class SpectatorWaitingFragment extends Fragment {
 
     private SpectatorWaitingViewModel viewModel;
     private View view;
 
+    /**
+     * creates view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the created view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

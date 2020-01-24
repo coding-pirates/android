@@ -45,6 +45,10 @@ public class GameViewModel extends ViewModel {
      */
     private ArrayList<Point2D> pointsOfShips; //already converted for the GridLayout of the GameView
 
+    /**
+     * returns all the positions of currently displayed ships
+     * @return pointsOfShips
+     */
     public ArrayList<Point2D> getPointsOfShips() {
         return pointsOfShips;
     }
@@ -55,26 +59,47 @@ public class GameViewModel extends ViewModel {
     private Client currentPlayer;
 
     private MutableLiveData<ArrayList<Point2D>> pointsOfShots = new MutableLiveData<>();
+    /**
+     * returns the positions of currently placed shots
+     * @return pointsOfShots
+     */
     public MutableLiveData<ArrayList<Point2D>> getPointsOfShots(){
         return pointsOfShots;
     }
 
     private MutableLiveData<Boolean> goToGameEnd = new MutableLiveData<>();
+
+    /**
+     * returns the state of goToGameEnd
+     * @return goToGameEnd
+     */
     public MutableLiveData<Boolean> getGoToGameEnd(){
         return goToGameEnd;
     }
 
     private MutableLiveData<Boolean> newRound = new MutableLiveData<>();
+
+    /**
+     * returns the value of the boolean newRound
+     * @return newRound
+     */
     public MutableLiveData<Boolean> getNewRound(){
         return newRound;
     }
 
     private MutableLiveData<Integer> pointsOfCurrentPlayer = new MutableLiveData<>();
 
+    /**
+     * returns the points of the current player
+     * @return pointsOfCurrentPlayer
+     */
     public MutableLiveData<Integer> getPointsOfCurrentPlayer() {
         return pointsOfCurrentPlayer;
     }
 
+    /**
+     * Constructor of GameViewModel. Binds the model and sets heigth and width of the field, as well as round time and creates observers
+     */
     public GameViewModel(){
        model = Model.getInstance();
        fieldWidth = model.getFieldWidth();
@@ -141,6 +166,10 @@ public class GameViewModel extends ViewModel {
 
     }
 
+    /**
+     * returns the currentPlayer
+     * @return currentPlayer
+     */
     public Client getCurrentPlayer() {
         return currentPlayer;
     }
@@ -159,18 +188,34 @@ public class GameViewModel extends ViewModel {
     }
 
 
+    /**
+     * returns all the players
+     * @return players
+     */
     public ArrayList<Client> getPlayers() {
         return players;
     }
 
+    /**
+     * returns the round time
+     * @return roundTime
+     */
     public long getRoundTime(){
         return roundTime;
     }
 
+    /**
+     * returns the width of the field
+     * @return fieldWidth
+     */
     public int getFieldWidth() {
         return fieldWidth;
     }
 
+    /**
+     * returns the height of the field
+     * @return filedHeight
+     */
     public int getFieldHeight() {
         return fieldHeight;
     }

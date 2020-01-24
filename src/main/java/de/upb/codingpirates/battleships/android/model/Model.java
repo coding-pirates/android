@@ -35,20 +35,39 @@ public class Model implements ModelMessageListener {
     private ClientConnector connector;
 
     private MutableLiveData<Boolean> serverJoinRequestSuccess = new MutableLiveData<>();
+
+    /**
+     * returns whether ServerJoinRequest was successful
+     * @return serverJoinRequestSuccess
+     */
     public MutableLiveData<Boolean> getServerJoinRequestSuccess(){
         return serverJoinRequestSuccess;
     }
+
+    /**
+     * sets the success of the ServerJoinRequest
+     * @param serverJoinSuccess
+     */
     public void setServerJoinRequestSuccess(Boolean serverJoinSuccess) {
         this.serverJoinRequestSuccess.postValue(serverJoinSuccess);
     }
 
 
+    /**
+     * sends ServerJoinRequest
+     * @param connected
+     */
     public void setConnected(Boolean connected){
         connector.sendMessageToServer(RequestBuilder.serverJoinRequest(clientName, clientType));
     }
 
     //data for LobbyView
     private MutableLiveData<Collection<Game>> gamesOnServer = new MutableLiveData<>();
+
+    /**
+     * returns the games that currently run on the server
+     * @return gamesOnSever
+     */
     public MutableLiveData<Collection<Game>> getGamesOnServer(){
         return gamesOnServer;
     }
@@ -71,6 +90,11 @@ public class Model implements ModelMessageListener {
      * LivaData for Players in Game
      */
     private MutableLiveData<Collection<Client>> players = new MutableLiveData<>();
+
+    /**
+     * Returns the players
+     * @return players
+     */
     public MutableLiveData<Collection<Client>> getPlayers(){
         return players;
     }
@@ -195,11 +219,18 @@ public class Model implements ModelMessageListener {
         this.connector.connect(ipAddress, port, ()->this.setConnected(true),()-> this.setConnectionTookTooLong(true));
     }
 
-
+    /**
+     * sets the clientId for the player
+     * @param clientId
+     */
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
+    /**
+     * sets games on server and sorts the games by name
+     * @param gamesOnServer
+     */
     public void setGamesOnServer(Collection<Game> gamesOnServer) {
         gamesOnServer = this.sortGamesOnServer(gamesOnServer);
         this.gamesOnServer.postValue(gamesOnServer);
@@ -376,19 +407,37 @@ public class Model implements ModelMessageListener {
         }
         this.goToGameView.setValue(false);
     }
+
+    /**
+     * Sets the boolean goToGameView to the value of state
+     * @param state
+     */
     public void setGoToGameView(Boolean state){
         this.goToGameView.setValue(state);
     }
 
+    /**
+     * Sets goToGameEnd to true if it was null or false before
+     */
     public void goToGameEnd(){
         if(this.goToGameEnd.getValue()==null || !this.goToGameEnd.getValue()) {//TODO could be unneccecary because its set to false every time the navigation  was completed
             this.goToGameEnd.setValue(true);
         }
     }
+
+    /**
+     * sets the boolean goTheGameEnd to the value of status
+     * @param status
+     */
     public void setGoToGameEnd(Boolean status) {
         this.goToGameEnd.setValue(status);
     }
 
+
+    /**
+     * sets the boolean newRound to the value og newState
+     * @param newState
+     */
     public void setNewRound(Boolean newState){
         this.newRound.setValue(newState);
     }
@@ -401,7 +450,7 @@ public class Model implements ModelMessageListener {
 
     /**
      * return a 2 dimensional String array which contains the players and their points in descending order
-     *  * @return 2 dimensional String array which contains the players and their points in descending order
+     * @return sortedPoints a 2 dimensional String array which contains the players and their points in descending order
      */
     public String[][] getAllPlayerNamesAndPoints() {
         int playersConnected = players.getValue().size();
@@ -428,50 +477,97 @@ public class Model implements ModelMessageListener {
         return sortedPoints;
     }
 
+    /**
+     * sets points of players and sets gotToGameEnd on true if FinishNotification is recieved
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onFinishNotification(FinishNotification message, int clientId) {
         this.setPointsOfPlayers(message.getPoints());
         this.goToGameEnd();
     }
 
+    /**
+     *
+     * sets players and game configuration if GameInitNotification is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onGameInitNotification(GameInitNotification message, int clientId) {
         this.setPlayers(message.getClientList());
         this.setGameConfig(message.getConfiguration());
     }
 
+    /**
+     *
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onGameJoinSpectatorResponse(GameJoinSpectatorResponse message, int clientId) {
         this.setJoinedGameWithId(message.getGameId());
         this.sendSpectatorGameStateRequest();
     }
 
+    /**
+     * sends SpectatorGameStateRequest if GameStartNotification is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onGameStartNotification(GameStartNotification message, int clientId) {
         this.sendSpectatorGameStateRequest();
     }
 
+    /**
+     * sets games on server if LobbyResponse is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onLobbyResponse(LobbyResponse message, int clientId) {
         this.setGamesOnServer(message.getGames());
     }
 
+    /**
+     * Sets points of a player if PointsResponse is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onPointsResponse(PointsResponse message, int clientId) {
         this.setPointsOfPlayers(message.getPoints());
     }
 
+    /**
+     * sets newRound to true if roundStartNotification is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onRoundStartNotification(RoundStartNotification message, int clientId) {
         this.setNewRound(true);
     }
 
+    /**
+     * sets serverJoinRequestSuccess to true clienId if serverJoinResponse is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onServerJoinResponse(ServerJoinResponse message, int clientId) {
         this.setClientId(message.getClientId());
         this.setServerJoinRequestSuccess(true);
     }
 
+    /**
+     * sets goToSpectatorWaiting to true if SpectatorFameStateResponse is received and ships are not placed yet,
+     * else sets players, shots and ships and set gotToGameView to true
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onSpectatorGameStateResponse(SpectatorGameStateResponse message, int clientId) {
         if(message.getShips().size() == 0){
@@ -485,6 +581,11 @@ public class Model implements ModelMessageListener {
         }
     }
 
+    /**
+     * adds all successfull and unsuccessful new shots and updates points if a SpectatorUpdateNotification is received
+     * @param message
+     * @param clientId
+     */
     @Override
     public void onSpectatorUpdateNotification(SpectatorUpdateNotification message, int clientId) {
         Collection<Shot> shots =  message.getHits();
@@ -493,6 +594,10 @@ public class Model implements ModelMessageListener {
         this.updatePoints(message.getPoints());
     }
 
+    /**
+     * returns the connector of a client
+     * @return connector
+     */
     public ClientConnector getClientConnector() {
         return this.connector;
     }

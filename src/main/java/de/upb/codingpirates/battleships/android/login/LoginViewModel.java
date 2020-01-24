@@ -58,6 +58,10 @@ public class LoginViewModel extends ViewModel {
         model.getConnectionTookTooLong().observeForever(connectionTookTooLongResponse);
     }
 
+    /**
+     * creates new MutableLiveData if progressBarShow is null
+     * @return progressBarShow
+     */
     public MutableLiveData<Boolean> getProgressbarShow(){
         if(progressBarShow == null){
             progressBarShow = new MutableLiveData<Boolean>();
@@ -65,6 +69,10 @@ public class LoginViewModel extends ViewModel {
         return progressBarShow;
     }
 
+    /**
+     *creates new MutableLiveData if serverJoin is null
+     * @return serverJoin
+     */
     public MutableLiveData<Boolean> getServerJoin(){
         if(serverJoin == null){
             serverJoin = new MutableLiveData<Boolean>();

@@ -22,7 +22,10 @@ import de.upb.codingpirates.battleships.logic.Game;
 
 import java.util.ArrayList;
 
-
+/**
+ * LobbyFragment represents the LobbyView. This class initializes the view and
+ *  manages all UI related actions
+ */
 public class LobbyFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -32,6 +35,13 @@ public class LobbyFragment extends Fragment {
     private LobbyViewModel viewmodel;
     private View view;
 
+    /**
+     * creates view if it should be displayed on the screen
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LobbyFragmentBinding databinding = DataBindingUtil.inflate(inflater, R.layout.lobby_fragment,container,false);
@@ -86,6 +96,9 @@ public class LobbyFragment extends Fragment {
 
         //handles the behavior when the phones back button is pressed
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            /**
+             * diconnects from the server and returns to the lobby
+             */
             @Override
             public void handleOnBackPressed() {
                 //closes the connection to the server and return to the loginView

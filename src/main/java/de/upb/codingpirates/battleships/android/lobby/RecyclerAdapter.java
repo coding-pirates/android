@@ -14,9 +14,12 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
     private ArrayList<Game> mDataset;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    /**
+     * Provide a reference to the views for each data item
+     *
+     */
+    //Complex data items may need more than one view per item,
+    //and you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         public View listItemViw;
@@ -32,13 +35,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
+    /**
+     * Provide a suitable constructor (depends on the kind of dataset)
+     */
     public RecyclerAdapter(ArrayList<Game> myDataset) {
         mDataset = myDataset;
     }
 
 
-    // Create new views (invoked by the layout manager)
+    /**
+     * Create new views (invoked by the layout manager)
+     */
     @Override
     public RecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
@@ -50,7 +57,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     *  Replace the contents of a view (invoked by the layout manager)
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
@@ -63,7 +72,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.listItemViw.setTag(mDataset.get(position).getId());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    /**
+     * Return the size of your dataset (invoked by the layout manager)
+     */
     @Override
     public int getItemCount() {
         return mDataset.size();

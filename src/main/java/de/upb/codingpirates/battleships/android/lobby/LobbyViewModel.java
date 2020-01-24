@@ -84,6 +84,10 @@ public class LobbyViewModel extends ViewModel {
         Navigation.findNavController(view).navigate(R.id.action_lobbyFragment_to_settingsFragment);
     }
 
+    /**
+     * returns the ClientConnector of the model
+     * @return ClientConnector
+     */
     public ClientConnector getClientConnector() {
         return model.getClientConnector();
     }

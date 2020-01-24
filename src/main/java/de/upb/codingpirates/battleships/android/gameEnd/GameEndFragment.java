@@ -25,6 +25,10 @@ import de.upb.codingpirates.battleships.android.databinding.GameendFragmentBindi
 
 import static java.lang.String.*;
 
+/**
+ * GameEndFragment represents the EndView. This class initializes the view and
+ *  manages all UI related actions
+ */
 public class GameEndFragment extends Fragment {
 
     private View view;
@@ -33,11 +37,11 @@ public class GameEndFragment extends Fragment {
     private String[][] allPlayersAndPoints;
 
     /**
-     * //TODO Beschreibung
+     * creates view if it should be displayed on the screen
      * @param inflater
      * @param container
      * @param savedInstanceState
-     * @return
+     * @return the created view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +87,7 @@ public class GameEndFragment extends Fragment {
     }
 
     /**
-     * author : Fynn Ruppel
+     * @author  Fynn Ruppel
      * This method adds one row to the EndScreen Player ranking table. The params define the attributes of the player added to the table
      * @param p the place in which the player is ranked
      * @param n name of the player being added

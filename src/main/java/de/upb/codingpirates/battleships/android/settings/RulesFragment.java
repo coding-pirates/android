@@ -13,11 +13,20 @@ import androidx.fragment.app.DialogFragment;
 import androidx.navigation.Navigation;
 
 import de.upb.codingpirates.battleships.android.R;
+
+/**
+ * The class for showing the rules dialog.
+ */
 public class RulesFragment extends DialogFragment {
 
         private int width = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-        @Override
+    /**
+     * creates dialog
+     * @param savedInstanceState
+     * @return the created dialog
+     */
+    @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.RulesDialogTheme);
@@ -28,7 +37,8 @@ public class RulesFragment extends DialogFragment {
             return builder.create();
         }
 
-        @Override
+
+    @Override
         public void onResume() {
             super.onResume();
             Window window = getDialog().getWindow();

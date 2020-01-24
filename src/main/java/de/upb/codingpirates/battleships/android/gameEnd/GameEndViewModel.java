@@ -12,16 +12,23 @@ import java.util.Map;
 import de.upb.codingpirates.battleships.android.model.Model;
 import de.upb.codingpirates.battleships.android.R;
 
+/**
+ * This class holds all the data for the GameEndFragment.
+ */
 public class GameEndViewModel extends ViewModel {
     private Model model;
     private String[][] threeBestPlayers;
     private int numberOfPlayersConnected;
 
+    /**
+     * Constructor for the GameEndViewModel.
+     */
     public GameEndViewModel(){
         model = Model.getInstance();
         numberOfPlayersConnected = model.getPlayers().getValue().size();
         model.setGoToGameEnd(false);
     }
+
     /**
      * exits the game and returns to the LobbyView, when the button is clicked
      * @param view
@@ -32,8 +39,8 @@ public class GameEndViewModel extends ViewModel {
     }
 
     /**
-     * Gets the tree best players form the model
-     * @return two dimensional array including each of the tree best players with their points
+     * Gets the three best players from the model
+     * @return threeBsetPlayers a two dimensional array including each of the tree best players with their points
      */
     public String[][] getThreeBestPlayers(){
         String[][] allPlayersAndPoints = this.getAllPlayersAndPoints();
