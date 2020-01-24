@@ -119,8 +119,8 @@ public class Model implements ModelMessageListener {
     }
 
     /**
-     * Consturctor for the Model.
-     * Instatiates the ClientConnectorAndroid
+     * Constructor for the Model.
+     * Instantiates the ClientConnectorAndroid
      */
     public Model() {
         connector = ClientApplication.create(AndroidReader.class);
@@ -401,7 +401,7 @@ public class Model implements ModelMessageListener {
 
     /**
      * return a 2 dimensional String array which contains the players and their points in descending order
-     *  * @return 2 dimensional String array which contains the players and their points in descending order
+     *  @return 2 dimensional String array which contains the players and their points in descending order
      */
     public String[][] getAllPlayerNamesAndPoints() {
         int playersConnected = players.getValue().size();
