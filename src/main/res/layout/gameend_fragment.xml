@@ -53,10 +53,11 @@
             android:textSize="18sp"
             android:textColor="@color/color_brown_main"
             android:ellipsize="end"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/firstPlaceImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle" app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
+            app:layout_constraintVertical_bias="1.0"/>
 
         <ImageView
             android:id="@+id/firstPlaceImageView"
@@ -66,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
-            app:srcCompat="@drawable/ic_winner_1" />
+            app:srcCompat="@drawable/ic_winner_1"/>
 
         <TextView
             android:id="@+id/firstPlacePointsTextView"
@@ -82,11 +83,11 @@
             android:id="@+id/secondPlaceTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:text="@string/secondPlacePlayerName"
             android:textColor="@color/color_brown_main"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/secondPlaceImageView"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@+id/firstPlaceImageView" app:layout_constraintStart_toStartOf="parent"/>
         <ImageView
             android:id="@+id/secondPlaceImageView"
             android:layout_width="115dp"
@@ -115,10 +116,11 @@
             android:text="@string/thirdPlacePlayerName"
             android:textColor="@color/color_brown_main"
             android:ellipsize="end"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/thirdPlaceImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/firstPlaceImageView"
-            app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle" app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintStart_toEndOf="@+id/firstPlaceImageView" app:layout_constraintTop_toBottomOf="@+id/gameEndActivityTitle"
+            app:layout_constraintVertical_bias="1.0"/>
 
         <ImageView
             android:id="@+id/thirdPlaceImageView"
